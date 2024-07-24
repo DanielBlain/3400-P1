@@ -29,8 +29,8 @@ const movieList = [
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import { UserContext } from '../components/UserContext'
 import { CustomContextProvider } from '../components/CustomContext'
+import useLocalStorage  from '../customhooks/useLocalStorage'
 
 import PageHome         from '../pages/PageHome'
 import PageSingle       from '../pages/PageSingle'
@@ -42,7 +42,7 @@ import PageNotFound     from '../pages/PageNotFound'
 
 const AppRouter = () => {
 
-    const customState = useState('hello from AppRouter')
+    const customState = useLocalStorage(useState('hello from AppRouter'), 'beeswax')
 
     return (
         <CustomContextProvider customState={customState}>
