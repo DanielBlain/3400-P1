@@ -31,6 +31,8 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import { CustomContextProvider } from '../components/CustomContext'
 import useLocalStorage  from '../customhooks/useLocalStorage'
+import Header           from '../components/Header'
+import Footer           from '../components/Footer'
 
 import PageHome         from '../pages/PageHome'
 import PageSingle       from '../pages/PageSingle'
@@ -51,9 +53,9 @@ const AppRouter = () => {
                     <Route
                         element={
                             <div className='wrapper'>
-                                {/* <Header /> */}
+                                <Header />
                                 <Outlet />
-                                {/* <Footer /> */}
+                                <Footer />
                             </div>
                         }
                     >
