@@ -54,7 +54,9 @@ const AppRouter = () => {
                         element={
                             <div className='wrapper'>
                                 <Header />
-                                <Outlet />
+                                <main>
+                                    <Outlet />
+                                </main>
                                 <Footer />
                             </div>
                         }
