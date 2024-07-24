@@ -27,7 +27,7 @@ const movieList = [
 ]
 
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import { CustomContextProvider } from '../components/CustomContext'
 import useLocalStorage  from '../customhooks/useLocalStorage'
@@ -42,19 +42,29 @@ import PageNotFound     from '../pages/PageNotFound'
 
 const AppRouter = () => {
 
-    const customState = useLocalStorage(useState('hello from AppRouter'), 'beeswax')
+    const customState = useLocalStorage('beeswax', useState('hello from AppRouter'))
 
     return (
         <CustomContextProvider customState={customState}>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/'             element={<PageHome />}  exact   />
-                    <Route path='/single/:id'   element={<PageSingle />}        />
-                    <Route path='/favourites'   element={<PageFavourites />}    />
-                    <Route path='/about'        element={<PageAbout />}         />
-                    <Route path='/help'         element={<PageHelp />}          />
-                    <Route path='/login'        element={<PageLogin />}         />
-                    <Route path='*'             element={<PageNotFound />}      />
+                    <Route
+                        element={
+                            <div className='wrapper'>
+                                {/* <Header /> */}
+                                <Outlet />
+                                {/* <Footer /> */}
+                            </div>
+                        }
+                    >
+                        <Route path='/'             element={<PageHome />}  exact   />
+                        <Route path='/single/:id'   element={<PageSingle />}        />
+                        <Route path='/favourites'   element={<PageFavourites />}    />
+                        <Route path='/about'        element={<PageAbout />}         />
+                        <Route path='/help'         element={<PageHelp />}          />
+                        <Route path='/login'        element={<PageLogin />}         />
+                        <Route path='*'             element={<PageNotFound />}      />
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </CustomContextProvider>
