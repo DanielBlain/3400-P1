@@ -6,29 +6,48 @@ const findFirst = (list, soughtKey) =>
 
 /*****
  * 
- * useSelectOne
- *      list: (array) of objects, each with a key (string) field
- *      initial: (string) a key for the first object to
- *          be selected by default
- *      orNone: (boolean) if true, the state where no objects are
- *          selected is allowed. In that case, the "selected
- *          object" is null
+ * ---- written by Daniel J Blain
  * 
- * returns: [ selected object in list,
- *              setter func to select a new object by key ]
+ * useSelectOne is a React custom hook that takes in a
+ * list (array) of objects and offers a key setter and the
+ * object selected by that key. Each object must have a
+ * "key" field.
  * 
- * If initial contains the key of an object in the list,
- * that object is selected right away
+ * The object selected by default is selected by passing
+ * in an initial key. If an object with that key does not
+ * exist, either the first object in the list is selected,
+ * or the object selected is null (depending upon the
+ * "orNone" boolean flag set in the parameters)
  * 
- * NOTE: objects in list ought to contain unique keys;
+ * NOTE:
+ * Objects in list ought to contain unique keys;
  * otherwise, only the object with the first matching key
  * can ever be selected
+ * 
+ * PARAMETERS: {
+ * 
+ *      (array, "list") list of objects, each with a key field
+ * 
+ *      (string, "initial") a key, of the initial object to be
+ *      selected
+ * 
+ *      (boolean, "orNone") if true, the state where no objects
+ *      are selected is allowed. In that case, the
+ *      selected object is null. Otherwise, bad keys
+ *      return a warning via console.warn
+ * }
+ * 
+ * RETURNS: {
+ * 
+ *      (object, "selectedObject") selected object in list
+ * 
+ *      (function, "setKey") key setter function, to select a
+ *      new object by its key
+ * }
  * 
  * */
 function useSelectOne(list, initial, orNone=false) {
 
-    // A state variable / setter for the selected index
-    // May be -1 if no selected objects are allowed (orNone === true)
     const [selectedIndex, setSelectedIndex] =
         useState(() => findFirst(list, initial))
 
@@ -37,9 +56,6 @@ function useSelectOne(list, initial, orNone=false) {
         setSelectedIndex(findFirst(list, initial))
     }, [list, initial])
 
-    // Choose a new key; also chooses the new object, if possible
-    // Otherwise the new object is set to -1 (if orNone) or list[0]
-    // ERROR if orNone === false but the key is not found
     const setKey = (key) => {
         let newIndex = findFirst(list, key)
         
@@ -54,7 +70,6 @@ function useSelectOne(list, initial, orNone=false) {
         console.log(list[newIndex])
     }
 
-    // Return the selected object, and the setter for the key
     return [
         (selectedIndex !== -1) ?
             list[selectedIndex]
