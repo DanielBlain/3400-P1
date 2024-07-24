@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import { UserContext } from '../components/UserContext'
+import { CustomContext } from '../components/CustomContext'
 
 const PageAbout = () => {
 
-    const { message, setMessage } = useContext(UserContext);
+    const [message, setMessage] = useContext(CustomContext);
 
     return (
         <>

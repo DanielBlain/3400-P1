@@ -30,6 +30,7 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { UserContext } from '../components/UserContext'
+import { CustomContextProvider } from '../components/CustomContext'
 
 import PageHome         from '../pages/PageHome'
 import PageSingle       from '../pages/PageSingle'
@@ -41,10 +42,10 @@ import PageNotFound     from '../pages/PageNotFound'
 
 const AppRouter = () => {
 
-    const [ message, setMessage ] = useState('hello from AppRouter')
+    const customState = useState('hello from AppRouter')
 
     return (
-        <UserContext.Provider value={{message, setMessage}}>
+        <CustomContextProvider customState={customState}>
             <BrowserRouter>
                 <Routes>
                     <Route path='/'             element={<PageHome />}  exact   />
@@ -56,7 +57,7 @@ const AppRouter = () => {
                     <Route path='*'             element={<PageNotFound />}      />
                 </Routes>
             </BrowserRouter>
-        </UserContext.Provider>
+        </CustomContextProvider>
     )
 }
 

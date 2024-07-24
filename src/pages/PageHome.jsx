@@ -1,25 +1,27 @@
 import { useContext } from 'react'
-import { UserContext } from '../components/UserContext'
+import { CustomContext } from '../components/CustomContext'
 
 const PageHome = () => {
 
-    const { message, setMessage } = useContext(UserContext);
+    const [message, setMessage] = useContext(CustomContext);
 
     return (
         <>
             <div>PageHome</div>
-            <button onClick={() => setMessage('Booga booga')}>Click to Booga booga</button>
+            <button onClick={() => {console.log(message)}}>Click to Booga booga</button>
             <button onClick={() => {
                 localStorage.setItem('beeswax', 'potato')
+                setMessage('potato')
             }}>
-                Click to local storage potato under &quot;beeswax&quot;
+                Click to potato, and to local storage potato under &quot;beeswax&quot;
             </button>
-            <div>{message}</div>
+            {/* <div>{customState.message}</div> */}
             <button onClick={() => {
                 localStorage.clear()
             }}>
                 Click to clear local storage
             </button>
+            <div>{message}</div>
         </>
     )
 }
