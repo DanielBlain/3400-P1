@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 
+// Utility func for this custom hook
 const findFirst = (list, soughtKey) =>
     list.findIndex(queried => queried.key === soughtKey)
 
@@ -24,7 +25,7 @@ const findFirst = (list, soughtKey) =>
  * can ever be selected
  * 
  * */
-export function useSelectOne(list, initial, orNone=false) {
+function useSelectOne(list, initial, orNone=false) {
 
     // A state variable / setter for the selected index
     // May be -1 if no selected objects are allowed (orNone === true)
@@ -61,3 +62,5 @@ export function useSelectOne(list, initial, orNone=false) {
         setKey
     ]
 }
+
+export default useSelectOne;
