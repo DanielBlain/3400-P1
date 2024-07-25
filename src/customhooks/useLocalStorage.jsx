@@ -19,7 +19,7 @@ import { useEffect } from 'react'
 
 /*****
  * 
- * ---- written by Daniel J Blain
+ * ---- written by Daniel J Blain, 24 July 2024
  * 
  * useLocalStorage is a React custom hook that takes in a
  * key (string) and a React state in the form of an array

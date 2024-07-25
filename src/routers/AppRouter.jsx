@@ -47,11 +47,11 @@ const AppRouter = () => {
     const customState = useLocalStorage('beeswax', useState('hello from AppRouter'))
 
     return (
-        <CustomContextProvider customState={customState}>
-            <BrowserRouter>
-                <Routes>
-                    <Route
-                        element={
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    element={
+                        <CustomContextProvider customState={customState}>
                             <div className='wrapper'>
                                 <Header />
                                 <main>
@@ -59,19 +59,19 @@ const AppRouter = () => {
                                 </main>
                                 <Footer />
                             </div>
-                        }
-                    >
-                        <Route path='/'             element={<PageHome />}  exact   />
-                        <Route path='/single/:id'   element={<PageSingle />}        />
-                        <Route path='/favourites'   element={<PageFavourites />}    />
-                        <Route path='/about'        element={<PageAbout />}         />
-                        <Route path='/help'         element={<PageHelp />}          />
-                        <Route path='/login'        element={<PageLogin />}         />
-                        <Route path='*'             element={<PageNotFound />}      />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
-        </CustomContextProvider>
+                        </CustomContextProvider>
+                    }
+                >
+                    <Route path='/'             element={<PageHome />}  exact   />
+                    <Route path='/single/:id'   element={<PageSingle />}        />
+                    <Route path='/favourites'   element={<PageFavourites />}    />
+                    <Route path='/about'        element={<PageAbout />}         />
+                    <Route path='/help'         element={<PageHelp />}          />
+                    <Route path='/login'        element={<PageLogin />}         />
+                    <Route path='*'             element={<PageNotFound />}      />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     )
 }
 

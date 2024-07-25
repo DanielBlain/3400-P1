@@ -6,7 +6,7 @@ const findFirst = (list, soughtKey) =>
 
 /*****
  * 
- * ---- written by Daniel J Blain
+ * ---- written by Daniel J Blain, 21 July 2024
  * 
  * useSelectOne is a React custom hook that takes in a
  * list (array) of objects and offers a key setter and the

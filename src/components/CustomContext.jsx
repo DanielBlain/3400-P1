@@ -10,7 +10,7 @@ export const CustomContext = createContext(null);
  * "Why use a Custom Hook for React Context API instead of useContext (+ TypeScript)"
  * Author: ByteGrad
  * 
- * ---- written by Daniel J Blain
+ * ---- written by Daniel J Blain, 24 July 2024
  * 
  * CustomContextProvider - generic ContextProvider, for any type of data we want to
  * share across the app
@@ -21,11 +21,11 @@ export const CustomContext = createContext(null);
  * 
  * */
 
-export const CustomContextProvider = (props) => {
+export const CustomContextProvider = ({customState, children}) => {
 
     return (
-        <CustomContext.Provider value={props.customState}>
-            {props.children}
+        <CustomContext.Provider value={customState}>
+            {children}
         </CustomContext.Provider>
     )
 }
