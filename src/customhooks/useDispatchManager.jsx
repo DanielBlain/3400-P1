@@ -61,7 +61,7 @@ const useDispatchManager = (dispatchPathList, initial) => {
 
         // Unrecognized dispatch path; return state unaltered
         if (dispatchPath === -1) {
-            console.warn('Unrecognized dispatch path - are you using the dispatchPathList parameter of useDispatchManager correctly?')
+            console.warn(`Unrecognized dispatch path '${dispatchPath}' called in action type '${action.type}' - are you using the dispatchPathList parameter of useDispatchManager correctly?`)
             return {...state}
         }
 
@@ -69,7 +69,7 @@ const useDispatchManager = (dispatchPathList, initial) => {
         // using that dispatch path
         return {
             ...state,
-            ...(dispatchPath.go(state, action.payload))
+            ...dispatchPath.go(state, action.payload)
         }
     }
 
