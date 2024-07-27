@@ -59,14 +59,12 @@ function useSelectOne(list, initial, orNone=false) {
     const setKey = (key) => {
         let newIndex = findFirst(list, key)
         
-        if (!orNone && newIndex === -1) {
+        if (newIndex === -1 && !orNone) {
             newIndex = 0
+            console.warn(`Invalid key: ${key}. Please review the list of keys and select one.`)
         }
         setSelectedIndex(newIndex)
         
-        if (newIndex === -1 && !orNone) {
-            console.warn(`Invalid key: ${key}. Please review the list of keys and select one.`)
-        }
         console.log(list[newIndex])
     }
 

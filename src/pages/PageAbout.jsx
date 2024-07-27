@@ -7,7 +7,7 @@ const PageAbout = () => {
 
     return (
         <>
-            <div>PageAbout</div>
+            <h1>PageAbout</h1>
             <button onClick={() => setMessage('Hubba wubba')}>Click to Hubba wubba</button>
             <button onClick={() => {
                 localStorage.removeItem('beeswax')

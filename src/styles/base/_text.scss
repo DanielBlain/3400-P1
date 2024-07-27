@@ -1,0 +1,26 @@
+@use '../config/vars' as *;
+@use '../mixins/mixins' as *;
+
+h1, h2, h3, h4, h5, h6 {
+    @include capitalize;
+    font-family: $fontfam-headers;
+    letter-spacing: -0.06em;
+}
+
+h1 {
+    font-size: 2.4rem;
+}
+
+a, blockquote, button, cite, input, label, ol, p, q, select, table, textarea, ul  {
+    text-align: justify;
+}
+
+button, label, code {
+    font-size: 1.1rem;
+    word-spacing: 0.6rem;
+}
+
+button, label {
+    @include uppercase;
+    background: $clr-control-primary;
+}
