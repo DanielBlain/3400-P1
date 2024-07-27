@@ -1,13 +1,34 @@
 footer {
-    & > div {
-        display: flex;
-        justify-content: center;
+    font-size: 1rem;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        width: 100%;
     }
 
-    .DanLogo {
-        width: 18px;
+    img {
+        width: 1.6rem;
         position: relative;
-        top: 2px;
-        right: 4px;
+        top: 0.3rem;
+        right: 0.2rem;
     }
+
+    & > * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.socialMediaPanel {
+    display: block;
+    background-color: black;
+    color: white;
+}
+
+
+.copyrightTag {
+    padding: 0.2rem 0;
 }
