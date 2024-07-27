@@ -4,14 +4,15 @@ import { getYear } from '../utilities/utilities'
 
 const Footer = () => (
     <footer>
-        <div>
+        <div className='footer-right'>socials</div>
+        <div className='footer-left'>
             <img
+                className="DanLogo"
                 src={DanLogo}
                 alt="Logo for Dan J Blain"
             />
-            {getYear()}&copy;{author}
+            {getYear()}  &copy;  {author}
         </div>
-        <div className='footer-right'></div>
     </footer>
 )
 
