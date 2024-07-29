@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react'
-
-// Utility func for this custom hook
-const findFirst = (list, soughtKey) =>
-    list.findIndex(queried => queried.key === soughtKey)
+import { findFirstByKey } from '../utilities/utilities'
 
 /*****
  * 
@@ -49,15 +46,15 @@ const findFirst = (list, soughtKey) =>
 function useSelectOne(list, initial, orNone=false) {
 
     const [selectedIndex, setSelectedIndex] =
-        useState(() => findFirst(list, initial))
+        useState(() => findFirstByKey(list, initial))
 
     // Choose a new selected object when the initial key or list changes
     useEffect(() => {
-        setSelectedIndex(findFirst(list, initial))
+        setSelectedIndex(findFirstByKey(list, initial))
     }, [list, initial])
 
     const setKey = (key) => {
-        let newIndex = findFirst(list, key)
+        let newIndex = findFirstByKey(list, key)
         
         if (newIndex === -1 && !orNone) {
             newIndex = 0
@@ -65,6 +62,7 @@ function useSelectOne(list, initial, orNone=false) {
         }
         setSelectedIndex(newIndex)
         
+        console.log(`Selecting one${orNone ? ` or none` : ``} -`)
         console.log(list[newIndex])
     }
 
@@ -76,4 +74,4 @@ function useSelectOne(list, initial, orNone=false) {
     ]
 }
 
-export default useSelectOne;
+export default useSelectOne

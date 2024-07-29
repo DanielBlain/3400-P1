@@ -1,5 +1,5 @@
 import DanLogo from '/DanLogo-x1024.png' // From public folder
-import { author } from '../global/global'
+import { author } from '../config/config'
 import { getYear } from '../utilities/utilities'
 
 const Footer = () => (

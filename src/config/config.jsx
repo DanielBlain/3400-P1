@@ -2,6 +2,12 @@ export const appName = `Cinéscape`
 export const author = `Daniel J Blain`
 export const authorQuote = `Eppur Si Muove`
 
+// Home page movie filter constants
+export const NOW_PLAYING    = 'now_playing'
+export const POPULAR        = 'popular'
+export const TOP_RATED      = 'top_rated'
+export const UPCOMING       = 'upcoming'
+
 export const socialMediaAccounts = [
     {
         key: `github`,
