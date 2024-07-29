@@ -1,3 +1,4 @@
+// App-wide constants
 export const appName = `Cinéscape`
 export const author = `Daniel J Blain`
 export const authorQuote = `Eppur Si Muove`
@@ -39,9 +40,9 @@ export const socialMediaAccounts = [
         url: `https://www.twitch.tv/tetsuorocks`,
         tooltip: `My Brother's Twitch`,
     },
-    {
-        key: `textdandirect`,
-        url: ``, // Can I hook this up somehow?
-        tooltip: `TextMe?`,
-    }
+    // {
+    //     key: `textdandirect`,
+    //     url: ``, // Can I hook this up somehow?
+    //     tooltip: `TextMe?`,
+    // },
 ]

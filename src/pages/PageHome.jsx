@@ -64,9 +64,9 @@ const PageHome = () => {
                         ))}
                         {displayedMovies.length > 0 ?                        
                             displayedMovies.map(movieDetails =>
-                                <p key={movieDetails.original_title}>
+                                <a key={movieDetails.original_title} href='/about'>
                                     <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={`Image of movie: ${movieDetails.title}`} />
-                                </p>
+                                </a>
                             )
                             : `No movies found under this filter! ${currentMovieFilter.filter} ${displayedMovies.length}`
                         }
