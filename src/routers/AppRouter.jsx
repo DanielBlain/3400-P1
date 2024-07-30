@@ -1,8 +1,9 @@
-import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
-import { CustomContextProvider } from '../components/CustomContext'
-import useLocalStorage  from '../customhooks/useLocalStorage'
+import { appCustomState } from '../config/config'
+import { CustomContextProvider } from '../contexts/CustomContextProvider'
+// import useLocalStorage  from '../customhooks/useLocalStorage'
+
 import Header           from '../components/Header'
 import Footer           from '../components/Footer'
 
@@ -17,14 +18,12 @@ import PageNotFound     from '../pages/PageNotFound'
 
 const AppRouter = () => {
 
-    const customState = useLocalStorage('beeswax', useState('hello from AppRouter'))
-
     return (
         <BrowserRouter>
             <Routes>
                 <Route
                     element={
-                        <CustomContextProvider customState={customState}>
+                        <CustomContextProvider initialStates={appCustomState}>
                             <div className='wrapper'>
                                 <Header />
                                 <main>
@@ -40,8 +39,9 @@ const AppRouter = () => {
                     <Route path='/about'        element={<PageAbout />}         />
                     <Route path='/favourites'   element={<PageFavourites />}    />
                     <Route path='/help'         element={<PageHelp />}          />
+
                     {/* Non-menued routes */}
-                    <Route path='/single/:id'   element={<PageSingle />}        />
+                    <Route path='/single/:key'  element={<PageSingle />}        />
                     <Route path='/login'        element={<PageLogin />}         />
                     <Route path='/register'     element={<PageRegister />}      />
                     <Route path='*'             element={<PageNotFound />}      />

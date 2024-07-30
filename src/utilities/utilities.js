@@ -1,9 +1,18 @@
 export const getYear = () => (new Date).getFullYear()
 
+
 export const theMovieDatabaseEndpoint = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US`
 
+
+// findFirstByKey finds the first object in the list with
+// a key field matching soughtKey, or else -1
 export const findFirstByKey = (list, soughtKey) =>
-    list.findIndex(queried => queried.key === soughtKey)
+    Array.isArray(list)
+    && list.findIndex(queried => (
+        queried instanceof Object
+        && queried.key === soughtKey
+    ))
+
 
 export async function fetchMoviesByFilter(filter) {
     try {
@@ -12,6 +21,6 @@ export async function fetchMoviesByFilter(filter) {
         return fulfilledResults.results
     }
     catch (error) {
-        console.log(`ERROR: ${error}`)
+        console.log(`Unable to retrieve movie data from TMDB: ${error}`)
     }
 }

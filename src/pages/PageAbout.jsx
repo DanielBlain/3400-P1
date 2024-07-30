@@ -1,20 +1,19 @@
-import { useContext } from 'react'
-import { CustomContext } from '../components/CustomContext'
+import useCustomContext from '../contexts/useCustomContext'
 
 const PageAbout = () => {
-
-    const [message, setMessage] = useContext(CustomContext);
+    
+    const [movies, setMovies] = useCustomContext('moviesContext')
 
     return (
         <>
             <h1>Page About</h1>
-            <button onClick={() => setMessage('Hubba wubba')}>Click to Hubba wubba</button>
-            <button onClick={() => {
-                localStorage.removeItem('beeswax')
-            }}>
-                Click to remove local storage under &quot;beeswax&quot;
-            </button>
-            <div>{message}</div>
+            <p>
+                Title is {movies.title}
+            </p>
+            <p>
+                Poster Path is {movies.poster_path}
+            </p>
+            <button onClick={()=>setMovies({title: 'wez on strike!', poster_path: 'Potatoes have value'})}>Update Movie stuff</button>
         </>
     )
 }

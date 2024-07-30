@@ -64,7 +64,10 @@ const PageHome = () => {
                         ))}
                         {displayedMovies.length > 0 ?                        
                             displayedMovies.map(movieDetails =>
-                                <a key={movieDetails.original_title} href='/about'>
+                                // NOTE: I've chosen to use the movie's "poster_path" as a key
+                                // The movie details do not come with a natural key, but the
+                                // poster_path appears to be a highly unique, randomized value
+                                <a key={movieDetails.poster_path} href={`/about/${movieDetails.poster_path}`}>
                                     <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={`Image of movie: ${movieDetails.title}`} />
                                 </a>
                             )

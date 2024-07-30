@@ -1,7 +1,11 @@
+import { useParams } from 'react-router-dom'
+
 const PageSingle = () => {
 
+    const routeParams = useParams()
+
     return (
-        <div>PageSingle</div>
+        <div>PageSingle - {routeParams}</div>
     )
 }
 
