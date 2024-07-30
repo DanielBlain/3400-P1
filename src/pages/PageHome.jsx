@@ -1,32 +1,41 @@
 import { useState, useEffect } from 'react'
 import useSelectOne from '../customhooks/useSelectOne'
-import { NOW_PLAYING, POPULAR, TOP_RATED, UPCOMING } from '../config/config'
-import { fetchMoviesByFilter } from '../utilities/utilities'
+import { fetchMoviesByFilter } from '../utilities/tmdb'
+import useCustomContext from '../contexts/useCustomContext'
+
+// Home page movie filter constants
+const NOW_PLAYING    = `/now_playing`
+const POPULAR        = `/popular`
+const TOP_RATED      = `/top_rated`
+const UPCOMING       = `/upcoming`
 
 const HomePageMovieFilters = [
     {
         key: NOW_PLAYING,
-        filter: `/now_playing`,
+        filter: NOW_PLAYING,
         label: 'Now Playing',
     },
     {
         key: POPULAR,
-        filter: `/popular`,
+        filter: POPULAR,
         label: 'Popular',
     },
     {
         key: TOP_RATED,
-        filter: `/top_rated`,
+        filter: TOP_RATED,
         label: 'Top Rated',
     },
     {
         key: UPCOMING,
-        filter: `/upcoming`,
+        filter: UPCOMING,
         label: 'Upcoming',
     }
 ]
 
 const PageHome = () => {
+    const moviesState = useCustomContext(`moviesState`)
+    const browseState = useCustomContext(`browseState`)
+
     const [currentMovieFilter, setCurrentMovieFilter] = useSelectOne(HomePageMovieFilters, NOW_PLAYING)
     const [displayedMovies, setDisplayedMovies] = useState([])
 
@@ -44,7 +53,6 @@ const PageHome = () => {
         <>
             <div>
                 <div>
-                    {/*<!-- LIVE CONTENT .. eventually -->*/}
                     <h1>Home page</h1>
                     <p>
                         Page Home - This is where all the magic happens! Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, fugit tenetur exercitationem ratione officiis accusamus eligendi quaerat in autem, quia voluptas id iste dignissimos totam obcaecati vitae culpa vero neque.
@@ -64,10 +72,7 @@ const PageHome = () => {
                         ))}
                         {displayedMovies.length > 0 ?                        
                             displayedMovies.map(movieDetails =>
-                                // NOTE: I've chosen to use the movie's "poster_path" as a key
-                                // The movie details do not come with a natural key, but the
-                                // poster_path appears to be a highly unique, randomized value
-                                <a key={movieDetails.poster_path} href={`/about/${movieDetails.poster_path}`}>
+                                <a key={movieDetails.id} href={`/about/${movieDetails.id}`}>
                                     <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={`Image of movie: ${movieDetails.title}`} />
                                 </a>
                             )

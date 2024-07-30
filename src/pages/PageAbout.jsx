@@ -2,7 +2,7 @@ import useCustomContext from '../contexts/useCustomContext'
 
 const PageAbout = () => {
     
-    const [movies, setMovies] = useCustomContext('moviesContext')
+    const [movies, setMovies] = useCustomContext('moviesState')
 
     return (
         <>
