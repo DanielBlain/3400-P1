@@ -31,4 +31,7 @@ footer {
 
 .copyrightTag {
     padding: 0.2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }

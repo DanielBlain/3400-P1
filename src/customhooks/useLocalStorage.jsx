@@ -2,24 +2,7 @@ import { useEffect } from 'react'
 
 /*****
  * 
- *      key: (string), the name of the key in localStorage
- *      value: (any), state data we wish to persist through
- *          the use of localStorage
- *      setValue: (func) a setter func for value
- * 
- * returns: [ value with storage attached under key,
- * 
- *              setter func for value that also
- *              updates storage when changed,
- * 
- *              func that retrieves from key in 
- *              localStorage ]
- * 
- * */
-
-/*****
- * 
- * ---- written by Daniel J Blain
+ * ---- written by Daniel J Blain, 24 July 2024
  * 
  * useLocalStorage is a React custom hook that takes in a
  * key (string) and a React state in the form of an array
@@ -92,4 +75,4 @@ function useLocalStorage(key, [value, setUnstoredValue]) {
     return [value, setValue]
 }
 
-export default useLocalStorage;
+export default useLocalStorage

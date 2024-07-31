@@ -1,14 +1,28 @@
-// Resets
+// Reset
+@use './config/reset';
 
 // Base
+@use './base/screenreader';
 @use './base/root';
+@use './base/text';
 
 // Components
 @use './components/AppRouter';
+@use './components/Header';
 @use './components/Footer';
 
-// Utilities
+// Pages
+@use './pages/PageHome';
 
 // Special effects
 @use './effects/DanLogo';
+
 // Google Fonts - Import
+// Bruno Ace (headers, buttons, labels)
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap" rel="stylesheet');
+
+// Miriam Libre (body, quotes, cites)
+@import url('https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&display=swap" rel="stylesheet');
+
+// Sine Mono (code)
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet');

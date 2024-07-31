@@ -1,20 +1,16 @@
-import { useContext } from 'react'
-import { CustomContext } from '../components/CustomContext'
+import { useEffect } from 'react'
+import useCustomContext from '../contexts/useCustomContext'
+import { appName } from '../config/config'
 
 const PageAbout = () => {
 
-    const [message, setMessage] = useContext(CustomContext);
-
     return (
         <>
-            <div>PageAbout</div>
-            <button onClick={() => setMessage('Hubba wubba')}>Click to Hubba wubba</button>
-            <button onClick={() => {
-                localStorage.removeItem('beeswax')
-            }}>
-                Click to remove local storage under &quot;beeswax&quot;
-            </button>
-            <div>{message}</div>
+            <h1>About {appName}</h1>
+
+            {/* What app is */}
+
+            {/* Why app is useful */}
         </>
     )
 }
