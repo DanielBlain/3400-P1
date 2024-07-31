@@ -1,0 +1,9 @@
+.DanLogoInText::before {
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    background: url('DanLogo-x256.png') no-repeat center center;
+    background-size: 100% 100%;
+}

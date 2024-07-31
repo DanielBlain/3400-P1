@@ -1,7 +1,7 @@
-import DanLogo from '/DanLogo-x1024.png' // From public folder
+// import DanLogo from '/DanLogo-x1024.png' // From public folder
 import { author }               from '../config/config'
 import { authorQuote }          from '../config/config'
-import { socialMediaAccounts }  from '../config/config'
+// import { socialMediaAccounts }  from '../config/config'
 import { getYear }              from '../utilities/utilities'
 
 const Footer = () => (
@@ -12,9 +12,8 @@ const Footer = () => (
         <div>
             <span className='copyrightTag'>
                 <span>
-                    <a href='https://www.danjblain.dev' target="_blank" rel="noreferrer">
-                            <img src={DanLogo} alt='Logo of Dan J Blain' />
-                            {getYear()} &copy; {author} &nbsp;&nbsp;&nbsp;
+                    <a  className='DanLogoInText' href='https://www.danjblain.dev' target="_blank" rel="noreferrer">
+                        {getYear()} &copy; {author} &nbsp;&nbsp;&nbsp;
                     </a>
                     <em>
                         {authorQuote}
