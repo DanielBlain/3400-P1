@@ -1,12 +1,37 @@
 footer {
+    font-size: 1rem;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        width: 100%;
+    }
+
+    img {
+        width: 1.6rem;
+        position: relative;
+        top: 0.3rem;
+        right: 0.2rem;
+    }
+
+    & > * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.socialMediaPanel {
+    display: block;
+    background-color: black;
+    color: white;
+}
+
+
+.copyrightTag {
+    padding: 0.2rem 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
-    img {
-        width: 18px;
-        position: relative;
-        top: 2px;
-        right: 4px;
-    }
 }

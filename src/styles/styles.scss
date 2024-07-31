@@ -1,4 +1,5 @@
-@use './config/reset';              // Reset
+// Reset
+@use './config/reset';
 
 // Base
 @use './base/screenreader';
@@ -12,6 +13,9 @@
 
 // Pages
 @use './pages/PageHome';
+
+// Special effects
+@use './effects/DanLogo';
 
 // Google Fonts - Import
 // Bruno Ace (headers, buttons, labels)
