@@ -9,8 +9,25 @@ export const findFirstByKey = (list, soughtKey) =>
         && queried.key === soughtKey
     ))
 
-// Function to asynchronously fetch data from an external database
-export async function fetchFromDatabase(url) {
+// Function to asynchronously fetch singleton data from an external database
+export async function fetchSingleton(url) {
+
+    try {
+        const promiseResponse = await fetch(url)
+        const fulfilledPromise = await promiseResponse.json()
+
+        console.log('Results of a fetch')
+        console.log(fulfilledPromise)
+
+        return fulfilledPromise
+    }
+    catch (error) {
+        console.warn(`Unable to fetch: ${error}`)
+    }
+}
+
+// Function to asynchronously fetch list data from an external database
+export async function fetchList(url) {
 
     try {
         const promiseResponse = await fetch(url)

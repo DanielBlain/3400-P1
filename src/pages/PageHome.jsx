@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { fetchFromDatabase } from '../utilities/utilities'
+import { fetchList } from '../utilities/utilities'
 import useCustomContext from '../contexts/useCustomContext'
 import useLocalStorage from '../customhooks/useLocalStorage'
 import { api_key, databaseEndpoint, defaultQueries } from '../config/config'
@@ -17,11 +17,11 @@ const PageHome = () => {
     const [filter, setFilter] = useLocalStorage('cinescape', useState(NOW_PLAYING))
     const [displayedMovies, setDisplayedMovies] = useState([])
     
-    //Update PageHome when a new movie filter is selected
+    // Update PageHome when a new movie filter is selected
     useEffect(() => {
         async function updateMovieList(filterType, pagination=`&page=1`) {
             const url = `${databaseEndpoint}${filterType}?${defaultQueries}${pagination}&api_key=${api_key}`
-            const newMovieList = await fetchFromDatabase(url)
+            const newMovieList = await fetchList(url)
             if (newMovieList) {
                 setDisplayedMovies(newMovieList)
             }
@@ -55,7 +55,7 @@ const PageHome = () => {
                         <button key={UPCOMING}      onClick={() => setFilter(UPCOMING)}     >Upcoming</button>
                         {displayedMovies && displayedMovies.length > 0 ?                        
                             displayedMovies.map(movieDetails =>
-                                <a key={movieDetails.id} href={`/about/${movieDetails.id}`}>
+                                <a key={movieDetails.id} href={`/single/${movieDetails.id}`}>
                                     <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={`Image of movie: ${movieDetails.title}`} />
                                 </a>
                             )
