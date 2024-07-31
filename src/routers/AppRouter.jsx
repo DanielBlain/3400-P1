@@ -41,7 +41,7 @@ const AppRouter = () => {
                     <Route path='/help'         element={<PageHelp />}          />
 
                     {/* Non-menued routes */}
-                    <Route path='/single/:key'  element={<PageSingle />}        />
+                    <Route path='/single/:id'   element={<PageSingle />}        />
                     <Route path='/login'        element={<PageLogin />}         />
                     <Route path='/register'     element={<PageRegister />}      />
                     <Route path='*'             element={<PageNotFound />}      />

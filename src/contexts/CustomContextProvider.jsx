@@ -9,27 +9,29 @@ import { useState, createContext } from 'react'
  * 
  * ---- written by Daniel J Blain, 30 July 2024
  * 
- * CustomContextProvider - generic ContextProvider, for any type of data we want to
- * share across the app. Use in tandem with useCustomContext
-
- * Please wrap JSX tags <CustomContextProvider customState={your_custom_state_variable}>
- * around your elements that require access to the custom data. Then, import the
- * useCustomContext(param) hook, where param is the particular custom context.
+ * ---- The purpose of following this design pattern: I no longer need to import
+ * useCustomContext, my particular myContext, then create useContext(myContext),
+ * and double check that it's not null. The custom hook handles all of that. I
+ * only now need to:
+ *     (i) wrap JSX tags <CustomContextProvider customState={my_custom_state}>
+ * around elements that require access to the custom data
+ *     (ii) import and useCustomContext(param) hook, where param is the
+ * particular custom context, an immediate field of my_custom_state
  * 
- * For example, if CustomContextProvider is given initialStates {
+ * For example, if CustomContextProvider is given initialStates =
+    {
         userContext: {username: '', message: ''},
-        moviesContext: {title: '', poster_path: '',
+        moviesContext: {title: '', poster_path: ''}
     }
 
-    then you can access the (i) userContext, and (ii) moviesContext, respectively,
-    with:
-
-    const [user, setUser] = useCustomContext('userContext')    
-    and 
+* then I can access the (i) userContext, and (ii) moviesContext, respectively,
+* by using:
+    const [user, setUser] = useCustomContext('userContext')
     const [movies, setMovies] = useCustomContext('moviesContext')
+
  * 
- * Note in the respective setters, you ONLY need to set the values to be updated. The
- * rest will retain their value automatically.
+ * Note in the respective setters, I ONLY need to set the values to be updated.
+ * The rest will retain their value automatically, by design.
  * 
  * */
 

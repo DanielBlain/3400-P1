@@ -7,18 +7,16 @@ export const authorQuote    = `Eppur Si Muove`
 // App's initial custom state
 export const appCustomState = {
     userState: {
-        username: 'myUser',
-        message: 'message from myUser, amazing huh?'
+        username: 'guestUser',
+        password: null
     },
-    moviesState: {
-        title: '',
-        poster_path: '',
-        id: undefined,
-    },
-    browseState: {
-        movieFilter: '',
-    }
 }
+
+
+// The Movie Database communication
+export const api_key = import.meta.env.VITE_TMDB_DANJBLAIN_API_KEY
+export const databaseEndpoint = `https://api.themoviedb.org/3/movie`
+export const defaultQueries = `include_adult=false&include_video=false&language=en-US&page=1`
 
 
 // Info/Links to app author social media accounts

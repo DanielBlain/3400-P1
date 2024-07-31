@@ -1,53 +1,34 @@
 import { useState, useEffect } from 'react'
-import useSelectOne from '../customhooks/useSelectOne'
-import { fetchMoviesByFilter } from '../utilities/tmdb'
+import { fetchFromDatabase } from '../utilities/utilities'
 import useCustomContext from '../contexts/useCustomContext'
+import useLocalStorage from '../customhooks/useLocalStorage'
+import { api_key, databaseEndpoint, defaultQueries } from '../config/config'
+
 
 // Home page movie filter constants
-const NOW_PLAYING    = `/now_playing`
-const POPULAR        = `/popular`
-const TOP_RATED      = `/top_rated`
-const UPCOMING       = `/upcoming`
+const NOW_PLAYING   = `/now_playing`
+const POPULAR       = `/popular`
+const TOP_RATED     = `/top_rated`
+const UPCOMING      = `/upcoming`
 
-const HomePageMovieFilters = [
-    {
-        key: NOW_PLAYING,
-        filter: NOW_PLAYING,
-        label: 'Now Playing',
-    },
-    {
-        key: POPULAR,
-        filter: POPULAR,
-        label: 'Popular',
-    },
-    {
-        key: TOP_RATED,
-        filter: TOP_RATED,
-        label: 'Top Rated',
-    },
-    {
-        key: UPCOMING,
-        filter: UPCOMING,
-        label: 'Upcoming',
-    }
-]
 
 const PageHome = () => {
-    const moviesState = useCustomContext(`moviesState`)
-    const browseState = useCustomContext(`browseState`)
 
-    const [currentMovieFilter, setCurrentMovieFilter] = useSelectOne(HomePageMovieFilters, NOW_PLAYING)
+    const [filter, setFilter] = useLocalStorage('cinescape', useState(NOW_PLAYING))
     const [displayedMovies, setDisplayedMovies] = useState([])
-
-    async function updateMovieList(currentMovieFilter) {
-        const stuff = await fetchMoviesByFilter(currentMovieFilter.filter)
-        console.log(stuff)
-        setDisplayedMovies(stuff)
-    }
-
+    
+    //Update PageHome when a new movie filter is selected
     useEffect(() => {
-        updateMovieList(currentMovieFilter)
-    }, [currentMovieFilter])
+        async function updateMovieList(filterType, pagination=`&page=1`) {
+            const url = `${databaseEndpoint}${filterType}?${defaultQueries}${pagination}&api_key=${api_key}`
+            const newMovieList = await fetchFromDatabase(url)
+            if (newMovieList) {
+                setDisplayedMovies(newMovieList)
+            }
+        }
+
+        updateMovieList(filter)
+    }, [filter])
 
     return (
         <>
@@ -67,16 +48,18 @@ const PageHome = () => {
                 <div>
                     <h1>Movies!!</h1>
                     <div>
-                        {HomePageMovieFilters.map(filterDetails => (
-                            <button onClick={() => setCurrentMovieFilter(filterDetails.key)} key={filterDetails.key}>{filterDetails.label}</button>
-                        ))}
-                        {displayedMovies.length > 0 ?                        
+                        <p>Current filter: {filter}</p>
+                        <button key={NOW_PLAYING}   onClick={() => setFilter(NOW_PLAYING)}  >Now Playing</button>
+                        <button key={POPULAR}       onClick={() => setFilter(POPULAR)}      >Popular</button>
+                        <button key={TOP_RATED}     onClick={() => setFilter(TOP_RATED)}    >Top Rated</button>
+                        <button key={UPCOMING}      onClick={() => setFilter(UPCOMING)}     >Upcoming</button>
+                        {displayedMovies && displayedMovies.length > 0 ?                        
                             displayedMovies.map(movieDetails =>
                                 <a key={movieDetails.id} href={`/about/${movieDetails.id}`}>
                                     <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={`Image of movie: ${movieDetails.title}`} />
                                 </a>
                             )
-                            : `No movies found under this filter! ${currentMovieFilter.filter} ${displayedMovies.length}`
+                            : `No movies found under this filter! ${filter}`
                         }
                     </div>
                 </div>
