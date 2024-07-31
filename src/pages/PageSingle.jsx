@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { fetchSingleton } from '../utilities/utilities'
+import { fetchSingleton } from '../utilities/themoviedatabase'
 // import useCustomContext from '../contexts/useCustomContext'
 // import useLocalStorage from '../customhooks/useLocalStorage'
-import { api_key, databaseEndpoint, defaultQueries } from '../config/config'
+import { api_key, tmdbEndpoint } from '../config/config'
 
 const PageSingle = () => {
 
@@ -16,7 +16,7 @@ const PageSingle = () => {
     useEffect(() => {
         async function getMovieDetails(movieID) {
             try {
-                const url = `${databaseEndpoint}/${movieID}?language=en-US&api_key=${api_key}`
+                const url = `${tmdbEndpoint}/${movieID}?language=en-US&api_key=${api_key}`
                 const fetchedDetails = await fetchSingleton(url)
                 if (fetchedDetails) {
                     setIsLocated(true)
@@ -32,6 +32,7 @@ const PageSingle = () => {
     }, [isLocated])
 
 
+    // The component --------------------------------------
     return (
         <>
             <div>

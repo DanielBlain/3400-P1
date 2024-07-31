@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { fetchList } from '../utilities/utilities'
+import { fetchList } from '../utilities/themoviedatabase'
 import useCustomContext from '../contexts/useCustomContext'
 import useLocalStorage from '../customhooks/useLocalStorage'
-import { appName, api_key, databaseEndpoint, defaultQueries } from '../config/config'
+import { appName, api_key, tmdbEndpoint } from '../config/config'
 
 // Home page movie filter constants
 const NOW_PLAYING   = `/now_playing`
@@ -13,29 +13,18 @@ const UPCOMING      = `/upcoming`
 const PageHome = () => {
 
     const [filter, setFilter] = useLocalStorage(appName, useState(null))
-    const [displayedMovies, setDisplayedMovies] = useState([])
+    const [displayedMovies, setDisplayedMovies] = useState(null)
 
 
-    // Load the user's last choice for filter from localStorage
-    useEffect(() => {
-        let retrievedFilterChoice = localStorage.getItem(appName)
-
-        if (!retrievedFilterChoice
-            || (retrievedFilterChoice !== NOW_PLAYING
-                && retrievedFilterChoice !== POPULAR
-                && retrievedFilterChoice !== TOP_RATED
-                && retrievedFilterChoice !== UPCOMING
-            )
-        ) {retrievedFilterChoice = NOW_PLAYING}
-
-        setFilter(retrievedFilterChoice)        
-    }, [])
-
+    // The user's last choice for filter is loaded
+    // from localStorage automatically, by the
+    // useLocalStorage hook
+    
     
     // Update PageHome when a new movie filter is selected
     useEffect(() => {
         async function updateMovieList(filterType, pagination=`&page=1`) {
-            const url = `${databaseEndpoint}${filterType}?${defaultQueries}${pagination}&api_key=${api_key}`
+            const url = `${tmdbEndpoint}${filterType}?include_adult=false&include_video=false&language=en-US${pagination}&api_key=${api_key}`
             const newMovieList = await fetchList(url)
             if (newMovieList) {
                 setDisplayedMovies(newMovieList)
@@ -46,6 +35,7 @@ const PageHome = () => {
     }, [filter])
 
 
+    // The component --------------------------------------
     return (
         <>
             <div>
