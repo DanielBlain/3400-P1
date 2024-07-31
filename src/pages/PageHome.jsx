@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import { fetchList } from '../utilities/utilities'
 import useCustomContext from '../contexts/useCustomContext'
 import useLocalStorage from '../customhooks/useLocalStorage'
-import { api_key, databaseEndpoint, defaultQueries } from '../config/config'
-
+import { appName, api_key, databaseEndpoint, defaultQueries } from '../config/config'
 
 // Home page movie filter constants
 const NOW_PLAYING   = `/now_playing`
@@ -11,11 +10,27 @@ const POPULAR       = `/popular`
 const TOP_RATED     = `/top_rated`
 const UPCOMING      = `/upcoming`
 
-
 const PageHome = () => {
 
-    const [filter, setFilter] = useLocalStorage('cinescape', useState(NOW_PLAYING))
+    const [filter, setFilter] = useLocalStorage(appName, useState(null))
     const [displayedMovies, setDisplayedMovies] = useState([])
+
+
+    // Load the user's last choice for filter from localStorage
+    useEffect(() => {
+        let retrievedFilterChoice = localStorage.getItem(appName)
+
+        if (!retrievedFilterChoice
+            || (retrievedFilterChoice !== NOW_PLAYING
+                && retrievedFilterChoice !== POPULAR
+                && retrievedFilterChoice !== TOP_RATED
+                && retrievedFilterChoice !== UPCOMING
+            )
+        ) {retrievedFilterChoice = NOW_PLAYING}
+
+        setFilter(retrievedFilterChoice)        
+    }, [])
+
     
     // Update PageHome when a new movie filter is selected
     useEffect(() => {
@@ -27,8 +42,9 @@ const PageHome = () => {
             }
         }
 
-        updateMovieList(filter)
+        if (filter) {updateMovieList(filter)}
     }, [filter])
+
 
     return (
         <>

@@ -5,12 +5,12 @@ import { fetchSingleton } from '../utilities/utilities'
 // import useLocalStorage from '../customhooks/useLocalStorage'
 import { api_key, databaseEndpoint, defaultQueries } from '../config/config'
 
-
 const PageSingle = () => {
 
     const [isLocated, setIsLocated] = useState(false)
     const { movieID } = useParams()
     const [movieDetails, setMovieDetails] = useState(null)
+
 
     // Update PageHome when a new movie filter is selected
     useEffect(() => {
@@ -30,6 +30,7 @@ const PageSingle = () => {
 
         getMovieDetails(movieID)
     }, [isLocated])
+
 
     return (
         <>
