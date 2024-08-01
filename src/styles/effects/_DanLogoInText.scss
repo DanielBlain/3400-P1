@@ -1,3 +1,9 @@
+/**
+
+TO USE: simply add class 'DanLogoInText'
+
+Should likely be used on a text element
+*/
 .DanLogoInText::before {
     content: '';
     display: inline-block;

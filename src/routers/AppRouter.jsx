@@ -11,7 +11,7 @@ import PageHome         from '../pages/PageHome'
 import PageSingle       from '../pages/PageSingle'
 import PageFavourites   from '../pages/PageFavourites'
 import PageAbout        from '../pages/PageAbout'
-import PageHelp         from '../pages/PageHelp'
+import PageSupport      from '../pages/PageSupport'
 import PageLogin        from '../pages/PageLogin'
 import PageRegister     from '../pages/PageRegister'
 import PageNotFound     from '../pages/PageNotFound'
@@ -38,7 +38,7 @@ const AppRouter = () => {
                     <Route path='/'             element={<PageHome />}  exact   />
                     <Route path='/about'        element={<PageAbout />}         />
                     <Route path='/favourites'   element={<PageFavourites />}    />
-                    <Route path='/help'         element={<PageHelp />}          />
+                    <Route path='/support'      element={<PageSupport />}       />
 
                     {/* Non-menued routes */}
                     <Route path='/single/:movieID' element={<PageSingle />}     />

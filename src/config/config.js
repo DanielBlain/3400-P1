@@ -9,7 +9,7 @@ export const appCustomState = {
     userState: {
         username: 'guestUser',
         password: null
-    },
+    }
 }
 
 

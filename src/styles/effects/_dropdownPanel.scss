@@ -1,0 +1,33 @@
+/**
+
+TO USE:
+    0) Have an outer element and an inner element containing
+    the content you want to drop down
+    
+    1) Set an outer element's class to `dropdownPanel${isDropped}`
+    with the isDropped state created by useState
+
+    2) Set the immediate inner element's class to simply
+    `{isDropped}`
+
+    3) setIsDropped to either '' to close or 'isDropped' to open,
+        probably through an onClick event
+*/
+.dropdownPanel {
+    overflow: hidden;
+    max-height: 0;
+
+    &.isDropped {
+        max-height: fit-content;
+    }
+
+    & > * {
+        position: relative;
+        bottom: 1000px;
+        transition: bottom 0.5s ease-out 0.01s;
+    }
+
+    & > *.isDropped {
+        bottom: 0;
+    }
+}

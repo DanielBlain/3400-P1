@@ -7,13 +7,14 @@ const PageAbout = () => {
             <h1>About {appName}</h1>
             <p>
                 {appName} is an educational project built by Dan J. Blain as part of a class that teaches students to use the React Javascript framework. The React class was part of the Frontend Web Development program offered by the brilliant people at BCIT.
+                <img src="/bcit.png" alt="Logo for BCIT (British Columbia Institute of Technology)" />
             </p>
             <p>
                 Thank you for my education!
             </p>
             <p>
                 This product uses the TMDB API but is not endorsed or certified by TMDB.
-                <img src="/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="Logo for The Movie Database" />
+                <img src="/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="Logo for TMDB (The Movie Database)" />
             </p>
             <p>
                 Welcome to {appName}, your ultimate movie-browsing companion! Powered by IMDB, the Internet Movie Database, {appName} offers an intuitive experience for exploring a vast collection of movies.
