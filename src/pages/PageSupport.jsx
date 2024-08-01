@@ -36,7 +36,7 @@ const PageSupport = () => {
                     </div>
                 </article>
             </section>
-            <article className={`placeholder${isDroppedContent}`}>
+            <article aria-hidden='true' className={`placeholder${isDroppedContent}`}>
                 <div>
                     <p>
                         All movie-related content on {appName} is curated and managed by TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.
