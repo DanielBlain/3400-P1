@@ -10,13 +10,13 @@
 @use './components/AppRouter';
 @use './components/Header';
 @use './components/Footer';
+@use './components/ClickDropdown';
 
 // Pages
 @use './pages/PageHome';
 
 // Special effects
 @use './effects/DanLogoInText';
-@use './effects/Dropdown';
 
 // Google Fonts - Import
 // Bruno Ace (headers, buttons, labels)

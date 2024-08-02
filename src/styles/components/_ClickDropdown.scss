@@ -2,39 +2,21 @@
 // Dan J Blain, 01082024
 
 .activator {
-    background-color: blue;
-    padding: 20px 40px;
     position: relative;
     perspective: 1000px;
-    z-index: 100;
+    background-color: blue;
 }
 
 .activator.isDropped .activation_panel--animated {
     display: block;
-}
-
-.placeholder {
-    display: none;
-    visibility: hidden;
-    
-    &.isDropped {
-        display: block;
-    }
+    background-color: red;
 }
 
 .activation_panel {
-    position: absolute;
-    top: 100%;
-    left: 0;
     width: 100%;
     perspective: 1000px;
-    z-index: -1;
     & > * {
         display: none;
-        color: white;
-        background-color: #34495e;
-        padding: 10px 20px;
-        font-size: 16px;
         opacity: 0;
     }
 }
@@ -61,5 +43,14 @@
     }
     100% {
         transform: rotateX(0deg);
+    }
+}
+
+.spacer {
+    display: none;
+    visibility: hidden;
+    &.isDropped {
+        display: absolute;
+        top: 0;
     }
 }
