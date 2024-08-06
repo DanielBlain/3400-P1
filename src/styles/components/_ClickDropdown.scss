@@ -4,12 +4,10 @@
 .activator {
     position: relative;
     perspective: 1000px;
-    background-color: blue;
 }
 
 .activator.isDropped .activation_panel--animated {
     display: block;
-    background-color: red;
 }
 
 .activation_panel {
@@ -30,11 +28,11 @@
 }
 
 .style_rotate_X {
-    animation: rotateMenu 400ms ease-in-out forwards;
+    animation: rotatePanel 400ms ease-in-out forwards;
     transform-origin: top center;
 }
 
-@keyframes rotateMenu {
+@keyframes rotatePanel {
     0% {
         transform: rotateX(-90deg);
     }

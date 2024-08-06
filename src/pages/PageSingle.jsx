@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { fetchSingleton } from '../utilities/themoviedatabase'
+import { fetchSingleton } from '../utilities/themoviedatabase/themoviedatabase'
 // import useCustomContext from '../contexts/useCustomContext'
 // import useLocalStorage from '../customhooks/useLocalStorage'
 import { api_key, tmdbEndpoint } from '../config/config'

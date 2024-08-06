@@ -53,7 +53,7 @@ import { useReducer } from 'react'
  * 
  * */
 
-const useDispatchManager = (dispatchPathList, initial) => {
+const useDispatchManager = (dispatchPathList, initialState) => {
     
     function blindReducer(state, action) {
         const dispatchPath = dispatchPathList.find(
@@ -73,7 +73,7 @@ const useDispatchManager = (dispatchPathList, initial) => {
         }
     }
 
-    const [ state, dispatch ] = useReducer(blindReducer, initial)
+    const [ state, dispatch ] = useReducer(blindReducer, initialState)
 
     return [ state, dispatch ]
 }

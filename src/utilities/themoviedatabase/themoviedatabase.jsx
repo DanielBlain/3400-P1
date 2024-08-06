@@ -1,3 +1,25 @@
+/**
+ * The Movie Database (TMDB) returns movie data packaged in the following format
+ * 
+ * movieData {
+ *      adult,
+ *      backdrop_path,
+ *      genre_ids,
+ *      id,
+ *      original_language,
+ *      original_title,
+ *      overview,
+ *      popularity,
+ *      poster_path,
+ *      release_date,
+ *      title,
+ *      video,
+ *      vote_average,
+ *      vote_count
+ *  }
+ * 
+ */
+
 
 // Function to asynchronously fetch singleton data from an external database
 // Usage e.g. const url = `${databaseEndpoint}/${movieID}?language=en-US&api_key=${api_key}`
@@ -16,6 +38,7 @@ export async function fetchSingleton(url) {
         console.warn(`Unable to fetch: ${error}`)
     }
 }
+
 
 // Function to asynchronously fetch list data from an external database
 // Usage e.g. const url = `${databaseEndpoint}${filterType}?${defaultQueries}${pagination}&api_key=${api_key}`

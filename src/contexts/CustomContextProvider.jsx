@@ -13,7 +13,7 @@ import { useState, createContext } from 'react'
  * useCustomContext, my particular myContext, then create useContext(myContext),
  * and double check that it's not null. The custom hook handles all of that. I
  * only now need to:
- *     (i) wrap JSX tags <CustomContextProvider customState={my_custom_state}>
+ *     (i) wrap JSX tags <CustomContextProvider customState={initialStates}>
  * around elements that require access to the custom data
  *     (ii) import and useCustomContext(param) hook, where param is the
  * particular custom context, an immediate field of my_custom_state

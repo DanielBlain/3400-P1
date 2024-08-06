@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { fetchList } from '../utilities/themoviedatabase'
-import useCustomContext from '../contexts/useCustomContext'
+import { fetchList } from '../utilities/themoviedatabase/themoviedatabase'
 import useLocalStorage from '../customhooks/useLocalStorage'
+import MovieGadget from '../components/MovieGadget'
 import { appName, api_key, tmdbEndpoint } from '../config/config'
 
 // Home page movie filter constants
@@ -12,7 +12,7 @@ const UPCOMING      = `/upcoming`
 
 const PageHome = () => {
 
-    const [filter, setFilter] = useLocalStorage(appName, useState(null))
+    const [filter, setFilter] = useLocalStorage(`${appName}-homefilter`, useState(null))
     const [displayedMovies, setDisplayedMovies] = useState(null)
 
 
@@ -53,21 +53,27 @@ const PageHome = () => {
                 </div>
                 <div>
                     <h1>Movies!!</h1>
-                    <div>
-                        <p>Current filter: {filter}</p>
+                    <p>
+                        Current filter: {filter}
                         <button key={NOW_PLAYING}   onClick={() => setFilter(NOW_PLAYING)}  >Now Playing</button>
                         <button key={POPULAR}       onClick={() => setFilter(POPULAR)}      >Popular</button>
                         <button key={TOP_RATED}     onClick={() => setFilter(TOP_RATED)}    >Top Rated</button>
                         <button key={UPCOMING}      onClick={() => setFilter(UPCOMING)}     >Upcoming</button>
-                        {displayedMovies && displayedMovies.length > 0 ?                        
-                            displayedMovies.map(movieDetails =>
-                                <a key={movieDetails.id} href={`/single/${movieDetails.id}`}>
-                                    <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={`Image of movie: ${movieDetails.title}`} />
-                                </a>
+                    </p>
+                    <section>
+                        {
+                            // Guard clauses
+                            displayedMovies && displayedMovies.length > 0 ?
+
+                            // Return if passed
+                            displayedMovies.map(movieDetails => 
+                                <MovieGadget key={`movieGadget-${movieDetails.id}`} movieDetails={movieDetails} />
                             )
+
+                            // Return if failed
                             : `No movies found under this filter! ${filter}`
                         }
-                    </div>
+                    </section>
                 </div>
             </div>
         </>

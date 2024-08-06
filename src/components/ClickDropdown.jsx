@@ -19,7 +19,8 @@ const ClickDropdown = ({ tag, children }) => {
                     {children}
                 </article>
             </section>
-            <section className={`spacer${isDroppedContent}`}>
+            {/* The following section element serves no context, is provided as space for dropdown */}
+            <section aria-hidden='true' className={`spacer${isDroppedContent}`}>
                 <article className={`spacer_panel activation_panel--animated`}>
                     {children}
                 </article>

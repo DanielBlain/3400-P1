@@ -7,10 +7,51 @@ export const authorQuote    = `Eppur Si Muove`
 // App's initial custom state
 export const appCustomState = {
     userState: {
-        username: 'guestUser',
-        password: null
-    }
+        username: null,             // string
+        password: null,             // string
+    },
+    browseState: {
+        homeFilter: null,           // string
+        likedMovies: null,          // set of id's
+    },
 }
+
+
+// Browse state actions
+export const BrowseActions = [
+    {
+        // Like a movie; add to "likedMovies" set
+        type: 'like',
+        go: (state, payload) => {
+            const updatedLiked = 
+                state.likedMovies ?
+                    new Set([...state.likedMovies])
+                    : new Set([])
+            updatedLiked.add(payload.id)
+            return {
+                ...state,
+                likedMovies: updatedLiked
+            }
+        }
+    },
+    {
+        // Unlike a movie; remove from "likedMovies" set
+        type: 'unlike',
+        go: (state, payload) => {
+            let updatedLiked = state.likedMovies
+            if (updatedLiked) {
+                updatedLiked.delete(payload.id)
+            }
+            else {
+                updatedLiked = new Set([])
+            }
+            return {
+                ...state,
+                likedMovies: updatedLiked
+            }
+        }
+    },
+]
 
 
 // The Movie Database communication
