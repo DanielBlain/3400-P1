@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
-import useCustomContext from '../contexts/useCustomContext'
+import { useContext, useEffect } from 'react'
+import { MovieAppContext } from '../router/AppRouter'
 import MovieDisplayList from '../components/MovieDisplayList'
+
 
 // Home page movie filter constants
 const NOW_PLAYING   = `/now_playing`
@@ -8,26 +9,49 @@ const POPULAR       = `/popular`
 const TOP_RATED     = `/top_rated`
 const UPCOMING      = `/upcoming`
 
-const PageHome = () => {
-    
-    const [ browse, setBrowse ] = useCustomContext('browseState')
 
-    const isFilterValid = () => {
-        if (browse.homeFilter != NOW_PLAYING
-            && browse.homeFilter != POPULAR
-            && browse.homeFilter != TOP_RATED
-            && browse.homeFilter != UPCOMING
-        ) {
-            return false
+const PageHome = () => {
+
+    const { appState, setAppState, storagelockState, setInitializationLock } = useContext(MovieAppContext)
+
+
+    const isFilterValid = (newFilter) =>
+        newFilter === NOW_PLAYING
+        || newFilter === POPULAR
+        || newFilter === TOP_RATED
+        || newFilter === UPCOMING
+
+
+    function chooseFilter(newFilter) {
+        if (!isFilterValid(newFilter)) {
+            console.warn(`Bad filter selected: ${newFilter}`)
+            return
         }
-        return true
+        setAppState({
+            ...appState, 
+            browse: {
+                ...appState.browse,
+                homeFilter: newFilter
+            }
+        })
     }
 
+
+    // Initialize PageHome
+    // Run once on boot
     useEffect(() => {
-        if (!isFilterValid()) {
-            setBrowse({...browse, homeFilter: NOW_PLAYING})
-        }
+        setInitializationLock(false)
     }, [])
+
+
+    // Unlocked localStorage and found no filter? Set to NOW_PLAYING by default
+    // Run when state of storageLockState changes
+    useEffect(() => {
+        if (storagelockState === false && !isFilterValid(appState.browse.homeFilter)) {
+            chooseFilter(NOW_PLAYING)
+        }
+    }, [storagelockState])
+
 
     return (
         <>
@@ -47,13 +71,13 @@ const PageHome = () => {
                 <div>
                     <h1>Movies!!</h1>
                     <p>
-                        Current filter: {browse && browse.homeFilter}
-                        <button key={NOW_PLAYING}   onClick={() => setBrowse({...browse, homeFilter: NOW_PLAYING})} >Now Playing</button>
-                        <button key={POPULAR}       onClick={() => setBrowse({...browse, homeFilter: POPULAR})}     >Popular</button>
-                        <button key={TOP_RATED}     onClick={() => setBrowse({...browse, homeFilter: TOP_RATED})}   >Top Rated</button>
-                        <button key={UPCOMING}      onClick={() => setBrowse({...browse, homeFilter: UPCOMING})}    >Upcoming</button>
+                        Current filter: {appState.browse.homeFilter}
+                        <button key={NOW_PLAYING}   onClick={() => chooseFilter(NOW_PLAYING)}   >Now Playing</button>
+                        <button key={POPULAR}       onClick={() => chooseFilter(POPULAR)}       >Popular</button>
+                        <button key={TOP_RATED}     onClick={() => chooseFilter(TOP_RATED)}     >Top Rated</button>
+                        <button key={UPCOMING}      onClick={() => chooseFilter(UPCOMING)}      >Upcoming</button>
                     </p>
-                    {browse && isFilterValid() && <MovieDisplayList filterType={browse.homeFilter} />}
+                    {isFilterValid(appState.browse.homeFilter) && <MovieDisplayList filterType={appState.browse.homeFilter} />}
                 </div>
             </div>
         </>

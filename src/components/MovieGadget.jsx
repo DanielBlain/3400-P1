@@ -1,34 +1,13 @@
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
-import useCustomContext from '../contexts/useCustomContext'
-import useDispatchManager from '../customhooks/useDispatchManager'
-import { BrowseActions } from '../config/config'
+import { useReducer } from 'react'
+// import useCustomContext from '../contexts/useCustomContext'
+import MovieReducer from './MovieReducer'
 
 const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
-    const [ browseState ] = useCustomContext( 'browseState' )
-    const [ , dispatch ] = useDispatchManager( BrowseActions, browseState )
-    const [ isLiked, setIsLiked ] = useState(false)
-
-
-    // // On initialization, update whether this movie is Liked
-    // useEffect(() => {
-    //     if (browseState.likedMovies && browseState.likedMovies.has( movieDetails.id ))
-    //     {
-    //         setIsLiked(true)
-    //     }
-    // }, [])
-
+    // const [ browse, setBrowse ] = useCustomContext( 'browseState' )
 
     const handleLike = e => {
         e.preventDefault()
-        if (isLiked) {
-            dispatch({ type: 'unlike', payload: {id: movieDetails.id} })
-            setIsLiked(false)
-        }
-        else {
-            dispatch({ type: 'like', payload: {id: movieDetails.id} })
-            setIsLiked(true)
-        }
     }
 
     const handleInfo = e => {
@@ -36,7 +15,7 @@ const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
     }
 
     return (
-        <article key={ movieGadgetKey } style={isLiked ? {border: '10px solid red'} : {}}>
+        <article key={ movieGadgetKey } style={{border: '10px solid red'}}>
             <a
                 href={ `/single/${movieDetails.id}` }
             >

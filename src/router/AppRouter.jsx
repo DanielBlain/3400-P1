@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, createContext } from 'react'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import { appName, appCustomState } from '../config/config'
-import { CustomContextProvider } from '../contexts/CustomContextProvider'
+import useLocalStorage  from '../customhooks/useLocalStorage'
 
 import Header           from '../components/Header'
 import Footer           from '../components/Footer'
@@ -17,30 +17,17 @@ import PageRegister     from '../pages/PageRegister'
 import PageNotFound     from '../pages/PageNotFound'
 
 
-const AppRouter = () => {
+export const MovieAppContext = createContext({
+    appState: null,
+    setAppState: null,
+    storagelockState: null,
+    setInitializationLock: null
+})
 
-    const [ appState, setAppState ] = useState(appCustomState)
-    
-    function putState() {
-        try {
-            const packedState = JSON.stringify(appState)
-            localStorage.setItem(appName, packedState)
-        }
-        catch(failMessage) {
-            console.warn(failMessage)
-        }
-    }
 
-    function getState() {
-        try {
-            const packedState = localStorage.getItem(appName)
-            const unpackedState = JSON.parse(packedState)
-            setAppState(unpackedState)
-        }
-        catch(failMessage) {
-            console.warn(failMessage)
-        }
-    }
+export const AppRouter = () => {
+
+    const [ appState, setAppState, storagelockState, setInitializationLock ] = useLocalStorage(appName, useState( appCustomState ))
 
     return (
         <BrowserRouter>
@@ -48,19 +35,17 @@ const AppRouter = () => {
                 {/* Layout route */}
                 <Route
                     element={
-                        <CustomContextProvider
-                            statesStruct={[ appState, setAppState ]}
+                        <MovieAppContext.Provider
+                            value={{ appState, setAppState, storagelockState, setInitializationLock }}
                         >
                             <div className='wrapper'>
                                 <Header />
                                 <main>
-                                    <button onClick={putState}>Put state {appName}</button>
-                                    <button onClick={getState}>Get state {appName}</button>
                                     <Outlet />
                                 </main>
                                 <Footer />
                             </div>
-                        </CustomContextProvider>
+                        </MovieAppContext.Provider>
                     }
                 >
                     {/* Menued routes */}
@@ -81,5 +66,3 @@ const AppRouter = () => {
         </BrowserRouter>
     )
 }
-
-export default AppRouter
