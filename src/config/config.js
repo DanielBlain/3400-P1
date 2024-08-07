@@ -19,8 +19,9 @@ export const appCustomState = {
 
 // Browse state actions
 export const BrowseActions = [
+
+    // Like a movie; add to "likedMovies" set
     {
-        // Like a movie; add to "likedMovies" set
         type: 'like',
         go: (state, payload) => {
             const updatedLiked = 
@@ -34,8 +35,9 @@ export const BrowseActions = [
             }
         }
     },
+
+    // Unlike a movie; remove from "likedMovies" set
     {
-        // Unlike a movie; remove from "likedMovies" set
         type: 'unlike',
         go: (state, payload) => {
             let updatedLiked = state.likedMovies

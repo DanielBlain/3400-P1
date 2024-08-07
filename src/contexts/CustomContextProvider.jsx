@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState, createContext } from 'react'
+import { createContext } from 'react'
 
 /*****
  * 
@@ -7,7 +7,7 @@ import { useState, createContext } from 'react'
  * "Why use a Custom Hook for React Context API instead of useContext (+ TypeScript)"
  * Author: ByteGrad
  * 
- * ---- written by Daniel J Blain, 30 July 2024
+ * ---- written by Daniel J Blain, 6 Aug 2024
  * 
  * ---- The purpose of following this design pattern: I no longer need to import
  * useCustomContext, my particular myContext, then create useContext(myContext),
@@ -18,7 +18,8 @@ import { useState, createContext } from 'react'
  *     (ii) import and useCustomContext(param) hook, where param is the
  * particular custom context, an immediate field of my_custom_state
  * 
- * For example, if CustomContextProvider is given initialStates =
+ * For example, if CustomContextProvider is given statesStruct = [ initStates,
+ * setStates ], where initStates =
     {
         userContext: {username: '', message: ''},
         moviesContext: {title: '', poster_path: ''}
@@ -37,18 +38,16 @@ import { useState, createContext } from 'react'
 
 export const GlobalCustomContext = createContext( null );
 
-export const CustomContextProvider = ({ initialStates, children }) => {
-
-    const [ customState, setCustomState ] = useState( initialStates );
+export const CustomContextProvider = ({ statesStruct, children }) => {
 
     return (
-        <GlobalCustomContext.Provider value={[ customState, setCustomState ]}>
+        <GlobalCustomContext.Provider value={ statesStruct }>
             {children}
         </GlobalCustomContext.Provider>
     )
 }
 
 CustomContextProvider.propTypes = {
-    initialStates: PropTypes.object,
+    statesStruct: PropTypes.array,
     children: PropTypes.element
 }

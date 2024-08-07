@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react'
-import { fetchList } from '../utilities/themoviedatabase/themoviedatabase'
-import useLocalStorage from '../customhooks/useLocalStorage'
-import MovieGadget from '../components/MovieGadget'
-import { appName, api_key, tmdbEndpoint } from '../config/config'
+import { useEffect } from 'react'
+import useCustomContext from '../contexts/useCustomContext'
+import MovieDisplayList from '../components/MovieDisplayList'
 
 // Home page movie filter constants
 const NOW_PLAYING   = `/now_playing`
@@ -11,31 +9,26 @@ const TOP_RATED     = `/top_rated`
 const UPCOMING      = `/upcoming`
 
 const PageHome = () => {
-
-    const [filter, setFilter] = useLocalStorage(`${appName}-homefilter`, useState(null))
-    const [displayedMovies, setDisplayedMovies] = useState(null)
-
-
-    // The user's last choice for filter is loaded
-    // from localStorage automatically, by the
-    // useLocalStorage hook
     
-    
-    // Update PageHome when a new movie filter is selected
-    useEffect(() => {
-        async function updateMovieList(filterType, pagination=`&page=1`) {
-            const url = `${tmdbEndpoint}${filterType}?include_adult=false&include_video=false&language=en-US${pagination}&api_key=${api_key}`
-            const newMovieList = await fetchList(url)
-            if (newMovieList) {
-                setDisplayedMovies(newMovieList)
-            }
+    const [ browse, setBrowse ] = useCustomContext('browseState')
+
+    const isFilterValid = () => {
+        if (browse.homeFilter != NOW_PLAYING
+            && browse.homeFilter != POPULAR
+            && browse.homeFilter != TOP_RATED
+            && browse.homeFilter != UPCOMING
+        ) {
+            return false
         }
+        return true
+    }
 
-        if (filter) {updateMovieList(filter)}
-    }, [filter])
+    useEffect(() => {
+        if (!isFilterValid()) {
+            setBrowse({...browse, homeFilter: NOW_PLAYING})
+        }
+    }, [])
 
-
-    // The component --------------------------------------
     return (
         <>
             <div>
@@ -54,26 +47,13 @@ const PageHome = () => {
                 <div>
                     <h1>Movies!!</h1>
                     <p>
-                        Current filter: {filter}
-                        <button key={NOW_PLAYING}   onClick={() => setFilter(NOW_PLAYING)}  >Now Playing</button>
-                        <button key={POPULAR}       onClick={() => setFilter(POPULAR)}      >Popular</button>
-                        <button key={TOP_RATED}     onClick={() => setFilter(TOP_RATED)}    >Top Rated</button>
-                        <button key={UPCOMING}      onClick={() => setFilter(UPCOMING)}     >Upcoming</button>
+                        Current filter: {browse && browse.homeFilter}
+                        <button key={NOW_PLAYING}   onClick={() => setBrowse({...browse, homeFilter: NOW_PLAYING})} >Now Playing</button>
+                        <button key={POPULAR}       onClick={() => setBrowse({...browse, homeFilter: POPULAR})}     >Popular</button>
+                        <button key={TOP_RATED}     onClick={() => setBrowse({...browse, homeFilter: TOP_RATED})}   >Top Rated</button>
+                        <button key={UPCOMING}      onClick={() => setBrowse({...browse, homeFilter: UPCOMING})}    >Upcoming</button>
                     </p>
-                    <section>
-                        {
-                            // Guard clauses
-                            displayedMovies && displayedMovies.length > 0 ?
-
-                            // Return if passed
-                            displayedMovies.map(movieDetails => 
-                                <MovieGadget key={`movieGadget-${movieDetails.id}`} movieDetails={movieDetails} />
-                            )
-
-                            // Return if failed
-                            : `No movies found under this filter! ${filter}`
-                        }
-                    </section>
+                    {browse && isFilterValid() && <MovieDisplayList filterType={browse.homeFilter} />}
                 </div>
             </div>
         </>

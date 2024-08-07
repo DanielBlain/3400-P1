@@ -24,13 +24,13 @@ const PageAbout = () => {
             </p>
             <p>
                 {appName} also features
-                <ul>
-                    <li>Favourites: Click the star (image) to favourite a movie</li>
-                    {/* <li>Playlists: </li> */}
-                    <li>User Profiles: Login to ensure your list of favourited movies are saved for next time</li>
-                    {/* <li>(others?)</li> */}
-                </ul>
             </p>
+            <ul>
+                <li>Favourites: Click the star (image) to favourite a movie</li>
+                {/* <li>Playlists: </li> */}
+                <li>User Profiles: Login to ensure your list of favourited movies are saved for next time</li>
+                {/* <li>(others?)</li> */}
+            </ul>
             <p>Discover new releases, timeless classics, and hidden gems. See what&apos;s Now Playing to get started!</p>
             <p>
                 <b>NOTE:</b> {appName} is meant strictly as an educational project, and therefore should <em>not</em> be used for any professional or business purposes. If you choose to do so, it is at your own risk, and I take utterly no responsibility!

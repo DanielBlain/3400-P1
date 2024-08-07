@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
-import { appCustomState } from '../config/config'
+import { appName, appCustomState } from '../config/config'
 import { CustomContextProvider } from '../contexts/CustomContextProvider'
-// import useLocalStorage  from '../customhooks/useLocalStorage'
 
 import Header           from '../components/Header'
 import Footer           from '../components/Footer'
@@ -16,17 +16,46 @@ import PageLogin        from '../pages/PageLogin'
 import PageRegister     from '../pages/PageRegister'
 import PageNotFound     from '../pages/PageNotFound'
 
+
 const AppRouter = () => {
+
+    const [ appState, setAppState ] = useState(appCustomState)
+    
+    function putState() {
+        try {
+            const packedState = JSON.stringify(appState)
+            localStorage.setItem(appName, packedState)
+        }
+        catch(failMessage) {
+            console.warn(failMessage)
+        }
+    }
+
+    function getState() {
+        try {
+            const packedState = localStorage.getItem(appName)
+            const unpackedState = JSON.parse(packedState)
+            setAppState(unpackedState)
+        }
+        catch(failMessage) {
+            console.warn(failMessage)
+        }
+    }
 
     return (
         <BrowserRouter>
             <Routes>
+                {/* Layout route */}
                 <Route
                     element={
-                        <CustomContextProvider initialStates={appCustomState}>
+                        <CustomContextProvider
+                            statesStruct={[ appState, setAppState ]}
+                        >
                             <div className='wrapper'>
                                 <Header />
                                 <main>
+                                    <button onClick={putState}>Put state {appName}</button>
+                                    <button onClick={getState}>Get state {appName}</button>
                                     <Outlet />
                                 </main>
                                 <Footer />

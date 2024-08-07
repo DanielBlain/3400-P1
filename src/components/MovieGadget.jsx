@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useCustomContext from '../contexts/useCustomContext'
 import useDispatchManager from '../customhooks/useDispatchManager'
 import { BrowseActions } from '../config/config'
@@ -8,6 +8,16 @@ const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
     const [ browseState ] = useCustomContext( 'browseState' )
     const [ , dispatch ] = useDispatchManager( BrowseActions, browseState )
     const [ isLiked, setIsLiked ] = useState(false)
+
+
+    // // On initialization, update whether this movie is Liked
+    // useEffect(() => {
+    //     if (browseState.likedMovies && browseState.likedMovies.has( movieDetails.id ))
+    //     {
+    //         setIsLiked(true)
+    //     }
+    // }, [])
+
 
     const handleLike = e => {
         e.preventDefault()
