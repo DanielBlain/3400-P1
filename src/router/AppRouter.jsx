@@ -37,7 +37,12 @@ export const AppRouter = () => {
                 <Route
                     element={
                         <MovieAppContext.Provider
-                            value={{ storagelockState, setInitializationLock, state, dispatch }}
+                            value={{
+                                storagelockState,
+                                setInitializationLock,
+                                state,
+                                dispatch
+                            }}
                         >
                             <div className='wrapper'>
                                 <Header />

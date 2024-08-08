@@ -1,6 +1,6 @@
 // App-wide constants
 export const appName        = `Cinéscape`
-export const author         = `Daniel J Blain`
+export const author         = `Dan J Blain`
 export const authorQuote    = `Eppur Si Muove`
 
 

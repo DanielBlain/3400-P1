@@ -27,7 +27,7 @@ const MovieDisplayList = ({ filterType }) => {
 
     
     return (
-        <section>
+        <section className={`MovieDisplayList`}>
             {
                 movieList && movieList.length > 0 ?
                     movieList.map(movieDetails => 
