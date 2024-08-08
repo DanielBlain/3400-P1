@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { MovieAppContext } from '../router/AppRouter'
 import MovieDisplayList from '../components/MovieDisplayList'
 
@@ -12,8 +12,7 @@ const UPCOMING      = `/upcoming`
 
 const PageHome = () => {
 
-    const { appState, setAppState, storagelockState, setInitializationLock } = useContext(MovieAppContext)
-
+    const { storagelockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
 
     const isFilterValid = (newFilter) =>
         newFilter === NOW_PLAYING
@@ -27,13 +26,7 @@ const PageHome = () => {
             console.warn(`Bad filter selected: ${newFilter}`)
             return
         }
-        setAppState({
-            ...appState, 
-            browse: {
-                ...appState.browse,
-                homeFilter: newFilter
-            }
-        })
+        dispatch({ type: 'chooseFilter', filter: newFilter })
     }
 
 
@@ -47,7 +40,7 @@ const PageHome = () => {
     // Unlocked localStorage and found no filter? Set to NOW_PLAYING by default
     // Run when state of storageLockState changes
     useEffect(() => {
-        if (storagelockState === false && !isFilterValid(appState.browse.homeFilter)) {
+        if (storagelockState === false && !isFilterValid(state.browse.homeFilter)) {
             chooseFilter(NOW_PLAYING)
         }
     }, [storagelockState])
@@ -71,13 +64,13 @@ const PageHome = () => {
                 <div>
                     <h1>Movies!!</h1>
                     <p>
-                        Current filter: {appState.browse.homeFilter}
+                        Current filter: {state.browse.homeFilter}
                         <button key={NOW_PLAYING}   onClick={() => chooseFilter(NOW_PLAYING)}   >Now Playing</button>
                         <button key={POPULAR}       onClick={() => chooseFilter(POPULAR)}       >Popular</button>
                         <button key={TOP_RATED}     onClick={() => chooseFilter(TOP_RATED)}     >Top Rated</button>
                         <button key={UPCOMING}      onClick={() => chooseFilter(UPCOMING)}      >Upcoming</button>
                     </p>
-                    {isFilterValid(appState.browse.homeFilter) && <MovieDisplayList filterType={appState.browse.homeFilter} />}
+                    {isFilterValid(state.browse.homeFilter) && <MovieDisplayList filterType={state.browse.homeFilter} />}
                 </div>
             </div>
         </>

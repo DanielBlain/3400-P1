@@ -1,21 +1,31 @@
 import PropTypes from 'prop-types'
-import { useReducer } from 'react'
-// import useCustomContext from '../contexts/useCustomContext'
-import MovieReducer from './MovieReducer'
+import { useEffect, useContext } from 'react'
+import { MovieAppContext } from '../router/AppRouter'
+
 
 const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
-    // const [ browse, setBrowse ] = useCustomContext( 'browseState' )
+    
+    const { storagelockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
+
+    const isMovieLiked = () =>
+        !storagelockState && state.browse.likedMovies.includes(movieDetails.id)
+
 
     const handleLike = e => {
         e.preventDefault()
+        console.log('toggleLikeMovie.  add? ' + storagelockState + ' & ' + state.browse.likedMovies + ' & ' + state.browse.likedMovies.includes(movieDetails.id))
+        dispatch({ type:'toggleLikeMovie', id: movieDetails.id, add: !isMovieLiked() })
     }
 
+
     const handleInfo = e => {
+        // console.log( appState )
         e.preventDefault()
     }
 
+
     return (
-        <article key={ movieGadgetKey } style={{border: '10px solid red'}}>
+        <article key={ movieGadgetKey } style={isMovieLiked() ? { border: '10px solid red' } : {}}>
             <a
                 href={ `/single/${movieDetails.id}` }
             >

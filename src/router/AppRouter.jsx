@@ -1,8 +1,9 @@
-import { useState, createContext } from 'react'
+import { createContext, useReducer } from 'react'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import { appName, appCustomState } from '../config/config'
 import useLocalStorage  from '../customhooks/useLocalStorage'
+import MovieReducer     from '../components/MovieReducer'
 
 import Header           from '../components/Header'
 import Footer           from '../components/Footer'
@@ -18,16 +19,16 @@ import PageNotFound     from '../pages/PageNotFound'
 
 
 export const MovieAppContext = createContext({
-    appState: null,
-    setAppState: null,
     storagelockState: null,
-    setInitializationLock: null
+    setInitializationLock: null,
+    appState: null,
+    dispatch: null,
 })
 
 
 export const AppRouter = () => {
 
-    const [ appState, setAppState, storagelockState, setInitializationLock ] = useLocalStorage(appName, useState( appCustomState ))
+    const [ storagelockState, setInitializationLock, state, dispatch ] = useLocalStorage(appName, useReducer( MovieReducer, appCustomState ))
 
     return (
         <BrowserRouter>
@@ -36,7 +37,7 @@ export const AppRouter = () => {
                 <Route
                     element={
                         <MovieAppContext.Provider
-                            value={{ appState, setAppState, storagelockState, setInitializationLock }}
+                            value={{ storagelockState, setInitializationLock, state, dispatch }}
                         >
                             <div className='wrapper'>
                                 <Header />

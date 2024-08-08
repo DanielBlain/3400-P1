@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 
-const useLocalStorage = (key, [state, setState]) => {
+const useLocalStorage = (key, [state, dispatch]) => {
 
     const [ initializationLock, setInitializationLock ] = useState(true)
 
     useEffect(() => {
         if (initializationLock) {
-            console.warn('Ignored localStorage update due to initialization lock. If this is unexpected use setInitializationLock(false)')
+            console.warn('Ignored localStorage update due to initialization lock. If this is unexpected, use setInitializationLock(false)')
             return
         }
 
@@ -27,7 +27,7 @@ const useLocalStorage = (key, [state, setState]) => {
                 const packed = localStorage.getItem(key)
                 const unpacked = JSON.parse(packed)
                 if (unpacked) {
-                    setState(unpacked)
+                    dispatch({ type: 'initializeStorage', newState: unpacked })
                     console.log('localStorage read')
                     console.log(state)
                 }
@@ -41,7 +41,7 @@ const useLocalStorage = (key, [state, setState]) => {
         }
     }, [initializationLock])
 
-    return ([ state, setState, initializationLock, setInitializationLock ])
+    return ([ initializationLock, setInitializationLock, state, dispatch ])
 }
 
 export default useLocalStorage
