@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types'
-import { useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { MovieAppContext } from '../router/AppRouter'
 
 
 const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
     
-    const { storagelockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
+    const [ isLikedClass, setIsLikedClass ] = useState(false)
+    const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
 
     const isMovieLiked = () =>
-        !storagelockState && state.browse.likedMovies.includes(movieDetails.id)
+        !storageLockState && state.browse.likedMovies.includes(movieDetails.id)
 
 
     const handleLike = e => {
         e.preventDefault()
-        console.log('toggleLikeMovie.  add? ' + storagelockState + ' & ' + state.browse.likedMovies + ' & ' + state.browse.likedMovies.includes(movieDetails.id))
         dispatch({ type:'toggleLikeMovie', id: movieDetails.id, add: !isMovieLiked() })
     }
 
@@ -24,8 +24,14 @@ const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
     }
 
 
+    // On , check if the gadget (article) should have the isMovieLiked class
+    useEffect(() => {
+        setIsLikedClass(!storageLockState && state.browse.likedMovies && state.browse.likedMovies.includes(movieDetails.id))
+    }, [storageLockState, state.browse.likedMovies, movieDetails.id])
+
+
     return (
-        <article key={ movieGadgetKey } style={isMovieLiked() ? { border: '10px solid red' } : {}}>
+        <article key={ movieGadgetKey } className={isLikedClass ? `isMovieLiked` : ``}>
             <a
                 href={ `/single/${movieDetails.id}` }
             >
