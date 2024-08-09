@@ -19,7 +19,7 @@ import PageNotFound     from '../pages/PageNotFound'
 
 
 export const MovieAppContext = createContext({
-    storagelockState: null,
+    storageLockState: null,
     setInitializationLock: null,
     appState: null,
     dispatch: null,
@@ -28,7 +28,7 @@ export const MovieAppContext = createContext({
 
 export const AppRouter = () => {
 
-    const [ storagelockState, setInitializationLock, state, dispatch ] = useLocalStorage(appName, useReducer( MovieReducer, appCustomState ))
+    const [ storageLockState, setInitializationLock, state, dispatch ] = useLocalStorage(appName, useReducer( MovieReducer, appCustomState ))
 
     return (
         <BrowserRouter>
@@ -38,7 +38,7 @@ export const AppRouter = () => {
                     element={
                         <MovieAppContext.Provider
                             value={{
-                                storagelockState,
+                                storageLockState,
                                 setInitializationLock,
                                 state,
                                 dispatch
