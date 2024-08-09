@@ -30,7 +30,12 @@ const PageFavourites = () => {
             <h1>Your Favourite Movies</h1>
             <h2>Number of liked movies: {countLikedMovies}</h2>
             <h2>You&apos;ve liked these movies</h2>
-            <MovieDisplayList filterType={state.browse.homeFilter} />
+            {(countLikedMovies > 0) ?
+                <MovieDisplayList movieList={state.browse.likedMovies} />
+                : <div>You haven&apos;t liked any movies!</div>
+            }
+            {/* The problem here, you see, is that the "state.browse.likedMovies" list contains ONLY the ID's of the movies
+            you're gonna have to grab the whole movie data from TMDB */}
         </>
     )
 }

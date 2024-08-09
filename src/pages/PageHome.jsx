@@ -1,4 +1,7 @@
-import { useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { fetchList } from '../utilities/themoviedatabase/themoviedatabase'
+import { api_key, tmdbEndpoint } from '../config/config'
+
 import { MovieAppContext } from '../router/AppRouter'
 import MovieDisplayList from '../components/MovieDisplayList'
 
@@ -13,7 +16,7 @@ const UPCOMING      = `/upcoming`
 const PageHome = () => {
 
     const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
-
+    const [ movieList, setMovieList ] = useState(null)
     const isFilterValid = (newFilter) =>
         newFilter === NOW_PLAYING
         || newFilter === POPULAR
@@ -27,6 +30,16 @@ const PageHome = () => {
             return
         }
         dispatch({ type: 'chooseFilter', filter: newFilter })
+    }
+
+
+    // Fetch a new movie list based upon the filterType parameter
+    const updateMovieList = async (filterType, pagination=`&page=1`) => {
+        const url = `${tmdbEndpoint}${filterType}?include_adult=false&include_video=false&language=en-US${pagination}&api_key=${api_key}`
+        const newMovieList = await fetchList(url)
+        if (newMovieList) {
+            setMovieList(newMovieList)
+        }
     }
 
 
@@ -44,6 +57,14 @@ const PageHome = () => {
             chooseFilter(NOW_PLAYING)
         }
     }, [storageLockState])
+
+
+    // Update the movie list when the user changes the filter
+    useEffect(() => {
+        if (isFilterValid(state.browse.homeFilter)) {
+            updateMovieList(state.browse.homeFilter)
+        }
+    }, [state.browse.homeFilter])
 
 
     return (
@@ -66,7 +87,7 @@ const PageHome = () => {
                 <button key={TOP_RATED}     onClick={() => chooseFilter(TOP_RATED)}     >Top Rated</button>
                 <button key={UPCOMING}      onClick={() => chooseFilter(UPCOMING)}      >Upcoming</button>
             </p>
-            {isFilterValid(state.browse.homeFilter) && <MovieDisplayList filterType={state.browse.homeFilter} />}
+            {isFilterValid(state.browse.homeFilter) && <MovieDisplayList movieList={movieList} />}
         </>
     )
 }
