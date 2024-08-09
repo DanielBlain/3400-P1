@@ -1,7 +1,7 @@
-@use '../config/vars' as *;
+@use './vars' as *;
 @use '../mixins/mixins' as *;
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, button, label, code {
     @include capitalize;
     font-family: $fontfam-headers;
     letter-spacing: -0.06em;

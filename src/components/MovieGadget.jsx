@@ -4,10 +4,10 @@ import { Link } from "react-router-dom"
 import { MovieAppContext } from '../router/AppRouter'
 
 
-const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
+const MovieGadget = ({ movieDetails }) => {
     
     const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
-    const [ isLikedClass, setIsLikedClass ] = useState(false)
+    const [ isLikedFlag, setIsLikedFlag ] = useState(false)
     const [ isInfoOpen, setIsInfoOpen ] = useState(false)
 
 
@@ -34,7 +34,7 @@ const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
 
     // On change of dependencies, check if the gadget (article) should have the isMovieLiked class
     useEffect(() => {
-        setIsLikedClass(
+        setIsLikedFlag(
             !storageLockState
             && state.browse.likedMovies
             && state.browse.likedMovies.includes(movieDetails.id)
@@ -48,33 +48,40 @@ const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
 
     return (
         <article
-            key={ `${movieGadgetKey}` }
+            key={ `${movieDetails.id}` }
             className={ `movieGadget` }
-            id={ `movieGadget-${movieGadgetKey}` }
+            id={ `movieGadget-${movieDetails.id}` }
         >
             <img
                 src={ `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` }
-                alt={ `Image of movie: ${movieDetails.title}` }
+                alt={ `Poster of movie: ${movieDetails.title}` }
             />
 
 
-            <button
-                className={ isLikedClass ? `isMovieLiked` : `` }
-                onClick={ handleLike }
-            >
-                Like
-            </button>
+            <div className={ `gadgetPanel` }>
+                <div
+                    className={ `gadgetButton like` }
+                    onClick={ handleLike }
+                >
+                    <img
+                        src={ isLikedFlag ? '/cinescape-like-filled-240.png' : '/cinescape-like-lined-240.png' }
+                        alt='liked movie indicator'
+                    />
+                    <div>Like</div>
+                </div>
 
-
-            <button onClick={ handleInfo }>
-                Info
-            </button>
+                <div
+                    className={ `gadgetButton info` }
+                    onClick={ handleInfo }
+                >
+                    <img
+                        src={ '/iconmonstr-magnifier-10-240.png' }
+                        alt='more info indicator'
+                    />
+                    <div>Info</div>
+                </div>
+            </div>
             
-
-            <Link to={`/single/${movieDetails.id}`}>
-                Details
-            </Link>
-
 
             <div
                 className={ `infoFloat` + (isInfoOpen ? ` open` : ``) }
@@ -93,7 +100,6 @@ const MovieGadget = ({ movieGadgetKey, movieDetails }) => {
 }
 
 MovieGadget.propTypes = {
-    movieGadgetKey: PropTypes.string,
     movieDetails: PropTypes.object,
 }
 
