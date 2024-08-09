@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react'
 
+
 const useLocalStorage = (key, [state, dispatch]) => {
 
-    const [ initializationLock, setInitializationLock ] = useState(true)
+    const [isStorageUnlocked, setIsStorageUnlocked] = useState(false)
 
-    
+
+    // Call when key/state change, to also update localStorage
     useEffect(() => {
-        if (initializationLock) {
-            console.warn('Ignored localStorage update due to initialization lock. If this is unexpected, use setInitializationLock(false)')
+        if (!isStorageUnlocked) {
+            console.warn('Ignored localStorage update due to initialization lock. If this is unexpected, use setIsStorageUnlocked(true)')
             return
         }
 
@@ -16,35 +18,33 @@ const useLocalStorage = (key, [state, dispatch]) => {
             localStorage.setItem(key, packed)
             console.log('localStorage reset')
             console.log(state)
-        }
-        catch(failMessage) {
-            console.warn(failMessage)
+        } catch (failMessage) {
+            console.warn(failMessage);
         }
     }, [key, state])
 
 
+    // Call on isStorageUnlocked change, to recall value stored in localStorage
     useEffect(() => {
-        if (initializationLock) {
+        if (!isStorageUnlocked) {
             try {
                 const packed = localStorage.getItem(key)
                 const unpacked = JSON.parse(packed)
                 if (unpacked) {
                     dispatch({ type: 'initializeStorage', newState: unpacked })
                     console.log('localStorage read')
-                    console.log(state)
-                }
-                else {
+                    console.log(state);
+                } else {
                     throw('Failed attempt to read from localStorage')
                 }
-            }
-            catch(failMessage) {
+            } catch (failMessage) {
                 console.warn(failMessage)
             }
         }
-    }, [initializationLock])
+    }, [isStorageUnlocked])
 
 
-    return ([ initializationLock, setInitializationLock, state, dispatch ])
+    return [isStorageUnlocked, setIsStorageUnlocked, state, dispatch]
 }
 
 export default useLocalStorage

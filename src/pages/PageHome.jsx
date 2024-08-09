@@ -15,7 +15,7 @@ const UPCOMING      = `/upcoming`
 
 const PageHome = () => {
 
-    const { initializationLock, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
+    const { isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const [ movieList, setMovieList ] = useState(null)
     const isFilterValid = (newFilter) =>
         newFilter === NOW_PLAYING
@@ -45,17 +45,17 @@ const PageHome = () => {
 
     // Unlock localStorage. Run once on boot
     useEffect(() => {
-        setInitializationLock(false)
-    }, [setInitializationLock])
+        setIsStorageUnlocked(true)
+    }, [setIsStorageUnlocked])
     
 
     // Unlocked localStorage and found no filter? Set to NOW_PLAYING by default
     // Run when state of storageLockState changes
     useEffect(() => {
-        if (!initializationLock && !isFilterValid(state.browse.homeFilter)) {
+        if (isStorageUnlocked && !isFilterValid(state.browse.homeFilter)) {
             chooseFilter(NOW_PLAYING)
         }
-    }, [initializationLock])
+    }, [isStorageUnlocked])
 
 
     // Update the movie list when the user changes the filter
