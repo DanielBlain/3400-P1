@@ -4,6 +4,7 @@ const useLocalStorage = (key, [state, dispatch]) => {
 
     const [ initializationLock, setInitializationLock ] = useState(true)
 
+    
     useEffect(() => {
         if (initializationLock) {
             console.warn('Ignored localStorage update due to initialization lock. If this is unexpected, use setInitializationLock(false)')
@@ -20,6 +21,7 @@ const useLocalStorage = (key, [state, dispatch]) => {
             console.warn(failMessage)
         }
     }, [key, state])
+
 
     useEffect(() => {
         if (initializationLock) {
@@ -40,6 +42,7 @@ const useLocalStorage = (key, [state, dispatch]) => {
             }
         }
     }, [initializationLock])
+
 
     return ([ initializationLock, setInitializationLock, state, dispatch ])
 }

@@ -22,7 +22,7 @@
 
 
 // Function to asynchronously fetch singleton data from an external database
-// Usage e.g. const url = `${databaseEndpoint}/${movieID}?language=en-US&api_key=${api_key}`
+// Usage e.g. const url = `${tmdbEndpoint}/${movieID}?language=en-US&api_key=${api_key}`
 export async function fetchSingleton(url) {
 
     try {
@@ -41,7 +41,7 @@ export async function fetchSingleton(url) {
 
 
 // Function to asynchronously fetch list data from an external database
-// Usage e.g. const url = `${databaseEndpoint}${filterType}?${defaultQueries}${pagination}&api_key=${api_key}`
+// Usage e.g. const url = `${tmdbEndpoint}${filterType}?${defaultQueries}${pagination}&api_key=${api_key}`
 export async function fetchList(url) {
 
     try {

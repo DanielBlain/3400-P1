@@ -6,7 +6,7 @@ import { MovieAppContext } from '../router/AppRouter'
 import MovieDisplayList from '../components/MovieDisplayList'
 
 
-// Home page movie filter constants
+// Home page movie filter constants, double as partial urls for fetching
 const NOW_PLAYING   = `/now_playing`
 const POPULAR       = `/popular`
 const TOP_RATED     = `/top_rated`
@@ -15,7 +15,7 @@ const UPCOMING      = `/upcoming`
 
 const PageHome = () => {
 
-    const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
+    const { initializationLock, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
     const [ movieList, setMovieList ] = useState(null)
     const isFilterValid = (newFilter) =>
         newFilter === NOW_PLAYING
@@ -43,20 +43,19 @@ const PageHome = () => {
     }
 
 
-    // Initialize PageHome
-    // Run once on boot
+    // Unlock localStorage. Run once on boot
     useEffect(() => {
         setInitializationLock(false)
-    }, [])
-
+    }, [setInitializationLock])
+    
 
     // Unlocked localStorage and found no filter? Set to NOW_PLAYING by default
     // Run when state of storageLockState changes
     useEffect(() => {
-        if (storageLockState === false && !isFilterValid(state.browse.homeFilter)) {
+        if (!initializationLock && !isFilterValid(state.browse.homeFilter)) {
             chooseFilter(NOW_PLAYING)
         }
-    }, [storageLockState])
+    }, [initializationLock])
 
 
     // Update the movie list when the user changes the filter

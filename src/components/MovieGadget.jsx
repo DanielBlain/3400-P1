@@ -13,6 +13,7 @@ const MovieGadget = ({ movieDetails }) => {
 
     const isMovieLiked = () =>
         !storageLockState
+        && state.browse.likedMovies
         && state.browse.likedMovies.includes(movieDetails.id)
 
 

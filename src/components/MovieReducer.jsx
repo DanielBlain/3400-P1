@@ -20,7 +20,7 @@ const MovieReducer = (state, action) => {
 
 
         case 'toggleLikeMovie':
-            // (    id: number, id of the movie;
+            // (    id: number, id of the movie
             //      add: boolean, true to add, false to delete)
             // Toggle whether a movie is added to the browse.likedMovies list
             return {
@@ -37,7 +37,7 @@ const MovieReducer = (state, action) => {
                         )
                         : (
                             action.add ?
-                                [ action.id ]
+                                [action.id]
                                 : null
                         )
                 }
