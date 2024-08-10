@@ -20,19 +20,6 @@ const PageFavourites = () => {
     }
 
 
-    // Fetch details of all liked movies
-    const getLikedMoviesData = async () => {
-
-        let newLikedMoviesData = await Promise.all(
-            state.browse.likedMovies.map(async (movieID) => {
-                const movieData = await fetchMovieData(movieID)
-                return movieData
-            })
-        )
-        return newLikedMoviesData.filter( queried => queried !== null )
-    }
-
-
     // Unlock localStorage. Run once on boot
     useEffect(() => {
         setIsStorageUnlocked(true)
@@ -47,6 +34,17 @@ const PageFavourites = () => {
 
     // Update the movie list when the user's liked movies change
     useEffect(() => {
+    // Fetch details of all liked movies
+        const getLikedMoviesData = async () => {
+            let newLikedMoviesData = await Promise.all(
+                state.browse.likedMovies.map(async (movieID) => {
+                    const movieData = await fetchMovieData(movieID)
+                    return movieData
+                })
+            )
+            return newLikedMoviesData.filter( queried => queried !== null )
+        }
+
         const fetchLikedMoviesData = async () => {
             setLikedMoviesData(  await getLikedMoviesData() )
         }
