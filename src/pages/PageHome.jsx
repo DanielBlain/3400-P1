@@ -53,9 +53,9 @@ const PageHome = () => {
     // Run when state of storageLockState changes
     useEffect(() => {
         if (isStorageUnlocked && !isFilterValid(state.browse.homeFilter)) {
-            chooseFilter(NOW_PLAYING)
+            dispatch({ type: 'chooseFilter', filter: NOW_PLAYING })
         }
-    }, [isStorageUnlocked])
+    }, [isStorageUnlocked, state.browse.homeFilter, dispatch])
 
 
     // Update the movie list when the user changes the filter

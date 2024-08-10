@@ -36,6 +36,7 @@ export async function fetchSingleton(url) {
     }
     catch (error) {
         console.warn(`Unable to fetch: ${error}`)
+        return null
     }
 }
 
@@ -55,5 +56,6 @@ export async function fetchList(url) {
     }
     catch (error) {
         console.warn(`Unable to fetch: ${error}`)
+        return null
     }
 }
