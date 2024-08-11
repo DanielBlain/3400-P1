@@ -68,7 +68,6 @@ const PageHome = () => {
 
     return (
         <>
-            <h1>Home page</h1>
             <p>
                 Page Home - This is where all the magic happens! Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, fugit tenetur exercitationem ratione officiis accusamus eligendi quaerat in autem, quia voluptas id iste dignissimos totam obcaecati vitae culpa vero neque.
             </p>

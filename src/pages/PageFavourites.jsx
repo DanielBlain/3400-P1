@@ -34,8 +34,7 @@ const PageFavourites = () => {
 
     // Update the movie list when the user's liked movies change
     useEffect(() => {
-    // Fetch details of all liked movies
-        const getLikedMoviesData = async () => {
+        const fetchLikedMoviesData = async () => {
             let newLikedMoviesData = await Promise.all(
                 state.browse.likedMovies.map(async (movieID) => {
                     const movieData = await fetchMovieData(movieID)
@@ -45,12 +44,12 @@ const PageFavourites = () => {
             return newLikedMoviesData.filter( queried => queried !== null )
         }
 
-        const fetchLikedMoviesData = async () => {
-            setLikedMoviesData(  await getLikedMoviesData() )
+        const updateLikedMoviesData = async () => {
+            setLikedMoviesData(  await fetchLikedMoviesData() )
         }
 
         if (state.browse.likedMovies) {
-            fetchLikedMoviesData()
+            updateLikedMoviesData()
         }
     }, [state.browse.likedMovies])
 

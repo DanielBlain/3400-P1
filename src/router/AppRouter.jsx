@@ -47,6 +47,7 @@ export const AppRouter = () => {
                             <div className='wrapper'>
                                 <Header />
                                 <main>
+                                    <h1>{appName}</h1>
                                     <Outlet />
                                 </main>
                                 <Footer />

@@ -5,7 +5,7 @@ const PageSupport = () => {
 
     return (
         <>
-            <h1>{appName} Support</h1>
+            <h1>Support</h1>
             <h2>Categories</h2>
             <ul>
                 <li>App & website issues</li>

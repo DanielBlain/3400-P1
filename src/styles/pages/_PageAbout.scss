@@ -1,0 +1,20 @@
+@use '../base/vars' as *;
+@use '../mixins/mixins' as *;
+
+.tagline-block {
+    margin: 20px auto;
+    padding: 20px;
+    border-left: 5px solid $clr-control-primary;
+    background-color: $clr-gray;
+    
+    text-align: center;
+    font-size: 1.5em;
+    font-style: italic;
+    color: $clr-control-secondary;
+
+    & em {
+        @include uppercase;
+        font-size: 2rem;
+        word-spacing: 0.6rem;
+    }
+}
