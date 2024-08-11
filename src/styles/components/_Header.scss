@@ -1,5 +1,40 @@
-header a {
+@use '../base/vars' as *;
+
+header {
     display: block;
-    text-align: center;
-    color: red;
+
+    // To allow special positioning of children
+    position: relative;
+
+    & > div {
+        // To enable z-index, for hiding children
+        position: relative;
+        z-index: 1;
+
+        display: flex;
+        justify-content: space-between;
+        background-color: $clr-black;
+    }
+}
+
+.hamburgerButton {
+    padding: 0.2rem 0.8rem 0.6rem 0.8rem;
+    background-color: $clr-control-primary;
+
+    &:hover {
+        background-color: $clr-control-hover;
+    }
+    
+    &.isOpen {
+        background-color: $clr-control-secondary;
+    }
+
+    & > * {
+        display: block;
+        margin-top: 0.6rem;
+        margin-bottom: 0.2rem;
+        padding: 0.2rem 1.6rem;
+        border-radius: 0.2rem;
+        background-color: $clr-black;
+    }
 }

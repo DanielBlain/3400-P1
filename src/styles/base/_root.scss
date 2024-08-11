@@ -1,9 +1,6 @@
 @use '../base/vars' as *;
 
 #root {
-    display: flex;
-    min-width: 320px;
-    min-height: 100dvh;
     max-width: 1280px;
 
     max-width: 320px; /* TEMPORARY FOR TESTING / DEV: Simulate mobile display, left justified */
