@@ -29,6 +29,7 @@ function Header() {
                     <span className={'bar mid right'}></span>
                     <span className={'bar bottom left'}></span>
                     <span className={'bar bottom right'}></span>
+                    <div className={'hamburgerGlow'}></div>
                 </span>
             </div>
             <Nav isOpen={isOpen} closeNav={closeNav} />
