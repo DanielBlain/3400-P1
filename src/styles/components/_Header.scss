@@ -13,28 +13,63 @@ header {
 
         display: flex;
         justify-content: space-between;
-        background-color: $clr-black;
+        background-color: $clr-white;
+        border: 1px solid $clr-black;
     }
 }
 
 .hamburgerButton {
-    padding: 0.2rem 0.8rem 0.6rem 0.8rem;
-    background-color: $clr-control-primary;
+    margin: 5px;
+    padding: 14px;
+    vertical-align: top;
+    border-radius: 8px;
+    box-shadow: inset 0 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 0 4px 4px rgba(0, 0, 0, 0.4);
+    background-color: $clr-white;
 
-    &:hover {
-        background-color: $clr-control-hover;
-    }
+    display: grid;
+    grid-template-columns: 16px 16px;
+    grid-auto-rows: 1fr;
+    grid-gap: 10px 0;
     
-    &.isOpen {
-        background-color: $clr-control-secondary;
+    &:hover {
+        background-color: $clr-gray;
     }
 
-    & > * {
-        display: block;
-        margin-top: 0.6rem;
-        margin-bottom: 0.2rem;
-        padding: 0.2rem 1.6rem;
-        border-radius: 0.2rem;
+    & .bar {
+        display: inline-block;
+        height: 0.1rem;
         background-color: $clr-black;
+        transition: transform 0.4s ease, translate 0.4s ease, rotate 0.4s ease;
+    }
+
+    & .bar.top.right, & .bar.mid.left {transform-origin: top left;}
+    & .bar.mid.right, & .bar.bottom.left {transform-origin: bottom right;}
+
+    &.isOpen {
+        .bar.top.left {
+            translate: 50% -2px;
+        }
+    
+        .bar.top.right {
+            translate: 50% -2px;
+            rotate: 60deg;
+        }
+    
+        .bar.mid.left {
+            rotate: -60deg;
+        }
+    
+        .bar.mid.right {
+            rotate: -60deg;
+        }
+    
+        .bar.bottom.left {
+            translate: -50% 2px;
+            rotate: 60deg;
+        }
+    
+        .bar.bottom.right {
+            translate: -50% 2px;
+        }
     }
 }

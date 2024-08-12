@@ -23,9 +23,12 @@ function Header() {
                     Icon-on-left
                 </span>
                 <span className={'hamburgerButton' + (isOpen ? ` isOpen` : ``)} onClick={handleClick}>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <span className={'bar top left'}></span>
+                    <span className={'bar top right'}></span>
+                    <span className={'bar mid left'}></span>
+                    <span className={'bar mid right'}></span>
+                    <span className={'bar bottom left'}></span>
+                    <span className={'bar bottom right'}></span>
                 </span>
             </div>
             <Nav isOpen={isOpen} closeNav={closeNav} />
