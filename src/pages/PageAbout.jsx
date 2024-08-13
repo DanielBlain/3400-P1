@@ -24,12 +24,41 @@ const PageAbout = () => {
             </div>
             <p>{appName} also features</p>
             <ul>
-                <li>Favourites: Click the star (image) to favourite a movie</li>
+                <li>
+                    <b>Favourites</b><br />
+                    Click the star (image) to favourite a movie
+                </li>
                 {/* <li>Playlists: </li> */}
-                <li>User Profiles: Login to ensure your list of favourited movies are saved for next time</li>
+                <li>
+                    <b>User Profiles</b><br />
+                    Login to ensure your list of favourited movies are saved for next time</li>
                 {/* <li>(others?)</li> */}
             </ul>
             <p>Discover new releases, timeless classics, and hidden gems. See what&apos;s <Link to='/'>Now Playing</Link> to get started!</p>
+            <hr />
+
+            {/* Icons & other gratitude */}
+            <p>
+                Social media icons provided by <a
+                    className='isUrl'
+                    href='https://iconpacks.net/?utm_source=link-attribution&utm_content=6532'
+                >
+                    Iconpacks
+                </a>
+            </p>
+            <p>
+                Small bit(s) of code from:
+            </p>
+            <ul className='codeAttributionList'>
+                <li>
+                    <a
+                        className='isUrl'
+                        href='https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/'
+                    >
+                        https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+                    </a>
+                </li>
+            </ul>
             <hr />
 
             {/** BCIT gratitude */}

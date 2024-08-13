@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Nav from "./Nav"
+import Nav from './Nav'
 
 function Header() {
 
@@ -22,7 +22,7 @@ function Header() {
                 <span>
                     Icon-on-left
                 </span>
-                <span className={'hamburgerButton' + (isOpen ? ` isOpen` : ``)} onClick={handleClick}>
+                <button className={'hamburgerButton' + (isOpen ? ` isOpen` : ``)} onClick={handleClick}>
                     <span className={'bar top left'}></span>
                     <span className={'bar top right'}></span>
                     <span className={'bar mid left'}></span>
@@ -30,7 +30,7 @@ function Header() {
                     <span className={'bar bottom left'}></span>
                     <span className={'bar bottom right'}></span>
                     <div className={'hamburgerGlow'}></div>
-                </span>
+                </button>
             </div>
             <Nav isOpen={isOpen} closeNav={closeNav} />
         </header>

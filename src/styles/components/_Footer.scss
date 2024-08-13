@@ -8,13 +8,6 @@ footer {
         width: 100%;
     }
 
-    img {
-        width: 1.6rem;
-        position: relative;
-        top: 0.3rem;
-        right: 0.2rem;
-    }
-
     & > * {
         display: flex;
         justify-content: center;
@@ -22,16 +15,17 @@ footer {
     }
 }
 
-.socialMediaPanel {
-    display: block;
-    background-color: black;
-    color: white;
-}
-
-
 .copyrightTag {
-    padding: 0.2rem 0;
+    padding: 0.2em 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    &:first-child {
+        margin-left: 0.8em;
+    }
+
+    &:last-child {
+        margin-right: 0.8em;
+    }
 }

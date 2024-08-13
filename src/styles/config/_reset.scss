@@ -348,30 +348,49 @@
     display: none;
   }
   
-  /**=================================================================
-   * Remaining portion added by Daniel Blain (May 31 2023)
-   */
+/**=================================================================
+* Remaining portion added by Daniel Blain (last update Aug 12 2024)
+*/
   
-   /* Box Sizing Reset */
-  html {
-      box-sizing: border-box;
-  }
+/* Box Sizing Reset */
+html {
+    box-sizing: border-box;
+}
   
-  *,
-  *:before,
-  *:after {
-      box-sizing: inherit;
-  }
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
   
-  /* Responsive media */
-  embed,
-  iframe,
-  object {
+/* Responsive media */
+embed,
+iframe,
+object {
     max-width: 100%;
-  }
+}
   
-  img,
-  video {
+img,
+video {
     max-width: 100%;
     height: auto;
-  }
+}
+
+/* Force long urls (and other text) to break reasonably */
+.isUrl {
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}

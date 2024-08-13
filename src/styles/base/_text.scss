@@ -20,5 +20,4 @@ button, label, code {
 
 button, label {
     @include uppercase;
-    background: $clr-control-primary;
 }

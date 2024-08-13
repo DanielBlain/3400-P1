@@ -12,7 +12,12 @@
     font-style: normal;
     letter-spacing: -0.03rem;
     line-height: 1.1rem;
+}
 
+
+main {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }
 
 
@@ -40,6 +45,14 @@ a {
 }
 a:hover {
     color: #535bf2;
+}
+
+
+
+ul, ol {
+    & > li {
+        margin-bottom: 0.5em;
+    }
 }
 
 

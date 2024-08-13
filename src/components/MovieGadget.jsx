@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useState, useEffect, useContext } from 'react'
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
 
 

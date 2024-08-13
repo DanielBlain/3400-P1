@@ -8,14 +8,14 @@
 
 // Components
 @use './components/AppRouter';
-@use './components/Header';
-@use './components/Nav';
-@use './components/Footer';
-@use './components/MovieGadget';
 @use './components/ClickDropdown';
+@use './components/Footer';
+@use './components/Header';
+@use './components/MovieGadget';
+@use './components/Nav';
+@use './components/SocialMediaPanel';
 
 // Pages
-@use './pages/PageHome';
 @use './pages/PageAbout';
 
 // Special effects

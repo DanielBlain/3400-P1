@@ -1,0 +1,44 @@
+@use '../base/vars' as *;
+@use '../mixins/mixins' as *;
+
+.socialMediaPanel {
+    margin: 0 auto;
+    padding: 6px;
+    @include spaceButton;
+    
+    & .tooltip {
+        position: absolute;
+        left: 0;
+        bottom: 80%;
+        border: 1px solid $clr-black;
+        background-color: $clr-gray;
+        font-family: $fontfam-body;
+        
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s 0.5s;
+    }
+}
+
+.socialButton {
+    border-radius: 50%;
+    margin: 2px;
+    padding: 8px 12px;
+    justify-content: center;
+    position: relative;
+    // To allow special positioning of children
+
+    &.GitHub    {background-color: $clr-lightGitHub;}
+    &.LinkedIn  {background-color: $clr-lightLinkedIn;}
+    &.TwitterX  {background-color: $clr-lightTwitterX;}
+    &.Pinterest {background-color: $clr-lightPinterest;}
+    &.Portfolio {background-color: $clr-lightPortfolio;}
+
+    &:hover { @include spaceButton; }
+    &:hover.GitHub      {background-color: $clr-GitHub;}
+    &:hover.LinkedIn    {background-color: $clr-LinkedIn;}
+    &:hover.TwitterX    {background-color: $clr-TwitterX;}
+    &:hover.Pinterest   {background-color: $clr-Pinterest;}
+    &:hover.Portfolio   {background-color: $clr-Portfolio;}
+
+}
