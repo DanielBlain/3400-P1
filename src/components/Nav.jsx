@@ -24,11 +24,37 @@ const Nav = ({ isOpen, closeNav }) => {
 
 
     return (
-        <nav className={(isAnimating ? `isAnim` : ``) + (isOpen ? ` isOpen` : ``)}>
-            <NavLink to='/'             onClick={handleClick}   >Home</NavLink>
-            <NavLink to='/about'        onClick={handleClick}   >About</NavLink>
-            <NavLink to='/favourites'   onClick={handleClick}   >Favourites</NavLink>
-            <NavLink to='/support'      onClick={handleClick}   >Support</NavLink>
+        <nav
+            className={(isAnimating ? `isAnim` : ``) + (isOpen ? ` isOpen` : ``)}
+        >
+            <NavLink
+                tabIndex={isOpen ? 0 : -1}
+                to='/'
+                onClick={handleClick}
+            >
+                Home
+            </NavLink>
+            <NavLink
+                tabIndex={isOpen ? 0 : -1}
+                to='/about'
+                onClick={handleClick}
+            >
+                About
+            </NavLink>
+            <NavLink
+                tabIndex={isOpen ? 0 : -1}
+                to='/favourites'
+                onClick={handleClick}
+            >
+                Favourites
+            </NavLink>
+            <NavLink
+                tabIndex={isOpen ? 0 : -1}
+                to='/support'
+                onClick={handleClick}
+            >
+                Support
+            </NavLink>
         </nav>
     )
 }
