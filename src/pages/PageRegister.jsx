@@ -7,7 +7,7 @@ import { appName } from '../config/config'
 const PageRegister = () => {
 
     const navigate = useNavigate()
-    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
 
     // WARNING: POOR SECURITY CHECKING HERE -- INTENTIONAL, FOR DEMONSTRATION PURPOSES ONLY
@@ -44,7 +44,7 @@ const PageRegister = () => {
     }
 
 
-    // Unlock localStorage
+    // Flag to enable PageHome button, and unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(false)
@@ -52,78 +52,75 @@ const PageRegister = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [])
+    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
 
     return (
-        <>
-            <h1>{appName}</h1>
-            <div className='loginBox'>
-                <form action='POST'>
-                    <div className='loginInputGroup'>
-                        <label>
-                            Username
-                            <input
-                                type='text'
-                                id='username'
-                                name='username'
-                                required
-                                minLength='3'
-                                autoComplete='username'
-                            />
-                        </label>
-                    </div>
-                    
-                    <div className='loginInputGroup'>
-                        <label>
-                            Email Address
-                            <input
-                                type='email'
-                                id='email'
-                                name='email'
-                                autoComplete='email'
-                            />
-                        </label>
-                    </div>
-                    
-                    <div className='loginInputGroup'>
-                        <label>
-                            Password
-                            <input
-                                type='password'
-                                id='password'
-                                name='password'
-                                required
-                                minLength='8'
-                                autoComplete='new-password webauthn'
-                            />
-                        </label>
-                    </div>
-                    
-                    <div className='loginInputGroup'>
-                        <label>
-                            Password (again)
-                            <input
-                                type='password'
-                                id='password2'
-                                name='password2'
-                                required
-                                minLength='8'
-                                autoComplete='new-password webauthn'
-                            />
-                        </label>
-                    </div>
-                    
-                    <button
-                        type='submit'
-                        className='loginButton'
-                        onClick={ handleSubmit }
-                    >
-                        Register
-                    </button>
-                </form>
-            </div>        
-        </>
+        <section className='loginBox' id='mainContent'>
+            <form action='POST'>
+                <div className='loginInputGroup'>
+                    <label>
+                        Username
+                        <input
+                            type='text'
+                            id='username'
+                            name='username'
+                            required
+                            minLength='3'
+                            autoComplete='username'
+                        />
+                    </label>
+                </div>
+                
+                <div className='loginInputGroup'>
+                    <label>
+                        Email Address
+                        <input
+                            type='email'
+                            id='email'
+                            name='email'
+                            autoComplete='email'
+                        />
+                    </label>
+                </div>
+                
+                <div className='loginInputGroup'>
+                    <label>
+                        Password
+                        <input
+                            type='password'
+                            id='password'
+                            name='password'
+                            required
+                            minLength='8'
+                            autoComplete='new-password webauthn'
+                        />
+                    </label>
+                </div>
+                
+                <div className='loginInputGroup'>
+                    <label>
+                        Password (again)
+                        <input
+                            type='password'
+                            id='password2'
+                            name='password2'
+                            required
+                            minLength='8'
+                            autoComplete='new-password webauthn'
+                        />
+                    </label>
+                </div>
+                
+                <button
+                    type='submit'
+                    className='loginButton'
+                    onClick={ handleSubmit }
+                >
+                    Register
+                </button>
+            </form>
+        </section>        
     )
 }
 

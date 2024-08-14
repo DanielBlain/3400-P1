@@ -5,10 +5,10 @@ import { MovieAppContext } from '../router/AppRouter'
 
 const PageAbout = () => {
     
-    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
 
-    // Unlock localStorage
+    // Flag to enable PageHome button, and unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(true)
@@ -16,11 +16,11 @@ const PageAbout = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [])
+    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
     
     return (
-        <>
+        <section id='mainContent'>
             {/** Disclaimer(s) */}
             <p><b>NOTE:</b> {appName} is meant strictly as an educational project, and therefore should <em>not</em> be used for any professional or business purposes. If you choose to do so, it is at your own risk, and I take utterly no responsibility!</p>
             <hr />
@@ -89,7 +89,7 @@ const PageAbout = () => {
             <p>{appName} is an educational project built by Dan J. Blain as part of a class that teaches students to use the React Javascript framework.</p>
             <p>The React class was part of the Frontend Web Development program offered by the brilliant people at BCIT. Thank you for my education!</p>
             <img src="/bcit.png" alt="Logo for BCIT (British Columbia Institute of Technology)" />
-        </>
+        </section>
     )
 }
 

@@ -7,10 +7,10 @@ import ClickDropdown from '../components/ClickDropdown'
 
 const PageSupport = () => {
 
-    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
 
-    // Unlock localStorage
+    // Flag to enable PageHome button, and unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(true)
@@ -18,13 +18,13 @@ const PageSupport = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [])
+    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
 
     return (
-        <>
-            <h1>Support</h1>
-            <h2>Categories</h2>
+        <section id='mainContent'>
+            <h2>Support</h2>
+            <h3>Categories</h3>
             <ul>
                 <li>App & website issues</li>
                 <li>Account issues</li>
@@ -118,7 +118,7 @@ const PageSupport = () => {
                     </p>
                 </div>
             </ClickDropdown>
-        </>
+        </section>
     )
 }
 

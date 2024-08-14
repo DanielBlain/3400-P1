@@ -7,7 +7,7 @@ import { appName } from '../config/config'
 const PageLogin = () => {
 
     const navigate = useNavigate()
-    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
 
     // WARNING: POOR SECURITY CHECKING HERE -- INTENTIONAL, FOR DEMONSTRATION PURPOSES ONLY
@@ -39,7 +39,7 @@ const PageLogin = () => {
     }
 
 
-    // Unlock localStorage
+    // Flag to enable PageHome button, and unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(false)
@@ -47,52 +47,49 @@ const PageLogin = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [])
+    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
 
     return (
-        <>
-            <h1>{appName}</h1>
-            <div className='loginBox'>
-                <form action='POST'>
-                    <div className='loginInputGroup'>
-                        <label>
-                            Username
-                            <input
-                                type='text'
-                                id='username'
-                                name='username'
-                                required
-                                minLength='3'
-                                autoComplete='username'
-                            />
-                        </label>
-                    </div>
-                    
-                    <div className='loginInputGroup'>
-                        <label>
-                            Password
-                            <input
-                                type='password'
-                                id='password'
-                                name='password'
-                                required
-                                minLength='8'
-                                autoComplete='new-password webauthn'
-                            />
-                        </label>
-                    </div>
-                    
-                    <button
-                        type='submit'
-                        className='loginButton'
-                        onClick={ handleSubmit }
-                    >
-                        Login
-                    </button>
-                </form>
-            </div>        
-        </>
+        <section className='loginBox' id='mainContent'>
+            <form action='POST'>
+                <div className='loginInputGroup'>
+                    <label>
+                        Username
+                        <input
+                            type='text'
+                            id='username'
+                            name='username'
+                            required
+                            minLength='3'
+                            autoComplete='username'
+                        />
+                    </label>
+                </div>
+                
+                <div className='loginInputGroup'>
+                    <label>
+                        Password
+                        <input
+                            type='password'
+                            id='password'
+                            name='password'
+                            required
+                            minLength='8'
+                            autoComplete='new-password webauthn'
+                        />
+                    </label>
+                </div>
+                
+                <button
+                    type='submit'
+                    className='loginButton'
+                    onClick={ handleSubmit }
+                >
+                    Login
+                </button>
+            </form>
+        </section>        
     )
 }
 

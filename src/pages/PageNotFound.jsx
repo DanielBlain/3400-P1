@@ -2,6 +2,7 @@ import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
 import { appName } from '../config/config'
+import HomeButton from '../components/HomeButton'
 
 
 const PageNotFound = () => {
@@ -9,7 +10,7 @@ const PageNotFound = () => {
     const navigate = useNavigate()
     // Context is not needed here, but is included so
     // included so this page can be used as a template for new pages
-    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
 
     function handleClick() {
@@ -17,27 +18,28 @@ const PageNotFound = () => {
     }
 
 
-    // Unlock localStorage
+    // Flag to enable PageHome button, and unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(true)
-    }, [])
+        setIsStorageUnlocked(true)
+        return (() => {
+            setIsStorageUnlocked(false)
+        })
+    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
 
     return (
-        <>
-            <h1>{appName}</h1>
-            <div>
-                <h2>Page Not Found</h2>
-                <p>Oops! The page you are looking for does not exist.</p>
-                <button
-                    className='homeButton'
-                    onClick={ handleClick }
-                >
-                    &larr; Go Home
-                </button>
-            </div>
-        </>
+        <section id='mainContent'>
+            <h2>Page Not Found</h2>
+            <p>Oops! The page you are looking for does not exist.</p>
+            <hr />
+            <HomeButton>
+                <p>
+                    Click to go Home
+                </p>
+            </HomeButton>
+        </section>
     )
 }
 

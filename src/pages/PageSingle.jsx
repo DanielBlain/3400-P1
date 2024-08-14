@@ -3,13 +3,14 @@ import { useParams } from 'react-router-dom'
 import { fetchSingleton } from '../utilities/themoviedatabase/themoviedatabase'
 import { api_key, tmdbEndpoint } from '../config/config'
 import { MovieAppContext } from '../router/AppRouter'
+import MovieGadget from '../components/MovieGadget'
 
 
 const PageSingle = () => {
 
-    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const { movieID } = useParams()
-    const [movieDetails, setMovieDetails] = useState(null)
+    const [ movieDetails, setMovieDetails ] = useState(null)
 
 
     // Attempt to fetch movie details
@@ -31,7 +32,7 @@ const PageSingle = () => {
     }, [movieID])
 
 
-    // Flag that we're not on PageHome and unlock localStorage
+    // Flag to enable PageHome button, and unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(true)
@@ -39,24 +40,39 @@ const PageSingle = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [])
+    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
 
     return (
-        <>
-            <div>
-                <h1>Blog Post #{movieID}</h1>
-                <p>This is the content of blog post #{movieID}.</p>
+        <section id='mainContent'>
+            {movieDetails ? (
+                <>
+                    <h1>Blog Post</h1>
+                    <article className={`MovieDisplayList`}>
+                        <MovieGadget key={`movieGadget-${movieDetails.id}`} movieDetails={movieDetails} />
+                    </article>
+                </>
+            )
+            :(
                 <div>
-                    {movieDetails && <img src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`} alt={`Image of movie: ${movieDetails.title}`} />}
-                    Details are:
-                    <p className='isUrl'>
-                        {movieDetails && JSON.stringify(movieDetails)}
-                    </p>
+                    <p>Failed to fetch movie details, or unrecognized movie ID!</p>
+
                 </div>
-            </div>
-        </>
+            )}
+        </section>
     )
 }
 
 export default PageSingle
+/**
+ Individual Movie Pages
+ ● This page is accessed when a user clicks on the “More Info” link on an individual movie
+ ● All the requirements from the “All Pages” requirements plus…
+ ● POSTER       (or generic placeholder if no poster is available)
+ ● TITLE
+ ● DATE         of release
+ ● RATE         Review rating - e.g. 67%
+ ● PLOT         Summary
+ ● LIKE         or unlike, in localStorage
+ * 
+ */

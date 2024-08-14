@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MovieAppContext } from '../router/AppRouter'
 import CinescapeE from '/cinescape-e.png'
 
 
-const HomeButton = ({ isHomeBtnEnabled }) => {
+const HomeButton = ({ children }) => {
 
+    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const navigate = useNavigate()
 
 
@@ -15,14 +18,18 @@ const HomeButton = ({ isHomeBtnEnabled }) => {
 
 
     return (
-        <button className={'homeButton'} disabled={ !isHomeBtnEnabled } onClick={handleClick}>
-            <img src={CinescapeE} alt='Icon for Home Button' />
-        </button>
+        <div className={ 'homeBtnPanel' }>
+            <button disabled={ !isHomeBtnEnabled } onClick={handleClick}>
+                <img src={CinescapeE} alt='Icon for Home Button' />
+            </button>
+            { children !== null ? children : ``}
+        </div>
     )
 }
 
+
 HomeButton.propTypes = {
-    isHomeBtnEnabled: PropTypes.bool,
+    children: PropTypes.node,
 }
 
 export default HomeButton

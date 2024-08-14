@@ -51,6 +51,7 @@ export const AppRouter = () => {
                     element={
                         <MovieAppContext.Provider
                             value={{
+                                isHomeBtnEnabled,
                                 setIsHomeBtnEnabled,
                                 isStorageLocked,
                                 setIsStorageUnlocked,
@@ -60,8 +61,10 @@ export const AppRouter = () => {
                         >
                             <a href='#mainContent' className='screen-reader-text'>Skip to Content</a>
                             <div className='wrapper'>
-                                <Header isHomeBtnEnabled={ isHomeBtnEnabled } />
-                                <main id='mainContent'>
+                                <Header />
+                                <main>                                    
+                                    <h1>{ appName }</h1>
+                                    <hr />
                                     <Outlet />
                                 </main>
                                 <Footer />

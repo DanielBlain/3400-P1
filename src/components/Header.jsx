@@ -4,7 +4,7 @@ import HomeButton from '../components/HomeButton'
 import Nav from './Nav'
 
 
-function Header({ isHomeBtnEnabled }) {
+function Header() {
 
     const [ isOpen, setIsOpen ] = useState(false)
 
@@ -23,7 +23,7 @@ function Header({ isHomeBtnEnabled }) {
         <header>
             <div>
                 <span>
-                    <HomeButton isHomeBtnEnabled={ isHomeBtnEnabled } />
+                    <HomeButton />
                 </span>
                 <button className={'hamburgerButton' + (isOpen ? ` isOpen` : ``)} onClick={handleClick}>
                     <span className={'bar top left'}></span>

@@ -4,11 +4,12 @@ import { api_key, tmdbEndpoint } from '../config/config'
 
 import { MovieAppContext } from '../router/AppRouter'
 import MovieDisplayList from '../components/MovieDisplayList'
+import HomeButton from '../components/HomeButton'
 
 
 const PageFavourites = () => {
 
-    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const [ likedMoviesData, setLikedMoviesData ] = useState([])
     const [ numberOfLikedMovies, setNumberOfLikedMovies ] = useState(0)
 
@@ -20,7 +21,7 @@ const PageFavourites = () => {
     }
 
 
-    // Unlock localStorage
+    // Flag to enable PageHome button, and unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(true)
@@ -28,7 +29,7 @@ const PageFavourites = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [])
+    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
 
     // Update numberOfLikedMovies when the likedMovieData changes
@@ -60,15 +61,19 @@ const PageFavourites = () => {
 
 
     return (
-        <>
-            <h1>Your Favourite Movies</h1>
+        <section id='mainContent'>
             <h2>Number of liked movies: { numberOfLikedMovies }</h2>
             <h2>You&apos;ve liked these movies</h2>
             {( numberOfLikedMovies > 0 ) ?
                 <MovieDisplayList movieList={ likedMoviesData } />
                 : <div>You haven&apos;t liked any movies!</div>
             }
-        </>
+            <HomeButton>
+                <p>
+                    Click to go Home
+                </p>
+            </HomeButton>
+        </section>
     )
 }
 

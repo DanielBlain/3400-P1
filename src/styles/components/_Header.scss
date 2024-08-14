@@ -51,26 +51,28 @@ header {
         height: 100%;
         background-color: magenta;
         opacity: 0;
-        transform: opacity 1s 0.4s ease;
+        transition: opacity 1s 0.4s ease;
     }
 
     &.isOpen {
         @include spaceButton;
 
         .bar.top.left {
-            translate: 50% -2px;
+            translate: 50% 0;
         }
     
         .bar.top.right {
-            translate: 50% -2px;
+            translate: 50% 0;
             rotate: 60deg;
         }
     
         .bar.mid.left {
+            translate: 0 1px;
             rotate: -60deg;
         }
     
         .bar.mid.right {
+            translate: 0 1px;
             rotate: -60deg;
         }
     
