@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
 
@@ -9,6 +9,7 @@ const MovieGadget = ({ movieDetails }) => {
     const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
     const [ isLikedFlag, setIsLikedFlag ] = useState(false)
     const [ isInfoOpen, setIsInfoOpen ] = useState(false)
+    const activeInfo = useRef(null)
 
 
     const isMovieLiked = () =>
@@ -50,18 +51,39 @@ const MovieGadget = ({ movieDetails }) => {
     return (
         <article
             key={ `${movieDetails.id}` }
-            className={ `movieGadget` }
+            className='movieGadget'
             id={ `movieGadget-${movieDetails.id}` }
         >
-            <img
-                src={ `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` }
-                alt={ `Poster of movie: ${movieDetails.title}` }
-            />
 
-
-            <div className={ `gadgetPanel` }>
+            <div className='posterPanel'>
                 <div
-                    className={ `gadgetButton like` }
+                    className={ isInfoOpen ? `isInfoOpen` : `` }
+                    onClick={ handleInfo }
+                >
+                    <img
+                        aria-hidden='true'
+                        src={ `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` }
+                        alt={ `For layout sizing purposes only. Not an interactive element` }
+                    />
+                    <img
+                        src={ `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` }
+                        alt={ `Poster of movie: ${movieDetails.title}` }
+                    />
+                    <article
+                        onClick={ handleInfo }
+                    >
+                        <h2>{ movieDetails.title }</h2>
+                        <p>{ movieDetails.overview }</p>
+                        <Link to={`/single/${movieDetails.id}`}>
+                            Details
+                        </Link>
+                    </article>
+                </div>
+            </div>
+
+            <div className='detailPanel'>
+                <div
+                    className='detailButton like'
                     onClick={ handleLike }
                 >
                     <img
@@ -72,29 +94,11 @@ const MovieGadget = ({ movieDetails }) => {
                 </div>
 
                 <div
-                    className={ `gadgetButton info` }
+                    className='detailButton info'
                     onClick={ handleInfo }
                 >
-                    <img
-                        src={ '/iconmonstr-magnifier-10-240.png' }
-                        alt='more info indicator'
-                    />
-                    <div>Info</div>
+                    Click for Info
                 </div>
-            </div>
-            
-
-            <div
-                className={ `infoFloat` + (isInfoOpen ? ` open` : ``) }
-                onClick={ handleInfo }
-            >
-                <article className={`infoSheet`}>
-                    <h2>{ movieDetails.title }</h2>
-                    <p>{ movieDetails.overview }</p>
-                    <Link to={`/single/${movieDetails.id}`}>
-                        Details
-                    </Link>
-                </article>
             </div>
         </article>
     )
@@ -105,6 +109,19 @@ MovieGadget.propTypes = {
 }
 
 export default MovieGadget
+
+/**
+ Individual Movie Pages
+ ● This page is accessed when a user clicks on the “More Info” link on an individual movie
+ ● All the requirements from the “All Pages” requirements plus…
+ ● POSTER       (or generic placeholder if no poster is available)
+ ● TITLE
+ ● DATE         of release
+ ● RATE         Review rating - e.g. 67%
+ ● PLOT         Summary
+ ● LIKE         or unlike, in localStorage
+ * 
+ */
 
 /**
  * The Movie Database (TMDB) returns movie data packaged in the following format
@@ -125,18 +142,5 @@ export default MovieGadget
  *      vote_average,
  *      vote_count
  *  }
- * 
- */
-
-/**
- Individual Movie Pages
- ● This page is accessed when a user clicks on the “More Info” link on an individual movie
- ● All the requirements from the “All Pages” requirements plus…
- ● POSTER       (or generic placeholder if no poster is available)
- ● TITLE
- ● DATE         of release
- ● RATE         Review rating - e.g. 67%
- ● PLOT         Summary
- ● LIKE         or unlike, in localStorage
  * 
  */
