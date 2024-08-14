@@ -19,7 +19,10 @@ const HomeButton = ({ children }) => {
 
     return (
         <div className={ 'homeBtnPanel' }>
-            <button disabled={ !isHomeBtnEnabled } onClick={handleClick}>
+            <button
+                onClick={handleClick}
+                disabled={ !isHomeBtnEnabled }
+            >
                 <img src={CinescapeE} alt='Icon for Home Button' />
             </button>
             { children !== null ? children : ``}

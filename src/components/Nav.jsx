@@ -1,57 +1,55 @@
 import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-// import { appName } from "../config/config"
+
 
 const Nav = ({ isOpen, closeNav }) => {
 
-    const [ isAnimating, setIsAnimating ] = useState(false)
+    const [ isAnimating, setIsAnimating ] = useState(true)
 
 
-    function handleClick(e) {
-        // Do not preventDefault, want to perform NavLink redirection
-        setIsAnimating(false)
+    // Ensure Nav is closed when we click to a new page
+    const handleClick = e => {
+        e.preventDefault()
         closeNav()
     }
 
-
-    // Effect to enable hamburger menu animations after page initialization
+    // Animate hamburger button plasma animation only when
+    // opening the nav, so it terminates instantly when closing
     useEffect(() => {
-        if (isOpen) {
-            setIsAnimating(true)
-        }
-    }, [isOpen, setIsAnimating])
+        if (isOpen)     { setIsAnimating(true) }
+        else            { setIsAnimating(false) }
+        return () =>    { setIsAnimating(false) }
+    }, [isOpen, closeNav])
 
 
     return (
         <nav
             className={(isAnimating ? `isAnim` : ``) + (isOpen ? ` isOpen` : ``)}
+            onClick={handleClick}
         >
             <NavLink
+                // Ensure NavLinks are not tabable while the Nav is closed
                 tabIndex={isOpen ? 0 : -1}
                 to='/'
-                onClick={handleClick}
             >
                 Home
             </NavLink>
             <NavLink
                 tabIndex={isOpen ? 0 : -1}
                 to='/about'
-                onClick={handleClick}
             >
                 About
             </NavLink>
             <NavLink
                 tabIndex={isOpen ? 0 : -1}
                 to='/favourites'
-                onClick={handleClick}
             >
                 Favourites
             </NavLink>
             <NavLink
                 tabIndex={isOpen ? 0 : -1}
                 to='/support'
-                onClick={handleClick}
             >
                 Support
             </NavLink>

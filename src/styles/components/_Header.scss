@@ -27,7 +27,7 @@ header {
     border-radius: 8px;
     background-color: $clr-white;
     display: grid;
-    grid-template-columns: 16px 16px;
+    grid-template-columns: 17px 17px;
     grid-auto-rows: 1fr;
     grid-gap: 10px 0;
     position: relative;
@@ -57,11 +57,11 @@ header {
         @include spaceButton;
 
         .bar.top.left {
-            translate: 50% 0;
+            translate: 50% -1px;
         }
     
         .bar.top.right {
-            translate: 50% 0;
+            translate: 50% -1px;
             rotate: 60deg;
         }
     
@@ -71,7 +71,6 @@ header {
         }
     
         .bar.mid.right {
-            translate: 0 1px;
             rotate: -60deg;
         }
     

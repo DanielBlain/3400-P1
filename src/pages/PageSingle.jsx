@@ -48,9 +48,9 @@ const PageSingle = () => {
             {movieDetails ? (
                 <>
                     <h1>Blog Post</h1>
-                    <article className={`MovieDisplayList`}>
+                    <section className={`MovieDisplayList`}>
                         <MovieGadget key={`movieGadget-${movieDetails.id}`} movieDetails={movieDetails} />
-                    </article>
+                    </section>
                 </>
             )
             :(
@@ -64,15 +64,3 @@ const PageSingle = () => {
 }
 
 export default PageSingle
-/**
- Individual Movie Pages
- ● This page is accessed when a user clicks on the “More Info” link on an individual movie
- ● All the requirements from the “All Pages” requirements plus…
- ● POSTER       (or generic placeholder if no poster is available)
- ● TITLE
- ● DATE         of release
- ● RATE         Review rating - e.g. 67%
- ● PLOT         Summary
- ● LIKE         or unlike, in localStorage
- * 
- */

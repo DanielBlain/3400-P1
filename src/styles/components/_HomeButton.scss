@@ -17,6 +17,10 @@
         &:hover {
             background-color: $clr-control-hover;
         }
+
+        &:focus {
+            background-color: $clr-control-secondary;
+        }
     
         &:disabled {
             background-color: $clr-gray;

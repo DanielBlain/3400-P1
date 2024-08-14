@@ -4,7 +4,7 @@ import MovieGadget from '../components/MovieGadget'
 const MovieDisplayList = ({ movieList }) => {
     
     return (
-        <section className={`MovieDisplayList`}>
+        <section>
             {
                 movieList && movieList.length > 0 ?
                     movieList.map(movieDetails => 

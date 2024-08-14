@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import HomeButton from '../components/HomeButton'
 import Nav from './Nav'
 
@@ -7,6 +7,7 @@ import Nav from './Nav'
 function Header() {
 
     const [ isOpen, setIsOpen ] = useState(false)
+    const headerRef = useRef(null)
 
 
     function handleClick() {
@@ -19,8 +20,23 @@ function Header() {
     }
 
 
+    // Close the nav when we click anywhere off the header
+    useEffect(() => {
+        const handleClickElsewhere = e => {
+            if (headerRef.current && !headerRef.current.contains(e.target)) {
+                closeNav()
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickElsewhere)
+        return(() => {
+            document.removeEventListener('mousedown', handleClickElsewhere)
+        })
+    })
+
+
     return (
-        <header>
+        <header ref={headerRef}>
             <div>
                 <span>
                     <HomeButton />
