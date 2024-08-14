@@ -7,7 +7,7 @@ import { MovieAppContext } from '../router/AppRouter'
 
 const PageSingle = () => {
 
-    const { isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const { movieID } = useParams()
     const [movieDetails, setMovieDetails] = useState(null)
 
@@ -34,6 +34,7 @@ const PageSingle = () => {
     // Flag that we're not on PageHome and unlock localStorage
     // Run once on boot
     useEffect(() => {
+        setIsHomeBtnEnabled(true)
         setIsStorageUnlocked(true)
         return (() => {
             setIsStorageUnlocked(false)

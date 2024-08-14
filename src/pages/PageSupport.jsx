@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import { appName } from '../config/config'
 import { MovieAppContext } from '../router/AppRouter'
 import ClickDropdown from '../components/ClickDropdown'
@@ -7,7 +7,18 @@ import ClickDropdown from '../components/ClickDropdown'
 
 const PageSupport = () => {
 
-    const { isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+
+
+    // Unlock localStorage
+    // Run once on boot
+    useEffect(() => {
+        setIsHomeBtnEnabled(true)
+        setIsStorageUnlocked(true)
+        return (() => {
+            setIsStorageUnlocked(false)
+        })
+    }, [])
 
 
     return (

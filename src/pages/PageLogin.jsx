@@ -42,6 +42,7 @@ const PageLogin = () => {
     // Unlock localStorage
     // Run once on boot
     useEffect(() => {
+        setIsHomeBtnEnabled(false)
         setIsStorageUnlocked(true)
         return (() => {
             setIsStorageUnlocked(false)

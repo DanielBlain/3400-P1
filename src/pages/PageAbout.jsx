@@ -1,7 +1,22 @@
+import { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { appName } from '../config/config'
+import { MovieAppContext } from '../router/AppRouter'
 
 const PageAbout = () => {
+    
+    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+
+
+    // Unlock localStorage
+    // Run once on boot
+    useEffect(() => {
+        setIsHomeBtnEnabled(true)
+        setIsStorageUnlocked(true)
+        return (() => {
+            setIsStorageUnlocked(false)
+        })
+    }, [])
 
     
     return (

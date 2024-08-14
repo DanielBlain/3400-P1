@@ -8,7 +8,7 @@ import MovieDisplayList from '../components/MovieDisplayList'
 
 const PageFavourites = () => {
 
-    const { isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const [ likedMoviesData, setLikedMoviesData ] = useState([])
     const [ numberOfLikedMovies, setNumberOfLikedMovies ] = useState(0)
 
@@ -23,6 +23,7 @@ const PageFavourites = () => {
     // Unlock localStorage
     // Run once on boot
     useEffect(() => {
+        setIsHomeBtnEnabled(true)
         setIsStorageUnlocked(true)
         return (() => {
             setIsStorageUnlocked(false)

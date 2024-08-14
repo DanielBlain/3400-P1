@@ -14,7 +14,7 @@ const UPCOMING      = `/upcoming`
 
 const PageHome = () => {
 
-    const { isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const [ movieList, setMovieList ] = useState(null)
     const isFilterValid = (newFilter) =>
         newFilter === NOW_PLAYING
@@ -45,6 +45,7 @@ const PageHome = () => {
     // Unlock localStorage
     // Run once on boot
     useEffect(() => {
+        setIsHomeBtnEnabled(false)
         setIsStorageUnlocked(true)
         return (() => {
             setIsStorageUnlocked(false)
