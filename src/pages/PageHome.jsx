@@ -79,7 +79,7 @@ const PageHome = () => {
                 <button key={TOP_RATED}     onClick={() => chooseFilter(TOP_RATED)}     >Top Rated</button>
                 <button key={UPCOMING}      onClick={() => chooseFilter(UPCOMING)}      >Upcoming</button>
             </p>
-            {state && isFilterValid(state.browse.homeFilter) && <MovieDisplayList movieList={movieList} />}
+            {state && state.browse && isFilterValid(state.browse.homeFilter) && <MovieDisplayList movieList={movieList} />}
         </section>
     )
 }
