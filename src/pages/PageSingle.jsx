@@ -31,7 +31,8 @@ const PageSingle = () => {
     }, [movieID])
 
 
-    // Unlock localStorage. Run once on boot
+    // Flag that we're not on PageHome and unlock localStorage
+    // Run once on boot
     useEffect(() => {
         setIsStorageUnlocked(true)
         return (() => {

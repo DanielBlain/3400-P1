@@ -1,7 +1,10 @@
+import PropTypes from 'prop-types'
 import { useState } from 'react'
+import HomeButton from '../components/HomeButton'
 import Nav from './Nav'
 
-function Header() {
+
+function Header({ isHomeBtnEnabled }) {
 
     const [ isOpen, setIsOpen ] = useState(false)
 
@@ -20,7 +23,7 @@ function Header() {
         <header>
             <div>
                 <span>
-                    Icon-on-left
+                    <HomeButton isHomeBtnEnabled={ isHomeBtnEnabled } />
                 </span>
                 <button className={'hamburgerButton' + (isOpen ? ` isOpen` : ``)} onClick={handleClick}>
                     <span className={'bar top left'}></span>
@@ -35,6 +38,10 @@ function Header() {
             <Nav isOpen={isOpen} closeNav={closeNav} />
         </header>
     )
+}
+
+Header.propTypes = {
+    isHomeBtnEnabled: PropTypes.bool,
 }
 
 export default Header

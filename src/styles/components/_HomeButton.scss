@@ -1,0 +1,21 @@
+@use '../base/vars' as *;
+@use '../mixins/mixins' as *;
+
+.homeButton {
+    @include spaceButton;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 8px;
+    width: 60px;
+    height: 60px;
+    background-color: $clr-control-primary;
+
+    &:hover {
+        background-color: $clr-control-hover;
+    }
+
+    &:disabled {
+        background-color: $clr-gray;
+        pointer-events: none;
+    }
+}

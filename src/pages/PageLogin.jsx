@@ -7,7 +7,7 @@ import { appName } from '../config/config'
 const PageLogin = () => {
 
     const navigate = useNavigate()
-    const { isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const { setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
 
     // WARNING: POOR SECURITY CHECKING HERE -- INTENTIONAL, FOR DEMONSTRATION PURPOSES ONLY
@@ -39,7 +39,8 @@ const PageLogin = () => {
     }
 
 
-    // Unlock localStorage. Run once on boot
+    // Unlock localStorage
+    // Run once on boot
     useEffect(() => {
         setIsStorageUnlocked(true)
         return (() => {

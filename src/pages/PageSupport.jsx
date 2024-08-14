@@ -1,7 +1,14 @@
+import { useContext } from 'react'
 import { appName } from '../config/config'
+import { MovieAppContext } from '../router/AppRouter'
 import ClickDropdown from '../components/ClickDropdown'
 
+
+
 const PageSupport = () => {
+
+    const { isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+
 
     return (
         <>

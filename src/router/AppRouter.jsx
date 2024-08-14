@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react'
+import { useState, createContext, useReducer } from 'react'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import { appName, appCustomState } from '../config/config'
@@ -19,6 +19,7 @@ import PageNotFound     from '../pages/PageNotFound'
 
 
 export const MovieAppContext = createContext({
+    setIsHomeBtnEnabled: null,
     isStorageUnlocked: false,
     setIsStorageUnlocked: null,
     appState: null,
@@ -27,6 +28,9 @@ export const MovieAppContext = createContext({
 
 
 export const AppRouter = () => {
+
+    const [ isHomeBtnEnabled, setIsHomeBtnEnabled ] = useState(false)
+    // State to determine whether the "Home" buttons are disabled
 
     const [ isStorageLocked, setIsStorageUnlocked, state, dispatch ]
         = useLocalStorage(
@@ -38,6 +42,7 @@ export const AppRouter = () => {
             )
         )
 
+        
     return (
         <BrowserRouter>
             <Routes>
@@ -46,6 +51,7 @@ export const AppRouter = () => {
                     element={
                         <MovieAppContext.Provider
                             value={{
+                                setIsHomeBtnEnabled,
                                 isStorageLocked,
                                 setIsStorageUnlocked,
                                 state,
@@ -54,7 +60,7 @@ export const AppRouter = () => {
                         >
                             <a href='#mainContent' className='screen-reader-text'>Skip to Content</a>
                             <div className='wrapper'>
-                                <Header />
+                                <Header isHomeBtnEnabled={ isHomeBtnEnabled } />
                                 <main id='mainContent'>
                                     <Outlet />
                                 </main>

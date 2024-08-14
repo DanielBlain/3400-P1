@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
 import { appName } from '../config/config'
@@ -9,16 +9,7 @@ const PageNotFound = () => {
     const navigate = useNavigate()
     // Context is not needed here, but is included so
     // included so this page can be used as a template for new pages
-    const { setIsStorageUnlocked } = useContext(MovieAppContext)
-
-
-    // Unlock localStorage. Run once on boot
-    useEffect(() => {
-        setIsStorageUnlocked(true)
-        return (() => {
-            setIsStorageUnlocked(false)
-        })
-    }, [setIsStorageUnlocked])
+    const { isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
 
     function handleClick() {

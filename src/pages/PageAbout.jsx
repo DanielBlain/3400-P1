@@ -3,6 +3,7 @@ import { appName } from '../config/config'
 
 const PageAbout = () => {
 
+    
     return (
         <>
             {/** Disclaimer(s) */}

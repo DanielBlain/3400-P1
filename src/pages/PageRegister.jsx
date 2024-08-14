@@ -44,7 +44,8 @@ const PageRegister = () => {
     }
 
 
-    // Unlock localStorage. Run once on boot
+    // Unlock localStorage
+    // Run once on boot
     useEffect(() => {
         setIsStorageUnlocked(true)
         return (() => {
