@@ -1,5 +1,7 @@
 export const getYear = () => (new Date).getFullYear()
 
+export const getTimestamp = () => Date.now()
+
 // findFirstByKey finds the first object in the list with
 // a key field matching soughtKey, or else -1
 export const findFirstByKey = (list, soughtKey) =>

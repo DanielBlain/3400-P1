@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { fetchList } from '../utilities/themoviedatabase/themoviedatabase'
 import { api_key, tmdbEndpoint } from '../config/config'
-
 import { MovieAppContext } from '../router/AppRouter'
 import MovieDisplayList from '../components/MovieDisplayList'
 
@@ -42,10 +41,17 @@ const PageHome = () => {
         }
     }
 
+    // Ensure contents of localStorage are valid; reset if not
+    useEffect(() => {
+    }, [isStorageUnlocked])
+
 
     // Unlock localStorage. Run once on boot
     useEffect(() => {
         setIsStorageUnlocked(true)
+        return (() => {
+            setIsStorageUnlocked(false)
+        })
     }, [setIsStorageUnlocked])
     
 

@@ -8,7 +8,7 @@ export const authorQuote    = `Eppur Si Muove`
 export const appCustomState = {
     user: {
         username: null,             // string
-        password: null,             // string
+        isLoggedIn: false,          // bool
     },
     browse: {
         homeFilter: null,           // string

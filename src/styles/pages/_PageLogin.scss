@@ -1,0 +1,41 @@
+@use '../base/vars' as *;
+
+.loginBox {
+    margin: 3em 0.2em;
+    padding: 2em;
+    border: 1px solid $clr-black;
+    border-radius: 1em;
+}
+
+.loginInputGroup {
+    margin-bottom: 1em;
+
+    & label {
+        display: block;
+    }
+    
+    & input {
+        margin-top: 0.1em;
+        margin-bottom: 0.1em;
+        width: 100%;
+        padding: 0.35em;
+    }
+
+    button {
+        margin-top: 2em;
+    }
+}
+
+.loginButton {
+    width: 100%;
+    padding: 1em;
+    background-color: $clr-control-secondary;
+    color: $clr-white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $clr-control-hover;
+    }
+}

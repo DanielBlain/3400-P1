@@ -4,20 +4,24 @@
 h1, h2, h3, h4, h5, h6, button, label, code {
     @include capitalize;
     font-family: $fontfam-headers;
-    letter-spacing: -0.06em;
 }
 
 h1 {
     @include bandedText;
-    @include uppercase;
-    font-size: 0.8rem;
+    margin: 2em auto 1em;
+    font-size: 2rem;
+    letter-spacing: 0.2em;
 }
 
 button, label, code {
-    font-size: 1.1rem;
-    word-spacing: 0.6rem;
+    font-size: 1.1em;
+    word-spacing: 0.2em;
 }
 
 button, label {
     @include uppercase;
+}
+
+input {
+    font-family: $fontfam-body;
 }

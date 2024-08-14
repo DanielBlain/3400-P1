@@ -28,7 +28,15 @@ export const MovieAppContext = createContext({
 
 export const AppRouter = () => {
 
-    const [ isStorageLocked, setIsStorageUnlocked, state, dispatch ] = useLocalStorage(appName, useReducer( MovieReducer, appCustomState ))
+    const [ isStorageLocked, setIsStorageUnlocked, state, dispatch ]
+        = useLocalStorage(
+            appName,            // Key value for Storage
+            appCustomState,     // Reference object, so useLocalStorage can ensure validity
+            useReducer(
+                MovieReducer,   // reducer function, creates a dispatcher
+                appCustomState  // The original state to be mutated
+            )
+        )
 
     return (
         <BrowserRouter>

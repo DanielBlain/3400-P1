@@ -1,5 +1,5 @@
 // Reset
-@use './config/reset';
+@use './base/reset';
 
 // Base
 @use './base/screenreader';
@@ -17,6 +17,7 @@
 
 // Pages
 @use './pages/PageAbout';
+@use './pages/PageLogin';
 
 // Special effects
 @use './effects/DanLogoInText';

@@ -1,3 +1,6 @@
+import { getTimestamp } from '../utilities/utilities'
+
+
 const MovieReducer = (state, action) => {
     switch (action.type) {
 
@@ -11,7 +14,7 @@ const MovieReducer = (state, action) => {
             // (    filter: string)
             // Set PageHome's movie filter type
             return {
-                ...state, 
+                ...state,
                 browse: {
                     ...state.browse,
                     homeFilter: action.filter
@@ -40,6 +43,72 @@ const MovieReducer = (state, action) => {
                                 [action.id]
                                 : null
                         )
+                }
+            }
+
+
+        case 'register':
+            // (    username: string
+            //      email: string
+            //      password: string
+            //      timeRegistered: datetime)
+            // Register a new user
+            return {
+                //...state, // Not required for now since all fields are wiped
+                user: {
+                    username: action.username,
+                    // email:
+                    // password:
+                    timeLoggedIn: getTimestamp()
+                },
+                browse: {
+                    homeFilter: null,
+                    likedMovies: []
+                }
+            }
+
+    
+        case 'logIn':
+            // (    username: string
+            //      timeLoggedIn: datetime)
+            // Log a user in
+            return {
+                ...state,
+                user: {
+                    username: action.username,
+                    timeLoggedIn: getTimestamp()
+                }
+            }
+
+
+        case 'logOut':
+            // (    no params)
+            // The user has logged out gracefully
+            return {
+                //...state, // Not required for now since all fields are wiped
+                user: {
+                    username: null,
+                    timeLoggedIn: null
+                },
+                browse: {
+                    homeFilter: null,
+                    likedMovies: []
+                }
+            }
+
+
+        case 'bootOut':
+            // (    no params)
+            // The user is being booted out for inactivity
+            return {
+                //...state, // Not required for now since all fields are wiped
+                user: {
+                    username: null,
+                    timeLoggedIn: null
+                },
+                browse: {
+                    homeFilter: null,
+                    likedMovies: []
                 }
             }
 
