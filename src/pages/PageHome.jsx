@@ -58,28 +58,28 @@ const PageHome = () => {
         if (state && state.browse && !isFilterValid(state.browse.homeFilter)) {
             dispatch({ type: 'chooseFilter', filter: NOW_PLAYING })
         }
-    }, [state, dispatch])
+    }, [isStorageUnlocked, state, dispatch])
 
 
     // Update the movie list when the user changes the filter
     useEffect(() => {
-        if (isFilterValid(state.browse.homeFilter)) {
+        if (state && state.browse && isFilterValid(state.browse.homeFilter)) {
             updateMovieList(state.browse.homeFilter)
         }
-    }, [state.browse.homeFilter])
+    }, [isStorageUnlocked, state])
 
 
     return (
         <section id='mainContent'>
             <h2>Movies List</h2>
             <p>
-                Current filter: {state.browse.homeFilter}
+                Current filter: {state && state.browse.homeFilter}
                 <button key={NOW_PLAYING}   onClick={() => chooseFilter(NOW_PLAYING)}   >Now Playing</button>
                 <button key={POPULAR}       onClick={() => chooseFilter(POPULAR)}       >Popular</button>
                 <button key={TOP_RATED}     onClick={() => chooseFilter(TOP_RATED)}     >Top Rated</button>
                 <button key={UPCOMING}      onClick={() => chooseFilter(UPCOMING)}      >Upcoming</button>
             </p>
-            {isFilterValid(state.browse.homeFilter) && <MovieDisplayList movieList={movieList} />}
+            {state && isFilterValid(state.browse.homeFilter) && <MovieDisplayList movieList={movieList} />}
         </section>
     )
 }

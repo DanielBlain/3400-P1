@@ -1,7 +1,38 @@
 import { useState, useEffect } from 'react'
 
 
-const useLocalStorage = (key, initial, [state, dispatch]) => {
+
+/**
+ * useLocalStorage - a React hook for tightly binding your state
+ *      React state with localStorage
+ * 
+ * @param {string} key - The name to be used in localStorage
+ * 
+ * @param {any} reference - The state reference, used to validate
+ *      retrievals from localStorage and attempts to update state. 
+ *      All object field names are compared, including nesting
+ * 
+ * @param {[any, function]} param2 - The state and dispatch function
+ *      returned by useReducer
+ * 
+ * @param {any} param2[0] - The initial state
+ * 
+ * @param {function} param2[1] - The dispatch function
+ * 
+ * @returns [isStorageUnlocked, setIsStorageUnlocked, state, dispatch]
+ * 
+ *      - isStorageUnlocked: false prevents changes to state from
+ *          rippling back to localStorage. Good for initialization
+ *          or page-change periods
+ * 
+ *      - setIsLocalStorage: setter for the above
+ * 
+ *      - state: current state, also generally reflects the state
+ *          in localStorage (though treat as a React state)
+ * 
+ *      - dispatch: the dispatch function passed as a parameter
+ */
+const useLocalStorage = (key, reference, [state, dispatch]) => {
 
     const [isStorageUnlocked, setIsStorageUnlocked] = useState(false)
 
@@ -45,7 +76,7 @@ const useLocalStorage = (key, initial, [state, dispatch]) => {
         // Try to update localStorage any change to
         // state, if they're valid
         let successfulUpdate = true
-        if (isValidCustomState(state, initial)) {
+        if (isValidCustomState(state, reference)) {
             try {
                 let valueToStore = state
                 const packed = JSON.stringify(valueToStore)
@@ -66,7 +97,7 @@ const useLocalStorage = (key, initial, [state, dispatch]) => {
             try {
                 const packed = localStorage.getItem(key)
                 let valueRetrieved = JSON.parse(packed)
-                if (!isValidCustomState(valueRetrieved, initial)) {
+                if (!isValidCustomState(valueRetrieved, reference)) {
                     console.warn('Invalid state retrieved from localStorage')
                     console.warn(valueRetrieved)
                 }
@@ -83,7 +114,7 @@ const useLocalStorage = (key, initial, [state, dispatch]) => {
         // (i) localStorage reset successfully in the earlier block
         // (ii) invalid state retrieved from localStorage, ignored & no change
 
-    }, [isStorageUnlocked, key, initial, state, dispatch])
+    }, [isStorageUnlocked, key, reference, state, dispatch])
 
     return [isStorageUnlocked, setIsStorageUnlocked, state, dispatch]
 }
