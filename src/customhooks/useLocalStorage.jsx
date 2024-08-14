@@ -9,13 +9,12 @@ const useLocalStorage = (key, initial, [state, dispatch]) => {
     // Call when isStorageUnlocked changes to true to load from localStorage,
     // or when key/state changes to update localStorage while it is unlocked
     useEffect(() => {
-        
-
-        // Function to check whether the obj value sent as a parameter
+   
+        // Function to check whether the obj sent as a parameter
         // matches the structure of the reference, i.e. is also
         // an object and has the same fields
         function isValidCustomState(obj, reference) {
-            if (reference === null || typeof reference !== 'object') {
+            if (obj === null || reference === null || typeof reference !== 'object') {
                 return false
             }
         
@@ -35,42 +34,55 @@ const useLocalStorage = (key, initial, [state, dispatch]) => {
         }
 
 
-        // Try to update localStorage any change to state
+        // No changes allowed if localStorage is locked
+        // (e.g. for initialization, changing pages)
+        if (isStorageUnlocked == false) {
+            console.warn('Ignored attempt to read from localStorage while locked. If this is unexpected, try setIsStorageUnlocked(true)')
+            return
+        }
+        
+        
+        // Try to update localStorage any change to
+        // state, if they're valid
         let successfulUpdate = true
-        try {
-            let valueToStore = state
-            const packed = JSON.stringify(valueToStore)
-            localStorage.setItem(key, packed)
-            console.log('localStorage reset')
-            console.log(state)
-        } catch {
+        if (isValidCustomState(state, initial)) {
+            try {
+                let valueToStore = state
+                const packed = JSON.stringify(valueToStore)
+                localStorage.setItem(key, packed)
+                console.log('localStorage reset')
+                console.log(state)
+            } catch {
+                successfulUpdate = false
+            }
+        }
+        else {
             successfulUpdate = false
         }
 
-        // Failed? Read from localStorage if isStorageUnlocked
+
+        // Failed? Read from localStorage instead
         if (!successfulUpdate) {
-            if (isStorageUnlocked) {
-                try {
-                    const packed = localStorage.getItem(key)
-                    let valueRetrieved = JSON.parse(packed)
-                    if (!isValidCustomState(valueRetrieved, initial)) {
-                        console.warn('Invalid state retrieved from localStorage. Reverting state to initial')
-                        console.warn(valueRetrieved)
-                        valueRetrieved = initial
-                    }
-                    else {
-                        console.log('State read from localStorage')
-                        console.log(state)
-                    }
+            try {
+                const packed = localStorage.getItem(key)
+                let valueRetrieved = JSON.parse(packed)
+                if (!isValidCustomState(valueRetrieved, initial)) {
+                    console.warn('Invalid state retrieved from localStorage')
+                    console.warn(valueRetrieved)
+                }
+                else {
+                    console.log('State read from localStorage')
+                    console.log(state)
                     dispatch({ type: 'initializeStorage', newState: valueRetrieved })
-                } catch (failMessage) {
-                    console.warn(failMessage)
-                }                    
-            }
-            else {
-                console.warn('Ignored attempt to read from localStorage while locked. If this is unexpected, try setIsStorageUnlocked(true)')
-            }
+                }
+            } catch (failMessage) {
+                console.warn(failMessage)
+            }                    
         }
+        // no else; would imply either:
+        // (i) localStorage reset successfully in the earlier block
+        // (ii) invalid state retrieved from localStorage, ignored & no change
+
     }, [isStorageUnlocked, key, initial, state, dispatch])
 
     return [isStorageUnlocked, setIsStorageUnlocked, state, dispatch]

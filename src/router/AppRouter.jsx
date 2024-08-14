@@ -38,7 +38,7 @@ export const AppRouter = () => {
             appCustomState,     // Reference object, so useLocalStorage can ensure validity
             useReducer(
                 MovieReducer,   // reducer function, creates a dispatcher
-                appCustomState  // The original state to be mutated
+                null            // Original state to be mutated
             )
         )
 

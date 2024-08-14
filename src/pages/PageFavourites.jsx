@@ -54,10 +54,10 @@ const PageFavourites = () => {
             setLikedMoviesData(  await fetchLikedMoviesData() )
         }
 
-        if (state.browse.likedMovies) {
+        if (state && state.browse && state.browse.likedMovies) {
             updateLikedMoviesData()
         }
-    }, [state.browse.likedMovies])
+    }, [isStorageUnlocked, state])
 
 
     return (
