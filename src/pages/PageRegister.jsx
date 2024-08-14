@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
-import { appName } from "../config/config"
+import { appName } from '../config/config'
 
 
 const PageRegister = () => {
