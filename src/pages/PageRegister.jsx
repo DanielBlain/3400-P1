@@ -50,7 +50,7 @@ const PageRegister = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [setIsStorageUnlocked])
+    }, [])
 
 
     return (

@@ -41,10 +41,6 @@ const PageHome = () => {
         }
     }
 
-    // Ensure contents of localStorage are valid; reset if not
-    useEffect(() => {
-    }, [isStorageUnlocked])
-
 
     // Unlock localStorage. Run once on boot
     useEffect(() => {
@@ -52,16 +48,15 @@ const PageHome = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [setIsStorageUnlocked])
+    }, [])
     
 
-    // Unlocked localStorage and found no filter? Set to NOW_PLAYING by default
-    // Run when state of storageLockState changes
+    // state.browse exists and found no valid filter? Set to NOW_PLAYING by default
     useEffect(() => {
-        if (isStorageUnlocked && !isFilterValid(state.browse.homeFilter)) {
+        if (state && state.browse && !isFilterValid(state.browse.homeFilter)) {
             dispatch({ type: 'chooseFilter', filter: NOW_PLAYING })
         }
-    }, [isStorageUnlocked, state.browse.homeFilter, dispatch])
+    }, [state, dispatch])
 
 
     // Update the movie list when the user changes the filter
@@ -75,6 +70,7 @@ const PageHome = () => {
     return (
         <>
             <p>
+                Is storage unlocked? {isStorageUnlocked}
                 Page Home - This is where all the magic happens! Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, fugit tenetur exercitationem ratione officiis accusamus eligendi quaerat in autem, quia voluptas id iste dignissimos totam obcaecati vitae culpa vero neque.
             </p>
             <p>                        

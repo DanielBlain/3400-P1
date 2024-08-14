@@ -19,7 +19,7 @@ import PageNotFound     from '../pages/PageNotFound'
 
 
 export const MovieAppContext = createContext({
-    isStorageUnlocked: null,
+    isStorageUnlocked: false,
     setIsStorageUnlocked: null,
     appState: null,
     dispatch: null,
