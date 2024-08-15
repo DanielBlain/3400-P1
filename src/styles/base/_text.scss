@@ -13,6 +13,13 @@ h1 {
     letter-spacing: 0.2em;
 }
 
+h2 {
+    padding: 0.5em 0;
+    background-color: $clr-control-calmIndicate;
+    color: $clr-white;
+    text-align: center;
+}
+
 button, label, code {
     font-size: 1.1em;
     word-spacing: 0.2em;

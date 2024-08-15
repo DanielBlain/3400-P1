@@ -5,14 +5,18 @@ $clr-black: black;
 $clr-gray: lightgray;
 $hover-gray: #A0A0A0;
 
-// UI shadows
-$clr-control-darkShadow: #000000DB;
+// UI light & shadow
+$clr-control-darkShadow:    #000000DB;
+$clr-lightMetal:            #d9eaff;
+$clr-shadowMetal:           #9ba7b6;
+
 
 // UI colors
-$clr-control-primary: #304FFE;
-$clr-control-secondary: #039D69;
-$clr-control-hover: #29E6A7;
-$clr-control-hotGlow: #FF00FF;
+$clr-control-primary:       #304FFE;
+$clr-control-secondary:     #039D69;
+$clr-control-hover:         #29E6A7;
+$clr-control-calmIndicate:  #646cff;
+$clr-control-hotGlow:       #FF00FF;
 
 // Social Media colors
 $clr-GitHub:            rgb(64, 120, 192);
@@ -35,3 +39,4 @@ $ui-delay: 0.01s;
 // Font strings
 $fontfam-headers: 'Bruno Ace', sans-serif;
 $fontfam-body: 'Miriam Libre', Georgia, 'Times New Roman', Times, serif;
+$fontfam-code: 'Inconsolata', 'Courier New', Courier, monospace;

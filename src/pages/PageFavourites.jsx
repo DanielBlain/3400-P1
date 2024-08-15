@@ -62,8 +62,7 @@ const PageFavourites = () => {
 
     return (
         <section id='mainContent'>
-            <h2>Number of liked movies: { numberOfLikedMovies }</h2>
-            <h2>You&apos;ve liked these movies</h2>
+            <h2>You&apos;ve liked { numberOfLikedMovies } movies</h2>
             {( numberOfLikedMovies > 0 ) ?
                 <MovieDisplayList movieList={ likedMoviesData } />
                 : <div>You haven&apos;t liked any movies!</div>

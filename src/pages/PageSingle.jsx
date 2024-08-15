@@ -13,6 +13,11 @@ const PageSingle = () => {
     const [ movieDetails, setMovieDetails ] = useState(null)
 
 
+    const makeGenresString = genresArray =>
+        (
+            genresArray.map( queried => queried.name )
+        ).join(' - ')
+
     // Attempt to fetch movie details
     useEffect(() => {
         async function getMovieDetails(movieID) {
@@ -47,13 +52,27 @@ const PageSingle = () => {
         <section id='mainContent'>
             {movieDetails ? (
                 <>
-                    <h1>Blog Post</h1>
-                    <section className={`MovieDisplayList`}>
+                    <h2>{
+                        movieDetails ?
+                            movieDetails.title
+                            : 'Movie loading or not found'
+                        }
+                    </h2>
+                    <section>
                         <MovieGadget
                             key={ `movieGadget-${movieDetails.id}` }
                             movieDetails={ movieDetails }
                             isInfoAvailable={ false }
                         />
+                        <div className='singleDetailsPanel'>
+                            <b>Genres</b>
+                            <p className='detailLabel'>
+                                { makeGenresString(movieDetails.genres) }
+                            </p>
+                            <p className='spacePanel'>
+                                {movieDetails.overview}
+                            </p>
+                        </div>
                     </section>
                 </>
             )

@@ -9,6 +9,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
     const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
     const [ isLikedFlag, setIsLikedFlag ] = useState(false)
     const [ isInfoOpen, setIsInfoOpen ] = useState(false)
+    const [ ratingInDegrees, setRatingInDegrees ] = useState(200)
  
 
     const isMovieLiked = () =>
@@ -35,7 +36,14 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
     }
 
 
-    // On change of dependencies, check if the gadget (article) should have the isMovieLiked class
+    useEffect(() => {
+        if (movieDetails === null) return
+        setRatingInDegrees( movieDetails.average_vote * 36.0 )
+    }, [movieDetails])
+
+
+    // On change of dependencies, check if the gadget (article) 
+    // should have the isMovieLiked class
     useEffect(() => {
         setIsLikedFlag(
             !storageLockState
@@ -48,7 +56,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
         movieDetails.id
     ])
 
-
+    
     return (
         <article
             key={ `${movieDetails.id}` }
@@ -79,7 +87,40 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                 )}
             </div>
 
-            <div className='detailPanel'>
+            <section className='detailPanel'>
+                <article>
+                    <em>
+                        Votes
+                    </em>
+                    {movieDetails && (
+                        <div
+                            className='voteIndicator'
+                            style={{
+                                background: `conic-gradient(#00E414 0deg, #00E414 ${ratingInDegrees}deg, black ${ratingInDegrees + 1}deg`
+                            }}
+                        >
+                            {/** Intentionally empty - handled by CSS */}
+                        </div>
+                    )}
+                </article>
+                {isInfoAvailable ? (
+                    <button
+                        className='detailButton info'
+                        onClick={ handleInfo }
+                    >
+                        Info
+                    </button>
+                )
+                : (
+                    <div></div>
+                    // I MIGHT IMPLEMENT THIS LATER, IF TIME
+                    // <button
+                    //     className='detailButton info'
+                    //     onClick={ handleInfo }
+                    // >
+                    //     Trailer
+                    // </button>
+                )}
                 <button
                     className='detailButton like'
                     onClick={ handleLike }
@@ -90,27 +131,22 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                     />
                     Like
                 </button>
-
-                {isInfoAvailable && (
-                    <button
-                        className='detailButton info'
-                        onClick={ handleInfo }
-                    >
-                        <img
-                            src='/iconmonstr-magnifier-10-240.png'
-                            alt='liked movie indicator'
-                        />
-                        Info
-                    </button>
-                )}
-            </div>
+                <article>
+                    <em>
+                        Release date
+                    </em> 
+                    <div className='detailLabel'>
+                        { movieDetails.release_date }
+                    </div>
+                </article>
+            </section>
         </article>
     )
 }
 
 MovieGadget.propTypes = {
     movieDetails: PropTypes.object,
-    isInfoAvailable: PropTypes.bool,
+    isInfoAvailable: PropTypes.bool
 }
 
 export default MovieGadget
@@ -119,12 +155,13 @@ export default MovieGadget
  Individual Movie Pages
  ● This page is accessed when a user clicks on the “More Info” link on an individual movie
  ● All the requirements from the “All Pages” requirements plus…
- ● POSTER       (or generic placeholder if no poster is available)
- ● TITLE
- ● DATE         of release
- ● RATE         Review rating - e.g. 67%
- ● PLOT         Summary
- ● LIKE         or unlike, in localStorage
+ ● POSTER  /    (or generic placeholder if no poster is available)
+ * Info button
+ ● DATE    /    of release
+ ● RATE    /    Review rating - e.g. 67%
+ ● LIKE    /    or unlike, in localStorage
+ ● TITLE   x
+ ● PLOT    x    Summary
  * 
  */
 

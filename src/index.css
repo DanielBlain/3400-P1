@@ -1,6 +1,6 @@
 /* 
     Synonym, in this case, for the html element, except the specificity of :root is higher
-    This is NOT identical to id .root
+    :root is NOT identical to className .root
 */
 :root {
 }

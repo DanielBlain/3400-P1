@@ -1,0 +1,11 @@
+@use '../mixins/mixins' as *;
+
+.spacePanel {
+    margin: 0.2em;
+    padding: 1em 2em;
+    @include spacePanel;
+}
+
+.singleDetailsPanel {
+    margin: 2em 0.2em;
+}

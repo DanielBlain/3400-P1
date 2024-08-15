@@ -18,6 +18,7 @@
 
 // Pages
 @use './pages/PageAbout';
+@use './pages/PageSingle';
 @use './pages/PageLogin';
 
 // Special effects
@@ -25,10 +26,10 @@
 
 // Google Fonts - Import
 // Bruno Ace (headers, buttons, labels)
-@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
 
 // Miriam Libre (body, quotes, cites)
-@import url('https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&display=swap');
 
-// Sine Mono (code)
-@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet');
+// Inconsolata (code)
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');

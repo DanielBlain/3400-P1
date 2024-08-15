@@ -24,7 +24,7 @@ button {
     transition: border-color 0.25s;
 }
 button:hover {
-    border-color: #646cff;
+    border-color: $clr-control-calmIndicate;
 }
 button:focus,
 button:focus-visible {
