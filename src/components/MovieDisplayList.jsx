@@ -4,6 +4,7 @@ import MovieGadget from '../components/MovieGadget'
 
 const MovieDisplayList = ({ movieList }) => {
 
+
     return (
         <section>
             {

@@ -30,9 +30,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
 
     const handleInfo = e => {
         e.preventDefault()
-        if (isInfoAvailable) {
-            setIsInfoOpen(!isInfoOpen)
-        }
+        setIsInfoOpen(!isInfoOpen)
     }
 
 
@@ -56,7 +54,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
         movieDetails.id
     ])
 
-    
+
     return (
         <article
             key={ `${movieDetails.id}` }
@@ -69,18 +67,21 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                     src={ `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` }
                     alt={ `Poster of movie: ${movieDetails.title}` }
                     onClick={ handleInfo }
+                    disabled={ isInfoAvailable }
                 />
                 { isInfoAvailable && (
                     <div
                         className={ isInfoOpen ? `isInfoOpen` : `` }
+                        id={ `infoFloat-${movieDetails.id}` }
                     >
                         <article
                             onClick={ handleInfo }
+                            disabled={ isInfoAvailable }
                         >
                             <h2>{ movieDetails.title }</h2>
                             <p>{ movieDetails.overview }</p>
                             <Link to={`/single/${movieDetails.id}`}>
-                                Details
+                                Movie Details
                             </Link>
                         </article>
                     </div>
@@ -145,8 +146,8 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
 }
 
 MovieGadget.propTypes = {
-    movieDetails: PropTypes.object,
-    isInfoAvailable: PropTypes.bool
+    movieDetails:       PropTypes.object,
+    isInfoAvailable:    PropTypes.bool,
 }
 
 export default MovieGadget

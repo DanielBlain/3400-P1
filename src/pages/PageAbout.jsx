@@ -82,14 +82,6 @@ const PageAbout = () => {
                         https://css-tricks.com/how-to-create-neon-text-with-css/
                     </a>
                 </li>
-                <li>
-                    <a
-                        className='isUrl'
-                        href='https://css-tricks.com/how-to-create-neon-text-with-css/'
-                    >
-                        https://css-tricks.com/how-to-create-neon-text-with-css/
-                    </a>
-                </li>
             </ul>
             <hr />
 
