@@ -49,7 +49,11 @@ const PageSingle = () => {
                 <>
                     <h1>Blog Post</h1>
                     <section className={`MovieDisplayList`}>
-                        <MovieGadget key={`movieGadget-${movieDetails.id}`} movieDetails={movieDetails} />
+                        <MovieGadget
+                            key={ `movieGadget-${movieDetails.id}` }
+                            movieDetails={ movieDetails }
+                            isInfoAvailable={ false }
+                        />
                     </section>
                 </>
             )

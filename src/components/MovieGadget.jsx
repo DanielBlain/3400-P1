@@ -1,16 +1,15 @@
 import PropTypes from 'prop-types'
-import { useState, useEffect, useContext, useRef } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
 
 
-const MovieGadget = ({ movieDetails }) => {
+const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
     
     const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
     const [ isLikedFlag, setIsLikedFlag ] = useState(false)
     const [ isInfoOpen, setIsInfoOpen ] = useState(false)
-    const activeInfo = useRef(null)
-
+ 
 
     const isMovieLiked = () =>
         !storageLockState
@@ -30,7 +29,9 @@ const MovieGadget = ({ movieDetails }) => {
 
     const handleInfo = e => {
         e.preventDefault()
-        setIsInfoOpen(!isInfoOpen)
+        if (isInfoAvailable) {
+            setIsInfoOpen(!isInfoOpen)
+        }
     }
 
 
@@ -56,33 +57,30 @@ const MovieGadget = ({ movieDetails }) => {
         >
 
             <div className='posterPanel'>
-                <div
-                    className={ isInfoOpen ? `isInfoOpen` : `` }
+                <img
+                    src={ `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` }
+                    alt={ `Poster of movie: ${movieDetails.title}` }
                     onClick={ handleInfo }
-                >
-                    <img
-                        aria-hidden='true'
-                        src={ `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` }
-                        alt={ `For layout sizing purposes only. Not an interactive element` }
-                    />
-                    <img
-                        src={ `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` }
-                        alt={ `Poster of movie: ${movieDetails.title}` }
-                    />
-                    <article
-                        onClick={ handleInfo }
+                />
+                { isInfoAvailable && (
+                    <div
+                        className={ isInfoOpen ? `isInfoOpen` : `` }
                     >
-                        <h2>{ movieDetails.title }</h2>
-                        <p>{ movieDetails.overview }</p>
-                        <Link to={`/single/${movieDetails.id}`}>
-                            Details
-                        </Link>
-                    </article>
-                </div>
+                        <article
+                            onClick={ handleInfo }
+                        >
+                            <h2>{ movieDetails.title }</h2>
+                            <p>{ movieDetails.overview }</p>
+                            <Link to={`/single/${movieDetails.id}`}>
+                                Details
+                            </Link>
+                        </article>
+                    </div>
+                )}
             </div>
 
             <div className='detailPanel'>
-                <div
+                <button
                     className='detailButton like'
                     onClick={ handleLike }
                 >
@@ -90,15 +88,21 @@ const MovieGadget = ({ movieDetails }) => {
                         src={ isLikedFlag ? '/cinescape-like-filled-240.png' : '/cinescape-like-lined-240.png' }
                         alt='liked movie indicator'
                     />
-                    <div>Like</div>
-                </div>
+                    Like
+                </button>
 
-                <div
-                    className='detailButton info'
-                    onClick={ handleInfo }
-                >
-                    Click for Info
-                </div>
+                {isInfoAvailable && (
+                    <button
+                        className='detailButton info'
+                        onClick={ handleInfo }
+                    >
+                        <img
+                            src='/iconmonstr-magnifier-10-240.png'
+                            alt='liked movie indicator'
+                        />
+                        Info
+                    </button>
+                )}
             </div>
         </article>
     )
@@ -106,6 +110,7 @@ const MovieGadget = ({ movieDetails }) => {
 
 MovieGadget.propTypes = {
     movieDetails: PropTypes.object,
+    isInfoAvailable: PropTypes.bool,
 }
 
 export default MovieGadget
