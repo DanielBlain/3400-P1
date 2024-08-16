@@ -2,6 +2,7 @@
 @use '../mixins/mixins' as *;
 
 nav {
+    width: 100%;
     margin: 0.4em 0.4em 0;
     position: absolute;
     top: -300px;
@@ -15,7 +16,6 @@ nav {
     
     &.isOpen {
         position: absolute;
-        width: 100%;
         top: 100%;
     }
 
