@@ -29,12 +29,12 @@
     background-color: black;
 }
 
-@mixin neonText($primaryColor) {
+@mixin neonText($primaryColor, $depth) {
     color: white;
     text-shadow:
-        0 0 1px $primaryColor,
-        0 0 2px $primaryColor,
-        0 0 3px $primaryColor;
+        0 0 $depth $primaryColor,
+        0 0 calc(2*$depth) $primaryColor,
+        0 0 calc(3*$depth) $primaryColor;
 }
 
 @mixin plasmaPulse($color, $speed, $delay) {

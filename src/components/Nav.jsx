@@ -25,34 +25,42 @@ const Nav = ({ isOpen, closeNav }) => {
 
     return (
         <nav
-            className={(isAnimating ? `isAnim` : ``) + (isOpen ? ` isOpen` : ``)}
+            className={'gadgetLabel ' + (isAnimating ? `isAnim` : ``) + (isOpen ? ` isOpen` : ``)}
             onClick={handleClick}
         >
-            <NavLink
-                // Ensure NavLinks are not tabable while the Nav is closed
-                tabIndex={isOpen ? '1' : '-1'}
-                to='/'
-            >
-                Home
-            </NavLink>
-            <NavLink
-                tabIndex={isOpen ? '2' : '-1'}
-                to='/about'
-            >
-                About
-            </NavLink>
-            <NavLink
-                tabIndex={isOpen ? '3' : '-1'}
-                to='/favourites'
-            >
-                Favourites
-            </NavLink>
-            <NavLink
-                tabIndex={isOpen ? '4' : '-1'}
-                to='/support'
-            >
-                Support
-            </NavLink>
+            <div>
+                <NavLink
+                    // Ensure NavLinks are not tabable while the Nav is closed
+                    tabIndex={isOpen ? '1' : '-1'}
+                    to='/'
+                >
+                    Home
+                </NavLink>
+            </div>
+            <div>
+                <NavLink
+                    tabIndex={isOpen ? '2' : '-1'}
+                    to='/about'
+                >
+                    About
+                </NavLink>
+            </div>
+            <div>
+                <NavLink
+                    tabIndex={isOpen ? '3' : '-1'}
+                    to='/favourites'
+                >
+                    Favourites
+                </NavLink>                
+            </div>
+            <div>
+                <NavLink
+                    tabIndex={isOpen ? '4' : '-1'}
+                    to='/support'
+                >
+                    Support
+                </NavLink>
+            </div>
         </nav>
     )
 }

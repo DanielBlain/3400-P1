@@ -51,7 +51,7 @@ ul, ol {
     padding: 0.2em;
 
     @include displayPanel(2px, $clr-lightMetal, $clr-shadowMetal);
-    @include neonText(#0fc);
+    @include neonText($clr-control-electricGreen, 1px);
 }
 
 

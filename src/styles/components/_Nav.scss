@@ -1,11 +1,15 @@
 @use '../base/vars' as *;
+@use '../mixins/mixins' as *;
 
 nav {
+    margin: 0.4em 0.4em 0;
     position: absolute;
     top: -300px;
     animation-duration: 0.2s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
+    text-align: center;
+    @include spacePanel;
 
     &.isAnim {
         position: relative;
@@ -19,11 +23,29 @@ nav {
         animation-name: slottingOpening;
     }
 
-    & a {
-        display: block;
-        background-color: $clr-control-secondary;
-        text-align: center;
-        color: red;
+    & div {
+        margin: 0.6em 0;
+    }
+
+    & div:hover {
+        margin: 0.6em 0;
+        border-left: 0 solid $clr-control-electricGreen;
+        border-right: 0 solid $clr-control-electricGreen;
+        animation-duration: 0.05s;
+        animation-name: cursorBlink;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+    }
+
+    a {
+        font-family: $fontfam-headers;
+        font-size: 2em;
+        color: $clr-control-electricGreen;
+        text-decoration: none;
+    }
+
+    a:hover {
+        @include neonText($clr-control-electricGreen, 4px);
     }
 }
 
@@ -33,8 +55,15 @@ nav {
     100%    {top: 0;        position: relative;}
 }
 
+
 @keyframes slottingClosing {
     0%      {top: 0;        position: relative;}
     99%     {top: -300px;   position: relative;}
     100%    {top: -300px;   position: absolute;}
+}
+
+
+@keyframes cursorBlink {
+    0%      {border-width: 0px;}
+    100%    {border-width: 6px;}
 }
