@@ -36,36 +36,6 @@
     }
 }
 
-.detailPanel {
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-auto-rows: min-content min-content min-content 1fr;
-    align-items: center;
-    justify-items: center;
-    text-align: center;
-    padding: 0 0.2em;
-    @include spacePanel;
-
-    & > * {
-        margin-bottom: 0.8em;
-    }
-}
-
-.detailButton {
-    margin-left: 0.2em;
-    border-color: $clr-control-calmIndicate;
-    padding: 0.2em 0.2em 0;
-    font-family: $fontfam-body;
-
-    &:hover {
-        @include spacePanel;
-    }
-
-    & img {
-        max-width: 2em;
-    }
-}
-
 .infoFloat {
     display: none;
     z-index: 1;
@@ -91,14 +61,6 @@
 
 .infoSheet {
     margin: 10% 5%;
-}
-
-.detailLabel {
-    margin: 0.4em 0.2em;
-    padding: 0.2em;
-
-    @include displayPanel(2px, $clr-lightMetal, $clr-shadowMetal);
-    @include neonText(#0fc);
 }
 
 .voteIndicator {

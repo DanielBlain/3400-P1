@@ -1,21 +1,21 @@
-// Colors for testing too-subtle things
+// Basic useful colors
 $clr-white: white;
 $clr-red: red;
 $clr-black: black;
 $clr-gray: lightgray;
-$hover-gray: #A0A0A0;
 
 // UI light & shadow
 $clr-control-darkShadow:    #000000DB;
 $clr-lightMetal:            #d9eaff;
 $clr-shadowMetal:           #9ba7b6;
-
+// $hover-gray: #A0A0A0;
 
 // UI colors
 $clr-control-primary:       #304FFE;
 $clr-control-secondary:     #039D69;
 $clr-control-hover:         #29E6A7;
 $clr-control-calmIndicate:  #646cff;
+$clr-control-lightIndicate: #b3b7ff;
 $clr-control-hotGlow:       #FF00FF;
 
 // Social Media colors
@@ -29,12 +29,6 @@ $clr-Pinterest:         rgb(230, 0, 35);
 $clr-lightPinterest:    rgba(230, 0, 35, 0.2);
 $clr-Portfolio:         rgb(0, 152, 0);
 $clr-lightPortfolio:    rgba(0, 152, 0, 0.2);
-
-// UI measures
-$radius: 0.2rem;
-
-// UI timings
-$ui-delay: 0.01s;
 
 // Font strings
 $fontfam-headers: 'Bruno Ace', sans-serif;

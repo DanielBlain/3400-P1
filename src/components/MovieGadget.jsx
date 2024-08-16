@@ -80,7 +80,10 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                         >
                             <h2>{ movieDetails.title }</h2>
                             <p>{ movieDetails.overview }</p>
-                            <Link to={`/single/${movieDetails.id}`}>
+                            <Link
+                                to={`/single/${movieDetails.id}`}
+                                tabIndex={ isInfoOpen ? '100' : '-1'}
+                            >
                                 Movie Details
                             </Link>
                         </article>
@@ -88,7 +91,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                 )}
             </div>
 
-            <section className='detailPanel'>
+            <section className='gadgetPanel'>
                 <article>
                     <em>
                         Votes
@@ -106,24 +109,18 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                 </article>
                 {isInfoAvailable ? (
                     <button
-                        className='detailButton info'
+                        className='gadgetButton info'
                         onClick={ handleInfo }
                     >
                         Info
                     </button>
                 )
                 : (
+                    // Intentionally empty; on a page where no Info button is required
                     <div></div>
-                    // I MIGHT IMPLEMENT THIS LATER, IF TIME
-                    // <button
-                    //     className='detailButton info'
-                    //     onClick={ handleInfo }
-                    // >
-                    //     Trailer
-                    // </button>
                 )}
                 <button
-                    className='detailButton like'
+                    className='gadgetButton like'
                     onClick={ handleLike }
                 >
                     <img
@@ -136,7 +133,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                     <em>
                         Release date
                     </em> 
-                    <div className='detailLabel'>
+                    <div className='gadgetLabel'>
                         { movieDetails.release_date }
                     </div>
                 </article>

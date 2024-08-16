@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import { TabPanel, TabList, Tabs, Tab } from 'react-tabs'
 import { fetchList } from '../utilities/themoviedatabase/themoviedatabase'
 import { api_key, tmdbEndpoint } from '../config/config'
 import { MovieAppContext } from '../router/AppRouter'
@@ -16,20 +17,6 @@ const PageHome = () => {
 
     const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const [ movieList, setMovieList ] = useState(null)
-    const isFilterValid = (newFilter) =>
-        newFilter === NOW_PLAYING
-        || newFilter === POPULAR
-        || newFilter === TOP_RATED
-        || newFilter === UPCOMING
-
-
-    function chooseFilter(newFilter) {
-        if (!isFilterValid(newFilter)) {
-            console.warn(`Bad filter selected: ${newFilter}`)
-            return
-        }
-        dispatch({ type: 'chooseFilter', filter: newFilter })
-    }
 
 
     // Fetch a new movie list based upon the filterType parameter
@@ -39,6 +26,42 @@ const PageHome = () => {
         if (newMovieList) {
             setMovieList(newMovieList)
         }
+    }
+
+
+    const isFilterValid = ( newFilter ) =>
+        [
+            NOW_PLAYING,
+            POPULAR,
+            TOP_RATED,
+            UPCOMING
+        ].includes( newFilter )
+
+
+    // Handle click on the NOW_PLAYING tab
+    const handleNowPlaying  = (e) => {
+        e.preventDefault()
+        updateMovieList( NOW_PLAYING )
+    }
+
+
+    // Handle click on the POPULAR tab
+    const handlePopular     = (e) => {
+        e.preventDefault()
+        updateMovieList( POPULAR )
+    }
+
+
+    // Handle click on the TOP_RATED tab
+    const handleTopRated    = (e) => {
+        e.preventDefault()
+        updateMovieList( TOP_RATED )
+    }
+
+
+    // Handle click on the UPCOMING tab
+    const handleUpcoming    = (e) => {
+        updateMovieList( UPCOMING )
     }
 
 
@@ -52,34 +75,55 @@ const PageHome = () => {
         })
     }, [])
     
-
-    // state.browse exists and found no valid filter? Set to NOW_PLAYING by default
+    
+    // Update the movie list when updated by localStorage
+    // Found no valid filter? Set to NOW_PLAYING by default
     useEffect(() => {
-        if (state && state.browse && !isFilterValid(state.browse.homeFilter)) {
-            dispatch({ type: 'chooseFilter', filter: NOW_PLAYING })
-        }
+        if (state && state.browse) {
+            if (isFilterValid(state.browse.homeFilter)) {
+                updateMovieList(state.browse.homeFilter)
+            }
+            else {
+                dispatch({ type: 'overrideFilter', filter: NOW_PLAYING })
+            }
+        } 
     }, [isStorageUnlocked, state, dispatch])
-
-
-    // Update the movie list when the user changes the filter
-    useEffect(() => {
-        if (state && state.browse && isFilterValid(state.browse.homeFilter)) {
-            updateMovieList(state.browse.homeFilter)
-        }
-    }, [isStorageUnlocked, state])
 
 
     return (
         <section id='mainContent'>
-            <h2>Movies List</h2>
-            <p>
-                Current filter: {state && state.browse.homeFilter}
-                <button key={NOW_PLAYING}   onClick={() => chooseFilter(NOW_PLAYING)}   >Now Playing</button>
-                <button key={POPULAR}       onClick={() => chooseFilter(POPULAR)}       >Popular</button>
-                <button key={TOP_RATED}     onClick={() => chooseFilter(TOP_RATED)}     >Top Rated</button>
-                <button key={UPCOMING}      onClick={() => chooseFilter(UPCOMING)}      >Upcoming</button>
-            </p>
-            {state && state.browse && isFilterValid(state.browse.homeFilter) && <MovieDisplayList movieList={movieList} />}
+            <Tabs>
+                <TabList className='filterPanel'>
+                    <Tab className='gadgetButton' tabIndex={'5'} role='button' onClick={ handleNowPlaying }>
+                        Now Playing
+                        <div></div>
+                    </Tab>
+                    <Tab className='gadgetButton' tabIndex={'6'} role='button' onClick={ handlePopular }>
+                        Popular
+                        <div></div>
+                    </Tab>
+                    <Tab className='gadgetButton' tabIndex={'7'} role='button' onClick={ handleTopRated }>
+                        Top Rated
+                        <div></div>
+                    </Tab>
+                    <Tab className='gadgetButton' tabIndex={'8'} role='button' onClick={ handleUpcoming } >
+                        Upcoming
+                        <div></div>
+                    </Tab>
+                </TabList>
+                <TabPanel>
+                    <MovieDisplayList movieList={ movieList } />
+                </TabPanel>
+                <TabPanel>
+                    <MovieDisplayList movieList={ movieList } />
+                </TabPanel>
+                <TabPanel>
+                    <MovieDisplayList movieList={ movieList } />
+                </TabPanel>
+                <TabPanel>
+                    <MovieDisplayList movieList={ movieList } />
+                </TabPanel>
+            </Tabs>
         </section>
     )
 }

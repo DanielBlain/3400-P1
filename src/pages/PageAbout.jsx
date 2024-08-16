@@ -21,6 +21,7 @@ const PageAbout = () => {
     
     return (
         <section id='mainContent'>
+            <h2>About</h2>
             {/** Disclaimer(s) */}
             <p><b>NOTE:</b> {appName} is meant strictly as an educational project, and therefore should <em>not</em> be used for any professional or business purposes. If you choose to do so, it is at your own risk, and I take utterly no responsibility!</p>
             <hr />
