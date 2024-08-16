@@ -1,6 +1,34 @@
 @use '../base/vars' as *;
 @use '../mixins/mixins' as *;
 
+#mainContent {
+    padding: 0 0.6em;
+
+    // Meant for references to appName
+    strong {
+        font-family: $fontfam-headers;
+        font-style: normal;
+        letter-spacing: 0.05em;
+        color: $clr-control-calmIndicate;
+        @include uppercase;
+    }
+}
+
+.tmdbLogo {
+    display: flex;
+    justify-content: center;
+
+    img {
+        max-width: 80%;
+    }
+}
+
+.appAdvertPanel {
+    padding: 1em;
+    @include spaceButton;
+}
+
+
 .tagline-block {
     margin: 20px auto;
     padding: 20px;
