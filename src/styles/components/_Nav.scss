@@ -5,22 +5,18 @@ nav {
     margin: 0.4em 0.4em 0;
     position: absolute;
     top: -300px;
-    animation-duration: 0.2s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in;
     text-align: center;
     @include spacePanel;
 
     &.isAnim {
         position: relative;
         top: 0;
-        animation-name: slottingClosing;
     }
     
     &.isOpen {
         position: absolute;
-        top: -300px;
-        animation-name: slottingOpening;
+        width: 100%;
+        top: 100%;
     }
 
     & div {
@@ -31,10 +27,6 @@ nav {
         margin: 0.6em 0;
         border-left: 0 solid $clr-control-electricGreen;
         border-right: 0 solid $clr-control-electricGreen;
-        animation-duration: 0.05s;
-        animation-name: cursorBlink;
-        animation-direction: alternate;
-        animation-iteration-count: infinite;
     }
 
     a {
@@ -45,25 +37,53 @@ nav {
     }
 
     a:hover {
-        @include neonText($clr-control-electricGreen, 4px);
+        color: $clr-white;
     }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+    nav {
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in;
+    
+        &.isAnim {
+            animation-name: slottingClosing;
+        }
+        
+        &.isOpen {
+            top: -300px;
+            animation-name: slottingOpening;
+        }
+    
+        & div:hover {
+            animation-duration: 0.05s;
+            animation-name: cursorBlink;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+        }
 
-@keyframes slottingOpening {
-    0%      {top: -300px;   position: relative;}
-    100%    {top: 0;        position: relative;}
-}
+        a:hover {
+            @include neonText($clr-control-electricGreen, 4px);
+        }
+    }
+        
 
-
-@keyframes slottingClosing {
-    0%      {top: 0;        position: relative;}
-    99%     {top: -300px;   position: relative;}
-    100%    {top: -300px;   position: absolute;}
-}
-
-
-@keyframes cursorBlink {
-    0%      {border-width: 0px;}
-    100%    {border-width: 6px;}
+    @keyframes slottingOpening {
+        0%      {top: -300px;   position: relative;}
+        100%    {top: 0;        position: relative;}
+    }
+    
+    
+    @keyframes slottingClosing {
+        0%      {top: 0;        position: relative;}
+        99%     {top: -300px;   position: relative;}
+        100%    {top: -300px;   position: absolute;}
+    }
+    
+    
+    @keyframes cursorBlink {
+        0%      {border-width: 0px;}
+        100%    {border-width: 6px;}
+    }
 }

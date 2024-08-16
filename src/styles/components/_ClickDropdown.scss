@@ -27,7 +27,6 @@
 }
 
 .style_rotate_X {
-    animation: rotatePanel 400ms ease-in-out forwards;
     transform-origin: top center;
 }
 
@@ -50,4 +49,12 @@
         display: absolute;
         top: 0;
     }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+    .style_rotate_X {
+        animation: rotatePanel 400ms ease-in-out forwards;
+    }
+    
 }

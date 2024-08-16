@@ -33,24 +33,19 @@ header {
     position: relative;
     // To allow special positioning of children
 
-    & .bar {
+    .bar {
         display: inline-block;
         height: 0.1rem;
         background-color: $clr-black;
-        transition: transform 0.4s ease, translate 0.4s ease, rotate 0.4s ease;
     }
 
-    & .bar.top.right, & .bar.mid.left {transform-origin: top left;}
-    & .bar.mid.right, & .bar.bottom.left {transform-origin: bottom right;}
+    .bar.top.right, .bar.mid.left {transform-origin: top left;}
+    .bar.mid.right, .bar.bottom.left {transform-origin: bottom right;}
 
-    & .hamburgerGlow {
-        clip-path: polygon(38% 25%, 62% 25%, 75% 50%, 62% 75%, 38% 75%, 25% 50%);
-        // To cut the special glow effect into the hexagon
+    .hamburgerGlow {
         position: absolute;
         width: 100%;
         height: 100%;
-        opacity: 0;
-        transition: opacity 1s 0.4s ease;
     }
 
     &.isOpen {
@@ -82,9 +77,34 @@ header {
         .bar.bottom.right {
             translate: -50% 2px;
         }
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+    .hamburgerButton {
+        .bar {
+            display: inline-block;
+            height: 0.1rem;
+            background-color: $clr-black;
+            transition: transform 0.4s ease, translate 0.4s ease, rotate 0.4s ease;
+        }
 
         .hamburgerGlow {
-            @include plasmaPulse($clr-control-hotGlow, 3s, 0.4s);
+            clip-path: polygon(38% 25%, 62% 25%, 75% 50%, 62% 75%, 38% 75%, 25% 50%);
+            // To cut the special glow effect into the hexagon
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s 0.4s ease;
+        }
+
+        &.isOpen {
+            .hamburgerGlow {
+                @include plasmaPulse($clr-control-hotGlow, 3s, 0.4s);
+            }
         }
     }
+    
 }
