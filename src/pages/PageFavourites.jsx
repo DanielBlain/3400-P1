@@ -62,14 +62,17 @@ const PageFavourites = () => {
 
     return (
         <section id='mainContent'>
-            <h2>You&apos;ve liked { numberOfLikedMovies } movies</h2>
+            <h2>
+                { numberOfLikedMovies } movie{ numberOfLikedMovies === 1 ? '' : 's'} liked so far...
+            </h2>
             {( numberOfLikedMovies > 0 ) ?
                 <MovieDisplayList movieList={ likedMoviesData } />
                 : <div>You haven&apos;t liked any movies!</div>
             }
             <HomeButton>
                 <p>
-                    Click to go Home
+                    Click to browse<br />
+                    more movies
                 </p>
             </HomeButton>
         </section>

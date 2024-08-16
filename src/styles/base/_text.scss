@@ -4,6 +4,7 @@
 h1, h2, h3, h4, h5, h6, button, label, code {
     @include capitalize;
     font-family: $fontfam-headers;
+    letter-spacing: 0.05em;
 }
 
 h1 {
@@ -18,6 +19,14 @@ h2 {
     background-color: $clr-control-calmIndicate;
     color: $clr-white;
     text-align: center;
+    line-height: 1.2em;
+}
+
+h3 {
+    padding: 0.5em 0;
+    text-align: center;
+    line-height: 1.2em;
+    background-color: $clr-gray;
 }
 
 button, label, code {

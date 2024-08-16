@@ -1,0 +1,39 @@
+@use '../base/vars' as *;
+@use '../mixins/mixins' as *;
+
+.filterPanel a {
+    padding: 0.8em;
+    border: 1px solid $clr-control-calmIndicate;
+    border-radius: 8px;
+
+    &:hover {
+        background-color: $clr-gray;
+        @include spaceButton;
+    }
+}
+
+.supportPanel {
+    margin: 0 0.4em 0.4em;
+    padding: 0.4em 1em;
+    @include spacePanel;
+}
+
+.dropdownButton {
+    margin: 0 0.4em;
+    padding: 0.4em;
+    background-color: $clr-control-lightIndicate;
+
+    &:hover {
+        color: $clr-white;
+    }
+}
+
+h4.dropdownButton {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 40px;
+    @include spacePanel;
+}
+
+h3.dropdownButton {
+    margin: 1em 0 0.4em;
+}

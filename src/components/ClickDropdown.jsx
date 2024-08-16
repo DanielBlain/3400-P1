@@ -20,7 +20,7 @@ const ClickDropdown = ({ tag, children }) => {
                 </article>
             </section>
             {/* The following section element serves no context, is provided as space for dropdown */}
-            <section aria-hidden='true' className={`spacer${isDroppedContent}`}>
+            <section aria-hidden={`${!isDroppedContent}`} className={`spacer${isDroppedContent}`}>
                 <article className={`spacer_panel activation_panel--animated`}>
                     {children}
                 </article>
@@ -31,7 +31,7 @@ const ClickDropdown = ({ tag, children }) => {
 
 ClickDropdown.propTypes = {
     tag: PropTypes.element,
-    children: PropTypes.element
+    children: PropTypes.element,
 }
 
 export default ClickDropdown
