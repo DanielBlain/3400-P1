@@ -9,6 +9,11 @@ const PageSupport = () => {
 
     const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
+
+    const isUserLoggedIn = () =>
+        state && state.user && state.user.isLoggedIn
+
+
     // Flag to enable PageHome button, and unlock localStorage
     // Run once on boot
     useEffect(() => {
@@ -18,6 +23,7 @@ const PageSupport = () => {
             setIsStorageUnlocked(false)
         })
     }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
+
 
     return (
         <section id='mainContent'>
@@ -153,6 +159,8 @@ const PageSupport = () => {
                             type='text'
                             id='username'
                             name='username'
+                            defaultValue={isUserLoggedIn() ? 'state.user.username' : ''}
+                            disabled={isUserLoggedIn()}
                             required
                         />
                     </label>
@@ -163,6 +171,8 @@ const PageSupport = () => {
                             type='email'
                             id='email'
                             name='email'
+                            defaultValue={isUserLoggedIn() ? 'state.user.email' : ''}
+                            disabled={isUserLoggedIn()}
                             required
                         />
                     </label>

@@ -124,8 +124,8 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
                 console.warn(failMessage)
             }                    
         }
-        // no else; would imply either:
-        // (i) localStorage write was successful in the upper block
+        // no else; getting here implies either:
+        // (i) localStorage write was successful in the upper block; no further action required
         // (ii) Write to and read from localStorage were both unsuccessful, ignore & no change
 
     }, [isStorageUnlocked, key, reference, state, dispatch])

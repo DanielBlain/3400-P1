@@ -68,7 +68,7 @@ const PageHome = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [])
+    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
 
     // Ensure the selected tab matches the homeFilter
@@ -104,10 +104,8 @@ const PageHome = () => {
                 }
                 return
             default:
-                if ( selectedTabNo !== 0 ) {
-                    setSelectedTabNo(0)
-                    updateMovieList( NOW_PLAYING )
-                }
+                setSelectedTabNo(0)
+                updateMovieList( NOW_PLAYING )
         }
     }, [state, selectedTabNo])
 
@@ -123,19 +121,35 @@ const PageHome = () => {
                 <TabList className='filterPanel'>
                     <Tab className='gadgetButton'>
                         Now Playing
-                        <div></div>
+                        <div>
+                            {/** Intentionally empty
+                             * Operates as an indicator light through pure CSS effects
+                             * */}
+                        </div>
                     </Tab>
                     <Tab className='gadgetButton'>
                         Popular
-                        <div></div>
+                        <div>
+                            {/** Intentionally empty
+                             * Operates as an indicator light through pure CSS effects
+                             * */}
+                        </div>
                     </Tab>
                     <Tab className='gadgetButton'>
                         Top Rated
-                        <div></div>
+                        <div>
+                            {/** Intentionally empty
+                             * Operates as an indicator light through pure CSS effects
+                             * */}
+                        </div>
                     </Tab>
                     <Tab className='gadgetButton'>
                         Upcoming
-                        <div></div>
+                        <div>
+                            {/** Intentionally empty
+                             * Operates as an indicator light through pure CSS effects
+                             * */}
+                        </div>
                     </Tab>
                 </TabList>
                 <TabPanel>

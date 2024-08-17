@@ -24,6 +24,7 @@ export const imageFolder    = baseFolder + '/assets/images'
 export const appCustomState = {
     user: {
         username: null,             // string
+        email: null,                // string
         isLoggedIn: false,          // bool
     },
     browse: {
