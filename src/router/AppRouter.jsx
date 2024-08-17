@@ -34,9 +34,12 @@ export const AppRouter = () => {
     const [ isStorageLocked, setIsStorageUnlocked, state, dispatch ]
         = useLocalStorage(
             appName,            // Key value for Storage
+
             appCustomState,     // Reference object so useLocalStorage can ensure validity
+
             useReducer(
                 MovieReducer,   // reducer function
+
                 null            // Original state set to null to ensure we attempt
                                 // initialization from localStorage first
             )

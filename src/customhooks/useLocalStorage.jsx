@@ -45,12 +45,23 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
         // matches the structure of the reference, i.e. is also
         // an object and has the same fields
         function isValidCustomState(obj, reference) {
+            console.log('checking isValidCustomState')
             if (!obj || !reference || typeof reference !== 'object') {
+                console.log('failed cuz !obj or !reference or reference is not object')
+                console.log('obj is')
+                console.log(obj)
+                console.log('reference is')
+                console.log(reference)
                 return false
             }
         
             for (let key in reference) {
+                console.log('checking keys')
                 if (!Object.prototype.hasOwnProperty.call(obj, key)) {
+                    console.log('first key')
+                    console.log(key)
+                    console.log('obj?')
+                    console.log(obj)
                     return false
                 }
                 
@@ -73,8 +84,8 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
         }
         
         
-        // Write to localStorage any change to state,
-        // if it is valid
+        // Write to localStorage any changes to state,
+        // if the changes are valid
         let successfulUpdate = true
         if (isValidCustomState(state, reference)) {
             try {
@@ -92,7 +103,7 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
         }
 
 
-        // Failed? Read from localStorage instead
+        // Failed? Read state from localStorage instead
         if (!successfulUpdate) {
             try {
                 const packed = localStorage.getItem(key)

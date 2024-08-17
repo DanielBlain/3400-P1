@@ -4,7 +4,6 @@
 .socialMediaPanel {
     margin: 0 auto;
     padding: 6px;
-    @include spaceButton;
     
     & .tooltip {
         position: absolute;

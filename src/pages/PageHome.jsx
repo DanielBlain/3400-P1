@@ -17,9 +17,9 @@ const PageHome = () => {
 
     const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const [ movieList, setMovieList ] = useState(null)
+    const [ selectedTabNo, setSelectedTabNo ] = useState(0)
 
 
-    // Fetch a new movie list based upon the filterType parameter
     const updateMovieList = async (filterType, pagination=`&page=1`) => {
         const url = `${tmdbEndpoint}${filterType}?include_adult=false&include_video=false&language=en-US${pagination}&api_key=${api_key}`
         const newMovieList = await fetchList(url)
@@ -27,42 +27,36 @@ const PageHome = () => {
             setMovieList(newMovieList)
         }
     }
+    
 
-
-    const isFilterValid = ( newFilter ) =>
-        [
-            NOW_PLAYING,
-            POPULAR,
-            TOP_RATED,
-            UPCOMING
-        ].includes( newFilter )
-
-
-    // Handle click on the NOW_PLAYING tab
-    const handleNowPlaying  = (e) => {
-        e.preventDefault()
-        dispatch({ type: 'setFilter', filter: NOW_PLAYING })
-    }
-
-
-    // Handle click on the POPULAR tab
-    const handlePopular     = (e) => {
-        e.preventDefault()
-        dispatch({ type: 'setFilter', filter: POPULAR })
-    }
-
-
-    // Handle click on the TOP_RATED tab
-    const handleTopRated    = (e) => {
-        e.preventDefault()
-        dispatch({ type: 'setFilter', filter: TOP_RATED })
-    }
-
-
-    // Handle click on the UPCOMING tab
-    const handleUpcoming    = (e) => {
-        updateMovieList( UPCOMING )
-        dispatch({ type: 'setFilter', filter: UPCOMING })
+    // Call to select a new Movie Filter tab
+    const setTabNo = ( tabNo ) => {
+        switch (tabNo) {
+            case 0:
+                setSelectedTabNo(0)
+                dispatch({ type: 'setFilter', filter: NOW_PLAYING })
+                updateMovieList( NOW_PLAYING )
+                return
+            case 1:
+                setSelectedTabNo(1)
+                dispatch({ type: 'setFilter', filter: POPULAR })
+                updateMovieList( POPULAR )
+                return
+            case 2:
+                setSelectedTabNo(2)
+                dispatch({ type: 'setFilter', filter: TOP_RATED })
+                updateMovieList( TOP_RATED )
+                return
+            case 3:
+                setSelectedTabNo(3)
+                dispatch({ type: 'setFilter', filter: UPCOMING })
+                updateMovieList( UPCOMING )
+                return
+            default:
+                setSelectedTabNo(0)
+                dispatch({ type: 'setFilter', filter: NOW_PLAYING })
+                updateMovieList( NOW_PLAYING )
+        }
     }
 
 
@@ -75,40 +69,71 @@ const PageHome = () => {
             setIsStorageUnlocked(false)
         })
     }, [])
-    
-    
-    // Update the movie list when updated by localStorage
-    // Found no valid filter? Set to NOW_PLAYING by default
+
+
+    // Ensure the selected tab matches the homeFilter
+    // (E.G. if homeFilter is updated by localStorage)
     useEffect(() => {
-        if (state && state.browse) {
-            if (isFilterValid(state.browse.homeFilter)) {
-                updateMovieList(state.browse.homeFilter)
-            }
-            else {
-                dispatch({ type: 'setFilter', filter: NOW_PLAYING })
-            }
-        } 
-    }, [isStorageUnlocked, state, dispatch])
+        if (!state || !state.browse) {
+            return
+        }
+
+        switch (state.browse.homeFilter) {
+            case NOW_PLAYING:
+                if ( selectedTabNo !== 0 ) {
+                    setSelectedTabNo(0)
+                    updateMovieList( NOW_PLAYING )
+                }
+                return
+            case POPULAR:
+                if ( selectedTabNo !== 1 ) {
+                    setSelectedTabNo(1)
+                    updateMovieList( POPULAR )
+                }
+                return
+            case TOP_RATED:
+                if ( selectedTabNo !== 2 ) {
+                    setSelectedTabNo(2)
+                    updateMovieList( TOP_RATED )
+                }
+                return
+            case UPCOMING:
+                if ( selectedTabNo !==3 ) {
+                    setSelectedTabNo(3)
+                    updateMovieList( UPCOMING )
+                }
+                return
+            default:
+                if ( selectedTabNo !== 0 ) {
+                    setSelectedTabNo(0)
+                    updateMovieList( NOW_PLAYING )
+                }
+        }
+    }, [state, selectedTabNo])
 
 
     return (
         <section id='mainContent'>
-            <Tabs>
+            <Tabs
+                selectedIndex={ selectedTabNo }
+                onSelect={
+                    (tabNo) => { setTabNo(tabNo) }
+                }
+            >
                 <TabList className='filterPanel'>
-                    <Tab className='gadgetButton' tabIndex={'1'} onClick={ handleNowPlaying }>
-                        {/** Weird tabIndex since Tabs/TabList/Tab uses <a> tags, which normally have no tab */}
+                    <Tab className='gadgetButton'>
                         Now Playing
                         <div></div>
                     </Tab>
-                    <Tab className='gadgetButton' tabIndex={'2'} onClick={ handlePopular }>
+                    <Tab className='gadgetButton'>
                         Popular
                         <div></div>
                     </Tab>
-                    <Tab className='gadgetButton' tabIndex={'3'} onClick={ handleTopRated }>
+                    <Tab className='gadgetButton'>
                         Top Rated
                         <div></div>
                     </Tab>
-                    <Tab className='gadgetButton' tabIndex={'4'} onClick={ handleUpcoming } >
+                    <Tab className='gadgetButton'>
                         Upcoming
                         <div></div>
                     </Tab>

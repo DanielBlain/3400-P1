@@ -37,3 +37,50 @@ h4.dropdownButton {
 h3.dropdownButton {
     margin: 1em 0 0.4em;
 }
+
+#contactUs form {
+    margin: 0 0.8em 0.8em;
+
+    label {
+        display: block;
+        margin: 0.8em 0;
+        padding: 0.4em;
+        @include spacePanel;
+
+        &:last-of-type {
+            margin-bottom: 0.8em;
+        }
+    }
+
+    input, textarea {
+        width: 100%;
+        margin-top: 0.4em;
+        font-family: $fontfam-body;
+    }
+
+    textarea {
+        padding: 0.2em;
+    }
+
+    button {
+        float: right;
+        border: 3px solid transparent;
+        border-radius: 8px;
+        margin-bottom: 0.8em;
+        padding: 0.4em;
+        @include spaceButton;
+
+        &:nth-of-type(n+2) {
+            background-color: $clr-control-warnIndicate;
+            margin-right: 0.4em;
+        }
+
+        &:hover {
+            border-color: $clr-black;
+        }
+        
+        &:active {
+            @include spaceButton;
+        }
+    }
+}

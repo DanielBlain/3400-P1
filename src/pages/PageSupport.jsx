@@ -24,9 +24,10 @@ const PageSupport = () => {
             <h2>Support</h2>
             <h3>Categories</h3>
             <ul className='filterPanel'>
-                <li><a href='#appandwebsite'>App & website issues</a></li>
+                <li><a href='#appAndWebsite'>App & website issues</a></li>
                 <li><a href='#account'>Account issues</a></li>
                 <li><a href='#content'>Content issues</a></li>
+                <li><a href='#contactUs'>Contact us</a></li>
             </ul>
 
             <section>
@@ -124,8 +125,8 @@ const PageSupport = () => {
                 </article>
             </section>
 
-            <ClickDropdown id='content' tag={<h3 className='dropdownButton' role='button'>Content issues</h3>}>
-                <div className='supportPanel'>
+            <ClickDropdown tag={<h3 className='dropdownButton' role='button'>Content issues</h3>}>
+                <div id='content' className='supportPanel'>
                     <p>
                         All movie-related content on {appName} is curated and managed by TMDB. This 
                         product uses the TMDB API but is not endorsed or certified by TMDB.
@@ -142,6 +143,47 @@ const PageSupport = () => {
                     </p>
                 </div>
             </ClickDropdown>
+
+            <section id='contactUs'>
+                <h2>Contact Us</h2>    
+                <form onSubmit={()=>{alert("form Submitted")}}>
+                    <label>
+                        Username<br />
+                        <input
+                            type='text'
+                            id='username'
+                            name='username'
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        Email<br />
+                        <input
+                            type='email'
+                            id='email'
+                            name='email'
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        How may we help?
+                        <textarea
+                            id='message'
+                            name='message'
+                            cols='22'
+                            rows='4'
+                            required
+                        >
+                            {/** Empty by design */}
+                        </textarea>
+                    </label>
+
+                    <button type='submit'>Submit</button>
+                    <button type='reset'>Reset</button>
+                </form>
+            </section>
         </section>
     )
 }
