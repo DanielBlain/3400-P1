@@ -1,7 +1,23 @@
 // App-wide constants
-export const appName        = `Cinéscape`
-export const author         = `Dan J Blain`
-export const authorQuote    = `Eppur Si Muove`
+export const appName        = 'Cinéscape'
+export const author         = 'Dan J Blain'
+export const authorQuote    = 'Eppur Si Muove'
+export const baseFolder     = import.meta.env.BASE_URL
+export const imageFolder    = baseFolder + '/assets/images'
+/**
+ * Notes to Dan for next time -- to prepares images for build to a subfolder:
+ * 
+ * STEP 1 - Add /assets/{images_folder} to /public, place images here
+ * 
+ * STEP 2 - In vite.config.js, add "base: '/{subfolder_name}'" to defineConfig
+ * 
+ * STEP 3 - img src is import.meta.env.BASE_URL + '/assets/{images_folder}/{image.png}'
+ * 
+ * STEP 4 - Images in CSS too? Use url('{images_folder}\\DanLogo-x256.png')
+ * 
+ * STEP 4 - Using react-router-dom? Add <BrowserRouter basename='/{subfolder_name}'>
+ *          to ensure URLs are updated properly too
+ */
 
 
 // App's initial custom state
@@ -19,7 +35,7 @@ export const appCustomState = {
 
 // The Movie Database communication
 export const api_key = import.meta.env.VITE_TMDB_DANJBLAIN_API_KEY
-export const tmdbEndpoint = `https://api.themoviedb.org/3/movie`
+export const tmdbEndpoint = 'https://api.themoviedb.org/3/movie'
 
 
 // Social media records

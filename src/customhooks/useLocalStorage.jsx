@@ -45,7 +45,7 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
         // matches the structure of the reference, i.e. is also
         // an object and has the same fields
         function isValidCustomState(obj, reference) {
-            if (obj === null || reference === null || typeof reference !== 'object') {
+            if (!obj || !reference || typeof reference !== 'object') {
                 return false
             }
         
@@ -73,15 +73,15 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
         }
         
         
-        // Try to update localStorage any change to
-        // state, if they're valid
+        // Write to localStorage any change to state,
+        // if it is valid
         let successfulUpdate = true
         if (isValidCustomState(state, reference)) {
             try {
                 let valueToStore = state
                 const packed = JSON.stringify(valueToStore)
                 localStorage.setItem(key, packed)
-                console.log('localStorage reset')
+                console.log('localStorage write')
                 console.log(state)
             } catch {
                 successfulUpdate = false
@@ -98,11 +98,14 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
                 const packed = localStorage.getItem(key)
                 let valueRetrieved = JSON.parse(packed)
                 if (!isValidCustomState(valueRetrieved, reference)) {
-                    console.warn('Invalid state retrieved from localStorage')
-                    console.warn(valueRetrieved)
+                    // Read something but it's bad? Rewrite initial state to localStorage
+                    console.log('localStorage reset')
+                    console.log(reference)
+                    dispatch({ type: 'initializeStorage', newState: reference })
                 }
                 else {
-                    console.log('State read from localStorage')
+                    // Read something and it's good? Update associated state
+                    console.log('localStorage read')
                     console.log(state)
                     dispatch({ type: 'initializeStorage', newState: valueRetrieved })
                 }
@@ -111,8 +114,8 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
             }                    
         }
         // no else; would imply either:
-        // (i) localStorage reset successfully in the earlier block
-        // (ii) invalid state retrieved from localStorage, ignored & no change
+        // (i) localStorage write was successful in the upper block
+        // (ii) Write to and read from localStorage were both unsuccessful, ignore & no change
 
     }, [isStorageUnlocked, key, reference, state, dispatch])
 

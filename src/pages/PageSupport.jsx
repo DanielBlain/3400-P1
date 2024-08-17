@@ -2,6 +2,8 @@ import { useEffect, useContext } from 'react'
 import { appName } from '../config/config'
 import { MovieAppContext } from '../router/AppRouter'
 import ClickDropdown from '../components/ClickDropdown'
+import { imageFolder } from '../config/config'
+
 
 const PageSupport = () => {
 
@@ -130,7 +132,7 @@ const PageSupport = () => {
                     </p>
                     <div className='tmdbLogo'>
                         <img
-                            src='/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg'
+                            src={ imageFolder + '/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg' }
                             alt='Logo for The Movie Database'
                         />
                     </div>

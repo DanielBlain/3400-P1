@@ -46,6 +46,7 @@ export async function fetchSingleton(url) {
 export async function fetchList(url) {
 
     try {
+        console.log('attempting fetch')
         const promiseResponse = await fetch(url)
         const fulfilledPromise = await promiseResponse.json()
 

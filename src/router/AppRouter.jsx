@@ -1,6 +1,5 @@
 import { useState, createContext, useReducer } from 'react'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
-
 import { appName, appCustomState } from '../config/config'
 import useLocalStorage  from '../customhooks/useLocalStorage'
 import MovieReducer     from '../components/MovieReducer'
@@ -45,7 +44,7 @@ export const AppRouter = () => {
 
         
     return (
-        <BrowserRouter>
+        <BrowserRouter basename='/cinescape'>
             <Routes>
                 {/* Layout route */}
                 <Route

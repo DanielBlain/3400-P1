@@ -10,7 +10,7 @@ const MovieReducer = (state, action) => {
             return {...action.newState}
 
 
-        case 'overrideFilter':
+        case 'setFilter':
             // (    filter: string)
             // Set PageHome's movie filter type
             return {

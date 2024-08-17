@@ -41,27 +41,28 @@ const PageHome = () => {
     // Handle click on the NOW_PLAYING tab
     const handleNowPlaying  = (e) => {
         e.preventDefault()
-        updateMovieList( NOW_PLAYING )
+        dispatch({ type: 'setFilter', filter: NOW_PLAYING })
     }
 
 
     // Handle click on the POPULAR tab
     const handlePopular     = (e) => {
         e.preventDefault()
-        updateMovieList( POPULAR )
+        dispatch({ type: 'setFilter', filter: POPULAR })
     }
 
 
     // Handle click on the TOP_RATED tab
     const handleTopRated    = (e) => {
         e.preventDefault()
-        updateMovieList( TOP_RATED )
+        dispatch({ type: 'setFilter', filter: TOP_RATED })
     }
 
 
     // Handle click on the UPCOMING tab
     const handleUpcoming    = (e) => {
         updateMovieList( UPCOMING )
+        dispatch({ type: 'setFilter', filter: UPCOMING })
     }
 
 
@@ -84,7 +85,7 @@ const PageHome = () => {
                 updateMovieList(state.browse.homeFilter)
             }
             else {
-                dispatch({ type: 'overrideFilter', filter: NOW_PLAYING })
+                dispatch({ type: 'setFilter', filter: NOW_PLAYING })
             }
         } 
     }, [isStorageUnlocked, state, dispatch])
@@ -94,19 +95,20 @@ const PageHome = () => {
         <section id='mainContent'>
             <Tabs>
                 <TabList className='filterPanel'>
-                    <Tab className='gadgetButton' tabIndex={'5'} role='button' onClick={ handleNowPlaying }>
+                    <Tab className='gadgetButton' tabIndex={'1'} onClick={ handleNowPlaying }>
+                        {/** Weird tabIndex since Tabs/TabList/Tab uses <a> tags, which normally have no tab */}
                         Now Playing
                         <div></div>
                     </Tab>
-                    <Tab className='gadgetButton' tabIndex={'6'} role='button' onClick={ handlePopular }>
+                    <Tab className='gadgetButton' tabIndex={'2'} onClick={ handlePopular }>
                         Popular
                         <div></div>
                     </Tab>
-                    <Tab className='gadgetButton' tabIndex={'7'} role='button' onClick={ handleTopRated }>
+                    <Tab className='gadgetButton' tabIndex={'3'} onClick={ handleTopRated }>
                         Top Rated
                         <div></div>
                     </Tab>
-                    <Tab className='gadgetButton' tabIndex={'8'} role='button' onClick={ handleUpcoming } >
+                    <Tab className='gadgetButton' tabIndex={'4'} onClick={ handleUpcoming } >
                         Upcoming
                         <div></div>
                     </Tab>

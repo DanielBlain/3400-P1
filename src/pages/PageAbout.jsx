@@ -2,6 +2,8 @@ import { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { appName } from '../config/config'
 import { MovieAppContext } from '../router/AppRouter'
+import { imageFolder } from '../config/config'
+
 
 const PageAbout = () => {
     
@@ -25,7 +27,7 @@ const PageAbout = () => {
             <section className='pageAbout'>
 
                 {/** Disclaimer(s) */}
-                <article className='gadgetPanel'>
+                <article className='appAdvertPanel'>
                     <p>
                         <b>NOTE:</b> <strong>{appName}</strong> is meant strictly as an
                         educational project, and therefore should <em>not</em> be
@@ -43,7 +45,7 @@ const PageAbout = () => {
                     </p>
                     <div className='tmdbLogo'>
                         <img
-                            src="/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg"
+                            src={ imageFolder + '/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg' }
                             alt="Logo for TMDB (The Movie Database)"
                         />
                     </div>
@@ -56,7 +58,7 @@ const PageAbout = () => {
                         Dan J. Blain as part of a class that teaches students
                         to use the Javascript React framework.
                     </p>
-                    <img src="/bcit.png" alt="Logo for BCIT (British Columbia Institute of Technology)" />
+                    <img src={ imageFolder + '/bcit.png' } alt="Logo for BCIT (British Columbia Institute of Technology)" />
                     <p>
                         The React class was part of the Frontend Web Development program
                         offered by the brilliant people at BCIT.

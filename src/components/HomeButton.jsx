@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
-import CinescapeE from '/cinescape-e.png'
+import { imageFolder } from '../config/config'
 
 
 const HomeButton = ({ children }) => {
@@ -23,7 +23,7 @@ const HomeButton = ({ children }) => {
                 onClick={handleClick}
                 disabled={ !isHomeBtnEnabled }
             >
-                <img src={CinescapeE} alt='Icon for Home Button' />
+                <img src={ imageFolder + '/cinescape-e.png' } alt='Icon for Home Button' />
             </button>
             { children !== null ? children : ``}
         </div>

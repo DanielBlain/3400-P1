@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
+import { imageFolder } from '../config/config'
 
 
 const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
@@ -14,11 +15,16 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
 
     const isMovieLiked = () =>
         !storageLockState
+        && state
+        && state.browse
         && state.browse.likedMovies
         && state.browse.likedMovies.includes(movieDetails.id)
 
 
     const handleLike = e => {
+        if (!movieDetails) {
+            return
+        }
         e.preventDefault()
         dispatch({
             type:'toggleLikeMovie',
@@ -45,14 +51,12 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
     useEffect(() => {
         setIsLikedFlag(
             !storageLockState
+            && state
+            && state.browse
             && state.browse.likedMovies
             && state.browse.likedMovies.includes(movieDetails.id)
         )
-    },[
-        storageLockState,
-        state.browse.likedMovies,
-        movieDetails.id
-    ])
+    },[storageLockState, state, movieDetails])
 
 
     return (
@@ -112,6 +116,10 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                         className='gadgetButton info'
                         onClick={ handleInfo }
                     >
+                        <img
+                            src={ imageFolder + '/iconmonstr-magnifier-10-240.png' }
+                            alt='Like button icon'
+                        />
                         Info
                     </button>
                 )
@@ -124,8 +132,11 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                     onClick={ handleLike }
                 >
                     <img
-                        src={ isLikedFlag ? '/cinescape-like-filled-240.png' : '/cinescape-like-lined-240.png' }
-                        alt='liked movie indicator'
+                        src={ isLikedFlag ?
+                            imageFolder + '/cinescape-like-filled-240.png'
+                            : imageFolder + '/cinescape-like-lined-240.png'
+                        }
+                        alt='Like button icon'
                     />
                     Like
                 </button>
@@ -148,39 +159,3 @@ MovieGadget.propTypes = {
 }
 
 export default MovieGadget
-
-/**
- Individual Movie Pages
- ● This page is accessed when a user clicks on the “More Info” link on an individual movie
- ● All the requirements from the “All Pages” requirements plus…
- ● POSTER  /    (or generic placeholder if no poster is available)
- * Info button
- ● DATE    /    of release
- ● RATE    /    Review rating - e.g. 67%
- ● LIKE    /    or unlike, in localStorage
- ● TITLE   x
- ● PLOT    x    Summary
- * 
- */
-
-/**
- * The Movie Database (TMDB) returns movie data packaged in the following format
- * 
- * movieData {
- *      adult,
- *      backdrop_path,
- *      genre_ids,
- *      id,
- *      original_language,
- *      original_title,
- *      overview,
- *      popularity,
- *      poster_path,
- *      release_date,
- *      title,
- *      video,
- *      vote_average,
- *      vote_count
- *  }
- * 
- */
