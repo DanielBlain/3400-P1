@@ -1,7 +1,6 @@
 import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
-import { appName } from '../config/config'
 import HomeButton from '../components/HomeButton'
 
 
@@ -13,12 +12,8 @@ const PageNotFound = () => {
     const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
 
-    function handleClick() {
-        navigate('/')
-    }
-
-
-    // Flag to enable PageHome button, and unlock localStorage
+    // i) Choose correct HomeBtn state
+    // ii) Unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(true)

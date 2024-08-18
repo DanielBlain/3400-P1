@@ -44,7 +44,8 @@ const PageRegister = () => {
     }
 
 
-    // Flag to enable PageHome button, and unlock localStorage
+    // i) Choose correct HomeBtn state
+    // ii) Unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(false)

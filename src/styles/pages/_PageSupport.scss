@@ -38,8 +38,11 @@ h3.dropdownButton {
     margin: 1em 0 0.4em;
 }
 
-#contactUs form {
-    margin: 0 0.8em 0.8em;
+#contactUs {
+
+    form {
+        margin: 0 0.8em 0.8em;
+    }
 
     label {
         display: block;
@@ -56,6 +59,10 @@ h3.dropdownButton {
         width: 100%;
         margin-top: 0.4em;
         font-family: $fontfam-body;
+
+        :disabled {
+            background-color: $clr-control-calmIndicate;
+        }
     }
 
     textarea {

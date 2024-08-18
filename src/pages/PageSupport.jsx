@@ -14,7 +14,8 @@ const PageSupport = () => {
         state && state.user && state.user.isLoggedIn
 
 
-    // Flag to enable PageHome button, and unlock localStorage
+    // i) Choose correct HomeBtn state
+    // ii) Unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(true)
@@ -159,8 +160,8 @@ const PageSupport = () => {
                             type='text'
                             id='username'
                             name='username'
-                            defaultValue={isUserLoggedIn() ? 'state.user.username' : ''}
-                            disabled={isUserLoggedIn()}
+                            defaultValue='state.user.username'
+                            disabled={true}
                             required
                         />
                     </label>
@@ -171,8 +172,8 @@ const PageSupport = () => {
                             type='email'
                             id='email'
                             name='email'
-                            defaultValue={isUserLoggedIn() ? 'state.user.email' : ''}
-                            disabled={isUserLoggedIn()}
+                            defaultValue='yes'
+                            disabled={true}
                             required
                         />
                     </label>

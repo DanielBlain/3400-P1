@@ -11,11 +11,11 @@ export const imageFolder    = baseFolder + '/assets/images'
  * 
  * STEP 2 - In vite.config.js, add "base: '/{subfolder_name}'" to defineConfig
  * 
- * STEP 3 - img src is import.meta.env.BASE_URL + '/assets/{images_folder}/{image.png}'
+ * STEP 3 - img src is import.meta.env.BASE_URL + '/assets/{images_folder}/{image.png/jpg/etc}'
  * 
- * STEP 4 - Images in CSS too? Use url('{images_folder}\\DanLogo-x256.png')
+ * STEP 4 - Images in CSS too? Use url('{images_folder}\\{image.png/jpg/etc}')
  * 
- * STEP 4 - Using react-router-dom? Add <BrowserRouter basename='/{subfolder_name}'>
+ * STEP 5 - Using react-router-dom? Add <BrowserRouter basename='/{subfolder_name}'>
  *          to ensure URLs are updated properly too
  */
 

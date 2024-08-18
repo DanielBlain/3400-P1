@@ -60,7 +60,8 @@ const PageHome = () => {
     }
 
 
-    // Unlock localStorage
+    // i) Choose correct HomeBtn state
+    // ii) Unlock localStorage
     // Run once on boot
     useEffect(() => {
         setIsHomeBtnEnabled(false)
@@ -72,7 +73,7 @@ const PageHome = () => {
 
 
     // Ensure the selected tab matches the homeFilter
-    // (E.G. if homeFilter is updated by localStorage)
+    // (Might otherwise differ if E.G. homeFilter is updated by localStorage)
     useEffect(() => {
         if (!state || !state.browse) {
             return
@@ -80,25 +81,25 @@ const PageHome = () => {
 
         switch (state.browse.homeFilter) {
             case NOW_PLAYING:
-                if ( selectedTabNo !== 0 ) {
+                if ( selectedTabNo !== 0 || !movieList ) {
                     setSelectedTabNo(0)
                     updateMovieList( NOW_PLAYING )
                 }
                 return
             case POPULAR:
-                if ( selectedTabNo !== 1 ) {
+                if ( selectedTabNo !== 1 || !movieList ) {
                     setSelectedTabNo(1)
                     updateMovieList( POPULAR )
                 }
                 return
             case TOP_RATED:
-                if ( selectedTabNo !== 2 ) {
+                if ( selectedTabNo !== 2 || !movieList ) {
                     setSelectedTabNo(2)
                     updateMovieList( TOP_RATED )
                 }
                 return
             case UPCOMING:
-                if ( selectedTabNo !==3 ) {
+                if ( selectedTabNo !==3 || !movieList ) {
                     setSelectedTabNo(3)
                     updateMovieList( UPCOMING )
                 }
@@ -122,33 +123,37 @@ const PageHome = () => {
                     <Tab className='gadgetButton'>
                         Now Playing
                         <div>
-                            {/** Intentionally empty
+                            {/**
+                             * Intentionally empty
                              * Operates as an indicator light through pure CSS effects
-                             * */}
+                             */}
                         </div>
                     </Tab>
                     <Tab className='gadgetButton'>
                         Popular
                         <div>
-                            {/** Intentionally empty
+                            {/**
+                             * Intentionally empty
                              * Operates as an indicator light through pure CSS effects
-                             * */}
+                             */}
                         </div>
                     </Tab>
                     <Tab className='gadgetButton'>
                         Top Rated
                         <div>
-                            {/** Intentionally empty
+                            {/**
+                             * Intentionally empty
                              * Operates as an indicator light through pure CSS effects
-                             * */}
+                             */}
                         </div>
                     </Tab>
                     <Tab className='gadgetButton'>
                         Upcoming
                         <div>
-                            {/** Intentionally empty
+                            {/**
+                             * Intentionally empty
                              * Operates as an indicator light through pure CSS effects
-                             * */}
+                             */}
                         </div>
                     </Tab>
                 </TabList>
