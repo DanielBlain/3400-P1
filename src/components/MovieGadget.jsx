@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
 import { imageFolder } from '../config/config'
 import { extractDateComponents } from '../utilities/utilities'
+import RatingsIndicators from '../components/RatingsIndicators'
 
 
-const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
+const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, setIsVoteNumbersDisplaying }) => {
     
     const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
     const [ releaseDateComponents, setReleaseDateComponents ] = useState(null)
+    const [ voteAverage, setVoteAverage ] = useState(0)
     const [ isLikedFlag, setIsLikedFlag ] = useState(false)
     const [ isInfoOpen, setIsInfoOpen ] = useState(false)
-    const [ ratingInDegrees, setRatingInDegrees ] = useState(200)
 
 
     const isMovieLiked = () =>
@@ -45,8 +46,8 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
     // Update movie details when the movieDetails array is updated
     useEffect(() => {
         if (movieDetails === null) return
-        setRatingInDegrees( movieDetails.average_vote * 36.0 )
         setReleaseDateComponents( extractDateComponents( movieDetails.release_date ))
+        setVoteAverage(movieDetails.vote_average)
         setIsLikedFlag(
             !storageLockState
             && state
@@ -112,20 +113,17 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                     )}
                 </article>
 
-                {/** Average Votes dial */}
+                {/** Average Votes dials */}
                 <article>
                     <strong>
-                        Votes
+                        Average Votes
                     </strong>
                     {movieDetails && (
-                        <div
-                            className='voteIndicator'
-                            style={{
-                                background: `conic-gradient(#00E414 0deg, #00E414 ${ratingInDegrees}deg, black ${ratingInDegrees + 1}deg`
-                            }}
-                        >
-                            {/** Intentionally empty - handled by CSS */}
-                        </div>
+                        <RatingsIndicators
+                            ratingOutOfTen={ voteAverage }
+                            isVoteNumbersDisplaying={ isVoteNumbersDisplaying }
+                            setIsVoteNumbersDisplaying={ setIsVoteNumbersDisplaying }
+                        />
                     )}
                 </article>
 
@@ -167,8 +165,10 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
 }
 
 MovieGadget.propTypes = {
-    movieDetails:       PropTypes.object,
-    isInfoAvailable:    PropTypes.bool,
+    movieDetails:               PropTypes.object,
+    isInfoAvailable:            PropTypes.bool,
+    isVoteNumbersDisplaying:    PropTypes.bool,
+    setIsVoteNumbersDisplaying: PropTypes.func,
 }
 
 export default MovieGadget

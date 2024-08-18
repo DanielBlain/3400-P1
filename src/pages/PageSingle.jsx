@@ -11,7 +11,7 @@ const PageSingle = () => {
     const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
     const { movieID } = useParams()
     const [ movieDetails, setMovieDetails ] = useState(null)
-
+    const [ isVoteNumbersDisplaying, setIsVoteNumbersDisplaying ] = useState(false)
 
     const makeGenresString = genresArray =>
         (
@@ -64,6 +64,8 @@ const PageSingle = () => {
                             key={ `movieGadget-${movieDetails.id}` }
                             movieDetails={ movieDetails }
                             isInfoAvailable={ false }
+                            isVoteNumbersDisplaying={ isVoteNumbersDisplaying }
+                            setIsVoteNumbersDisplaying={ setIsVoteNumbersDisplaying }
                         />
                         <div className='singleDetailsPanel'>
                             <b>Genres</b>

@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 import MovieGadget from '../components/MovieGadget'
 
 
 const MovieDisplayList = ({ movieList }) => {
 
+    const [ isVoteNumbersDisplaying, setIsVoteNumbersDisplaying ] = useState(false)
 
     return (
         <div className='movieDisplayList'>
@@ -15,6 +17,8 @@ const MovieDisplayList = ({ movieList }) => {
                                 key={ `movieGadget-${movieDetails.id}` }
                                 movieDetails={ movieDetails }
                                 isInfoAvailable={ true }
+                                isVoteNumbersDisplaying={ isVoteNumbersDisplaying }
+                                setIsVoteNumbersDisplaying={ setIsVoteNumbersDisplaying }
                             />
                         )
                         : `No movies found under this filter!`
