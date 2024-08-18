@@ -2,9 +2,15 @@
 @use '../mixins/mixins' as *;
 
 .movieGadget {
+    max-width: calc(0.75 * $mqb-max-mobile);
     display: flex;
     flex-direction: row;
     padding: 0.4em;
+
+    .gadgetButton {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .posterPanel {
@@ -63,10 +69,27 @@
     margin: 10% 5%;
 }
 
+.gadgetPanel {
+    display: grid;
+    grid-template-rows: auto;
+    padding: 0.2em;
+    text-align: center;
+    @include spacePanel;
+
+    strong {
+        display: block;
+        font-size: 1.2em;
+    }
+
+    .gadgetButton {
+        margin: 0.4em;
+        @include spaceButton;
+    }
+}
+
 .voteIndicator {
     display: inline-block;
     min-width: 50px;
-    margin-left: calc(50% - 25px);
     height: 50px;
     border-radius: 50%;
     @include spaceButton;

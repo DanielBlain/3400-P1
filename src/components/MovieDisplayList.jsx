@@ -6,19 +6,21 @@ const MovieDisplayList = ({ movieList }) => {
 
 
     return (
-        <section>
-            {
-                movieList && movieList.length > 0 ?
-                    movieList.map(movieDetails => 
-                        <MovieGadget
-                            key={ `movieGadget-${movieDetails.id}` }
-                            movieDetails={ movieDetails }
-                            isInfoAvailable={ true }
-                        />
-                    )
-                    : `No movies found under this filter!`
-            }
-        </section>
+        <div className='movieDisplayList'>
+            <section>
+                {
+                    movieList && movieList.length > 0 ?
+                        movieList.map(movieDetails => 
+                            <MovieGadget
+                                key={ `movieGadget-${movieDetails.id}` }
+                                movieDetails={ movieDetails }
+                                isInfoAvailable={ true }
+                            />
+                        )
+                        : `No movies found under this filter!`
+                }
+            </section>
+        </div>
     )
 }
 

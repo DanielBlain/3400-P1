@@ -1,0 +1,30 @@
+@use '../base/vars' as *;
+
+.movieDisplayList {
+    margin: 0 auto;
+
+    & > section {
+        display: grid;
+        grid-template-columns: auto;
+        justify-content: center;
+    }
+}
+
+@media (min-width: $mqb-min-twocol) {
+    .movieDisplayList > section {
+        grid-template-columns: auto auto;
+        gap: 0.8em;
+    }
+}
+
+@media (min-width: $mqb-min-threecol) {
+    .movieDisplayList > section {
+        grid-template-columns: auto auto auto;
+    }
+}
+
+@media (min-width: $mqb-min-fourcol) {
+    .movieDisplayList > section {
+        grid-template-columns: auto auto auto auto;
+    }
+}

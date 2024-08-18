@@ -1,9 +1,4 @@
-/**
-
-TO USE: simply add class 'DanLogoInText'
-
-Should likely be used on a text element
-*/
+/* Add Dan J Blain's logo at the front (left size) */
 .DanLogoInText::before {
     content: '';
     display: inline-block;

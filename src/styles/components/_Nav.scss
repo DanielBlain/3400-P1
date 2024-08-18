@@ -7,7 +7,6 @@ nav {
     position: absolute;
     top: -300px;
     left: 10%;
-    text-align: center;
     @include spacePanel;
 
     &.isAnim {

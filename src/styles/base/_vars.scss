@@ -1,3 +1,11 @@
+// Media query breakpoints // UNTESTED ON ALL PAGES EXCEPT PAGEHOME
+$mqb-max-mobile:            560px;
+$mqb-min-twocol:            670px;
+$mqb-min-threecol:          940px;
+$mqb-min-fourcol:           1200px; // untested on PageHome
+$mqb-min-fivecol:           1400px; // untested on PageHome
+$mqb-max:                   1920px;
+
 // Basic useful colors
 $clr-white: white;
 $clr-red: red;
@@ -8,7 +16,6 @@ $clr-gray: lightgray;
 $clr-control-darkShadow:    #000000DB;
 $clr-lightMetal:            #d9eaff;
 $clr-shadowMetal:           #9ba7b6;
-// $hover-gray: #A0A0A0;
 
 // UI colors
 $clr-control-primary:       #304FFE;

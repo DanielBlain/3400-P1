@@ -3,15 +3,17 @@ import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
 import { imageFolder } from '../config/config'
+import { extractDateComponents } from '../utilities/utilities'
 
 
 const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
     
     const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
+    const [ releaseDateComponents, setReleaseDateComponents ] = useState(null)
     const [ isLikedFlag, setIsLikedFlag ] = useState(false)
     const [ isInfoOpen, setIsInfoOpen ] = useState(false)
     const [ ratingInDegrees, setRatingInDegrees ] = useState(200)
- 
+
 
     const isMovieLiked = () =>
         !storageLockState
@@ -40,15 +42,11 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
     }
 
 
+    // Update movie details when the movieDetails array is updated
     useEffect(() => {
         if (movieDetails === null) return
         setRatingInDegrees( movieDetails.average_vote * 36.0 )
-    }, [movieDetails])
-
-
-    // On change of dependencies, check if the gadget (article) 
-    // should have the isMovieLiked class
-    useEffect(() => {
+        setReleaseDateComponents( extractDateComponents( movieDetails.release_date ))
         setIsLikedFlag(
             !storageLockState
             && state
@@ -96,10 +94,29 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
             </div>
 
             <section className='gadgetPanel'>
+
+                {/** Release Date readout */}
                 <article>
-                    <em>
+                    <strong>
+                        Release
+                    </strong>
+                    { releaseDateComponents && (
+                        <div className='gadgetLabel'>
+                            <div>
+                                { releaseDateComponents.year }
+                            </div>
+                            <div>
+                                { `${releaseDateComponents.month}-${releaseDateComponents.day}` }
+                            </div>
+                        </div>
+                    )}
+                </article>
+
+                {/** Average Votes dial */}
+                <article>
+                    <strong>
                         Votes
-                    </em>
+                    </strong>
                     {movieDetails && (
                         <div
                             className='voteIndicator'
@@ -111,6 +128,8 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                         </div>
                     )}
                 </article>
+
+                {/** Info Button */}
                 {isInfoAvailable ? (
                     <button
                         className='gadgetButton info'
@@ -127,6 +146,8 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                     // Intentionally empty; on a page where no Info button is required
                     <div></div>
                 )}
+
+                {/** Like Button */}
                 <button
                     className='gadgetButton like'
                     onClick={ handleLike }
@@ -140,14 +161,6 @@ const MovieGadget = ({ movieDetails, isInfoAvailable }) => {
                     />
                     Like
                 </button>
-                <article>
-                    <em>
-                        Release date
-                    </em> 
-                    <div className='gadgetLabel'>
-                        { movieDetails.release_date }
-                    </div>
-                </article>
             </section>
         </article>
     )

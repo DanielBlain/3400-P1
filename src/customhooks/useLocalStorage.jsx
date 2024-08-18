@@ -59,7 +59,7 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
         // No changes allowed if localStorage is locked
         // (e.g. for initialization, changing pages)
         if (isStorageUnlocked == false) {
-            console.warn('Ignored attempt to read from localStorage while locked. If this is unexpected, try setIsStorageUnlocked(true)')
+            console.warn('Ignored attempt to read from localStorage while locked')
             return
         }
         

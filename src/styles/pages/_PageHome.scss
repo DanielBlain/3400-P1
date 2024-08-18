@@ -2,11 +2,12 @@
 @use '../mixins/mixins' as *;
 
 .filterPanel {
+    max-width: $mqb-max-mobile;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     list-style: none;
-    margin: 0.4em 0 0 0;
+    margin: 0.4em auto 0;
     padding: 0 0.2em;
 
     & li {

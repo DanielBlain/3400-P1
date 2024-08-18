@@ -62,7 +62,7 @@ export const AppRouter = () => {
                                 dispatch
                             }}
                         >
-                            <a href='#mainContent' className='screen-reader-text'>Skip to Content</a>
+                            <a href='#mainContent' className='ScreenReaderText'>Skip to Content</a>
                             <div className='wrapper'>
                                 <Header />
                                 <main>                                    

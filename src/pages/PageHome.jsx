@@ -108,7 +108,7 @@ const PageHome = () => {
                 setSelectedTabNo(0)
                 updateMovieList( NOW_PLAYING )
         }
-    }, [state, selectedTabNo])
+    }, [state, selectedTabNo, movieList])
 
 
     return (

@@ -2,7 +2,6 @@
 @use './base/reset';
 
 // Base
-@use './base/screenreader';
 @use './base/root';
 @use './base/text';
 
@@ -12,9 +11,15 @@
 @use './components/Footer';
 @use './components/Header';
 @use './components/HomeButton';
+@use './components/MovieDisplayList';
 @use './components/MovieGadget';
 @use './components/Nav';
 @use './components/SocialMediaPanel';
+
+// Special effects
+@use './effects/DanLogoInText';
+@use './effects/isUrl';
+@use './effects/ScreenReaderText';
 
 // Pages
 @use './pages/PageAbout';
@@ -22,9 +27,6 @@
 @use './pages/PageLogin';
 @use './pages/PageSingle';
 @use './pages/PageSupport';
-
-// Special effects
-@use './effects/DanLogoInText';
 
 // Google Fonts - Import
 // Bruno Ace (headers, buttons, labels)

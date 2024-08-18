@@ -1,6 +1,8 @@
 /* 
     Synonym, in this case, for the html element, except the specificity of :root is higher
     :root is NOT identical to className .root
+
+    I've opted not to style it, instead relying on base>reset to provide the "bottommost" styling
 */
 :root {
 }
