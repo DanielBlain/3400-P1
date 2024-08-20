@@ -8,7 +8,7 @@ const PageLogin = () => {
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        posterRepo,
+        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,

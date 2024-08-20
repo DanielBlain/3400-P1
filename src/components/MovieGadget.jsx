@@ -2,11 +2,11 @@ import PropTypes from 'prop-types'
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
+import useMoviePoster               from '../customhooks/useMoviePoster'
 import { MovieAppContext }          from '../router/AppRouter'
 import { imageFolder }              from '../config/config'
 import { extractDateComponents }    from '../utilities/utilities'
 import RatingsIndicators            from '../components/RatingsIndicators'
-import MoviePoster                  from './MoviePoster'
 
 
 const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, setIsVoteNumbersDisplaying }) => {
@@ -14,7 +14,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        posterRepo,
+        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,
@@ -54,6 +54,9 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
     }
 
 
+    const [ renderPoster ] = useMoviePoster( moviePosterRepo, movieDetails, handleInfo )
+
+
     // Update movie details when the movieDetails array is updated
     useEffect(() => {        
         if (movieDetails === null) return
@@ -78,11 +81,14 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
             <div className='posterPanel'>
 
                 {/** The movie's poster */}
-                <MoviePoster
-                    posterRepo={ posterRepo }
-                    movieDetails={ movieDetails }
-                    handleClickFunc={ handleInfo }
-                />
+                { !movieDetails ?
+                    // Default movie "poster" is an animated gif of television static
+                    <img
+                        src={ imageFolder + '/402107790_STATIC_NOISE_400.gif' }
+                        alt={ 'Movie poster pending' }
+                    />
+                    : renderPoster()
+                }
 
                 {/** infoFloat, usually hidden */}
                 { isInfoAvailable && (

@@ -10,7 +10,7 @@ const PageAbout = () => {
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        posterRepo,
+        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,

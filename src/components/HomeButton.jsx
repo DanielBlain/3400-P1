@@ -10,6 +10,7 @@ const HomeButton = ({ children }) => {
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
+        moviePosterRepo,
         isStorageLocked,
         setIsStorageUnlocked,
         state,

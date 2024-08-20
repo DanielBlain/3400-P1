@@ -27,16 +27,16 @@ export const MovieAppContext = createContext({
     dispatch: null,
 })
 
+    
+// A fetch repository, to avoid duplicating requests to fetch movie posters
+// Contains {key, resource}
+const moviePosterRepo = []
+
 
 export const AppRouter = () => {
 
     // State to determine whether the "Home" buttons are disabled
     const [ isHomeBtnEnabled, setIsHomeBtnEnabled ] = useState(false)
-
-    
-    // A fetch repository, to avoid duplicating requests
-    // to fetch movie posters
-    const posterRepo = []
 
 
     // The global state manager using reducers and localStorage, and
@@ -66,7 +66,7 @@ export const AppRouter = () => {
                             value={{
                                 isHomeBtnEnabled,
                                 setIsHomeBtnEnabled,
-                                posterRepo,
+                                moviePosterRepo,
                                 isStorageLocked,
                                 setIsStorageUnlocked,
                                 state,

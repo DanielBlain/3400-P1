@@ -18,14 +18,17 @@ const PageHome = () => {
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        posterRepo,
+        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,
         dispatch,
     } = useContext(MovieAppContext)
 
-    const [ movieList, setMovieList ] = useState(null)
+    const [ movieList_0, setMovieList_0 ] = useState(null)
+    const [ movieList_1, setMovieList_1 ] = useState(null)
+    const [ movieList_2, setMovieList_2 ] = useState(null)
+    const [ movieList_3, setMovieList_3 ] = useState(null)
     const [ selectedTabNo, setSelectedTabNo ] = useState(0)
 
 
@@ -33,7 +36,20 @@ const PageHome = () => {
         const url = `${tmdbEndpoint}${filterType}?include_adult=false&include_video=false&language=en-US${pagination}&api_key=${api_key}`
         const newMovieList = await fetchList(url)
         if (newMovieList) {
-            setMovieList(newMovieList)
+            switch ( filterType ) {
+                case NOW_PLAYING:
+                    setMovieList_0(newMovieList)
+                    break
+                case POPULAR:
+                    setMovieList_1(newMovieList)
+                    break
+                case TOP_RATED:
+                    setMovieList_2(newMovieList)
+                    break
+                case UPCOMING:
+                    setMovieList_3(newMovieList)
+                    break
+            }
         }
     }
     
@@ -90,25 +106,25 @@ const PageHome = () => {
 
         switch (state.browse.homeFilter) {
             case NOW_PLAYING:
-                if ( selectedTabNo !== 0 || !movieList ) {
+                if ( selectedTabNo !== 0 || !movieList_0 ) {
                     setSelectedTabNo(0)
                     updateMovieList( NOW_PLAYING )
                 }
                 return
             case POPULAR:
-                if ( selectedTabNo !== 1 || !movieList ) {
+                if ( selectedTabNo !== 1 || !movieList_1 ) {
                     setSelectedTabNo(1)
                     updateMovieList( POPULAR )
                 }
                 return
             case TOP_RATED:
-                if ( selectedTabNo !== 2 || !movieList ) {
+                if ( selectedTabNo !== 2 || !movieList_2 ) {
                     setSelectedTabNo(2)
                     updateMovieList( TOP_RATED )
                 }
                 return
             case UPCOMING:
-                if ( selectedTabNo !==3 || !movieList ) {
+                if ( selectedTabNo !==3 || !movieList_3 ) {
                     setSelectedTabNo(3)
                     updateMovieList( UPCOMING )
                 }
@@ -117,7 +133,7 @@ const PageHome = () => {
                 setSelectedTabNo(0)
                 updateMovieList( NOW_PLAYING )
         }
-    }, [state, selectedTabNo, movieList])
+    }, [state, selectedTabNo, movieList_0, movieList_1, movieList_2, movieList_3])
 
 
     return (
@@ -167,16 +183,16 @@ const PageHome = () => {
                     </Tab>
                 </TabList>
                 <TabPanel>
-                    <MovieDisplayList movieList={ movieList } />
+                    <MovieDisplayList movieList={ movieList_0 } />
                 </TabPanel>
                 <TabPanel>
-                    <MovieDisplayList movieList={ movieList } />
+                    <MovieDisplayList movieList={ movieList_1 } />
                 </TabPanel>
                 <TabPanel>
-                    <MovieDisplayList movieList={ movieList } />
+                    <MovieDisplayList movieList={ movieList_2 } />
                 </TabPanel>
                 <TabPanel>
-                    <MovieDisplayList movieList={ movieList } />
+                    <MovieDisplayList movieList={ movieList_3 } />
                 </TabPanel>
             </Tabs>
         </section>

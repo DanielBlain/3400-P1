@@ -11,7 +11,7 @@ const PageSingle = () => {
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        posterRepo,
+        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,
