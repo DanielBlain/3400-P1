@@ -21,10 +21,9 @@
     }
 }
 
-@media (min-width: $mqb-max-paragraph) {
+@media (min-width: $mqb-min-twocol) {
     .filterPanel a {
-        font-size: 1.4em;
-        line-height: 1.4em;
+        font-size: 1.6em;
     }
 }
 
@@ -119,9 +118,6 @@ h3.dropdownButton {
 
 
 @media (min-width: $mqb-min-twocol) {
-    .supportPage .supportTabs {
-        background-color: red;
-    }
 
     .supportTabs {
         margin: 0 auto;

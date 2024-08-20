@@ -2,7 +2,7 @@
 @use '../mixins/mixins' as *;
 
 .filterPanel {
-    max-width: $mqb-max-mobile;
+    max-width: $mqb-min-fourcol;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;

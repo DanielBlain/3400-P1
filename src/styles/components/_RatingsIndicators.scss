@@ -11,8 +11,8 @@
     // To allow special positioning of children
 
     div {
-        width: 28px;
-        height: 28px;
+        width: 20px;
+        height: 20px;
         border: 3px solid $clr-black;
         border-radius: 50%;
         @include spaceButton;
@@ -33,8 +33,8 @@
     }
 
     div:nth-of-type(3) {
-        width: 46px;
-        height: 46px;
+        width: 26px;
+        height: 26px;
         grid-column: 1 / 3;
         grid-row: 2;
     }

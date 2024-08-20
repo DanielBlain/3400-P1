@@ -10,6 +10,17 @@
     .gadgetButton {
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
+    }
+}
+
+.info, .like {
+    font-size: 0.8em;
+    justify-content: center;
+    text-align: center;
+    
+    img {
+        margin: 0 auto;
     }
 }
 
@@ -78,7 +89,7 @@
 
     strong {
         display: block;
-        font-size: 1.2em;
+        font-size: 0.8em;
     }
 
     .gadgetButton {

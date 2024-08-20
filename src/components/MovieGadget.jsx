@@ -153,8 +153,12 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
                         <img
                             src={ imageFolder + '/iconmonstr-magnifier-10-240.png' }
                             alt='Like button icon'
+                            width='20px'
+                            height='20px'
                         />
-                        Info
+                        <div>
+                            Info
+                        </div>
                     </button>
                 )
                 : (
@@ -173,8 +177,12 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
                             : imageFolder + '/cinescape-like-lined-240.png'
                         }
                         alt='Like button icon'
+                        width='20px'
+                        height='20px'
                     />
-                    Like
+                    <span>
+                        Like
+                    </span>
                 </button>
             </section>
         </article>

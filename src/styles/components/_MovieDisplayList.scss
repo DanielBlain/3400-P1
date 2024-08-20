@@ -28,3 +28,9 @@
         grid-template-columns: auto auto auto auto;
     }
 }
+
+@media (min-width: $mqb-min-fivecol) {
+    .movieDisplayList > section {
+        grid-template-columns: auto auto auto auto auto;
+    }
+}
