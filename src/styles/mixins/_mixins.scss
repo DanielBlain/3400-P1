@@ -12,6 +12,11 @@
     text-transform: uppercase;
 }
 
+@mixin flat {
+    margin: 0;
+    padding: 0;
+}
+
 @mixin spacePanel {
     border-radius: 4px;
     box-shadow:         0 0 2px 2px rgba(0, 0, 0, 0.4),         0 0 4px 4px rgba(0, 0, 0, 0.6);

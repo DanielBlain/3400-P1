@@ -1,7 +1,9 @@
 @use '../base/vars' as *;
 @use '../mixins/mixins' as *;
 
+
 .pageAbout {
+    margin: 0 auto;
     padding: 0 0.6em;
 
     // Meant for references to appName
@@ -12,40 +14,93 @@
         color: $clr-control-calmIndicate;
         @include uppercase;
     }
+
 }
 
-.tmdbLogo {
-    display: flex;
-    justify-content: center;
 
-    img {
-        max-width: 80%;
+.gratitude {
+    @include flat;
+
+    & > * {
+        padding: 1em;
+    }
+
+    .span {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 1em;
+        justify-content: center;
+    
+        & img {
+            max-width: 320px;
+        }
+    }
+
+    img:first-of-type {
+        max-width: 200px;
     }
 }
+
+
+.disclaimer {
+    margin-right: 1em;
+    padding: 1em;
+    @include spacePanel;
+}
+
 
 .appAdvertPanel {
     padding: 1em;
     @include spaceButton;
-}
 
-.tagline-block {
-    margin: 1.2em auto;
-    padding: 1.2em;
-    border-left: 5px solid $clr-control-primary;
-    background-color: $clr-gray;
+    div {
+        margin: 1.2em auto;
+        padding: 1.2em;
+        border-left: 5px solid $clr-control-primary;
+        background-color: $clr-gray;
+        
+        text-align: center;
+        font-size: 1.5em;
+        font-style: italic;
+        color: $clr-control-secondary;
     
-    text-align: center;
-    font-size: 1.5em;
-    font-style: italic;
-    color: $clr-control-secondary;
-
-    & em {
-        @include uppercase;
-        font-size: 2em;
-        word-spacing: 0.6em;
+        & em {
+            @include uppercase;
+            font-size: 2em;
+            word-spacing: 0.6em;
+        }
     }
 }
 
+
 .codeAttributionList {
     list-style-type: circle;
+}
+
+
+@media (min-width: $mqb-max-paragraph) {
+    .gratitude {
+        display: flex;
+        flex: 1;
+    }
+}
+
+
+@media (min-width: $mqb-min-threecol) {
+
+    .pageAbout {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+
+        & > * {
+            width: 50%;
+        }
+
+        & > div { order: 1; }
+    }
+
+    .appAdvertPanel { order: 2; }
 }
