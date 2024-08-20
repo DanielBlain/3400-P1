@@ -7,10 +7,18 @@ import { imageFolder } from '../config/config'
 
 const HomeButton = ({ children }) => {
 
-    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const {
+        isHomeBtnEnabled,
+        setIsHomeBtnEnabled,
+        isStorageLocked,
+        setIsStorageUnlocked,
+        state,
+        dispatch,
+    } = useContext(MovieAppContext)
+
     const navigate = useNavigate()
 
-
+    
     function handleClick(e) {
         e.preventDefault()
         navigate('/')

@@ -7,9 +7,17 @@ import { imageFolder } from '../config/config'
 
 const PageAbout = () => {
     
-    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
-
-
+    const {
+        isHomeBtnEnabled,
+        setIsHomeBtnEnabled,
+        posterRepo,
+        isStorageUnlocked,
+        setIsStorageUnlocked,
+        state,
+        dispatch,
+    } = useContext(MovieAppContext)
+    
+    
     // i) Choose correct HomeBtn state
     // ii) Unlock localStorage
     // Run once on boot
@@ -111,7 +119,7 @@ const PageAbout = () => {
                 {/* Icons & other gratitude */}
                 <article>
                     <p>
-                        Small bit(s) of code from:
+                        Small bit(s) of things/code from:
                     </p>
                     <ul className='codeAttributionList'>
                         <li>
@@ -128,6 +136,15 @@ const PageAbout = () => {
                                 href='https://css-tricks.com/how-to-create-neon-text-with-css/'
                             >
                                 https://css-tricks.com/how-to-create-neon-text-with-css/
+                            </a>
+                        </li>
+                        <li>
+                            Television static gif from
+                            <a
+                                className='isUrl'
+                                href='https://cliply.co/clip/static-noise/'
+                            >
+                                https://cliply.co/clip/static-noise/
                             </a>
                         </li>
                     </ul>

@@ -15,7 +15,16 @@ const UPCOMING      = `/upcoming`
 
 const PageHome = () => {
 
-    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const {
+        isHomeBtnEnabled,
+        setIsHomeBtnEnabled,
+        posterRepo,
+        isStorageUnlocked,
+        setIsStorageUnlocked,
+        state,
+        dispatch,
+    } = useContext(MovieAppContext)
+
     const [ movieList, setMovieList ] = useState(null)
     const [ selectedTabNo, setSelectedTabNo ] = useState(0)
 

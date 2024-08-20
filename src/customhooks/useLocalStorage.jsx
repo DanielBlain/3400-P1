@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react'
 
 
 /**
- * useLocalStorage - a React hook for tightly binding your state
- *      React state with localStorage
+ * useLocalStorage - Tightly binds React state with localStorage
  * 
- * @param {string} key - The name to be used in localStorage
+ * @param {string} key - The key name to be used in localStorage
+ * 
  * @param {any} reference - The state reference, used to validate
- *      retrievals from localStorage and attempts to update state. 
- *      All object field names are compared, including nesting
+ *      retrievals from localStorage prior to attempts to update state
+ * 
  * @param {[any, function]} param2 - The state and dispatch function
  *      returned by useReducer
  * @param {any} param2[0] - The initial state
@@ -20,7 +20,7 @@ import { useState, useEffect } from 'react'
  *          or page-change periods
  *      - setIsLocalStorage: setter for the above
  *      - state: current state, also generally reflects the state
- *          in localStorage (though treat as a React state)
+ *          recorded in localStorage
  *      - dispatch: the dispatch function passed as a parameter
  */
 const useLocalStorage = (key, reference, [state, dispatch]) => {

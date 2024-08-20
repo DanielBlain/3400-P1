@@ -9,7 +9,16 @@ import HomeButton from '../components/HomeButton'
 
 const PageFavourites = () => {
 
-    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const {
+        isHomeBtnEnabled,
+        setIsHomeBtnEnabled,
+        posterRepo,
+        isStorageUnlocked,
+        setIsStorageUnlocked,
+        state,
+        dispatch,
+    } = useContext(MovieAppContext)
+
     const [ likedMoviesData, setLikedMoviesData ] = useState([])
     const [ numberOfLikedMovies, setNumberOfLikedMovies ] = useState(0)
 

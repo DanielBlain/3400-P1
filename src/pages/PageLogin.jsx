@@ -1,13 +1,21 @@
 import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
-import { appName } from '../config/config'
 
 
 const PageLogin = () => {
 
+    const {
+        isHomeBtnEnabled,
+        setIsHomeBtnEnabled,
+        posterRepo,
+        isStorageUnlocked,
+        setIsStorageUnlocked,
+        state,
+        dispatch,
+    } = useContext(MovieAppContext)
+    
     const navigate = useNavigate()
-    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
 
 
     // WARNING: POOR SECURITY CHECKING HERE -- INTENTIONAL, FOR DEMONSTRATION PURPOSES ONLY

@@ -1,22 +1,24 @@
 import { useState, createContext, useReducer } from 'react'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
+
 import { appName, appCustomState } from '../config/config'
 import useLocalStorage  from '../customhooks/useLocalStorage'
-import MovieReducer     from '../components/MovieReducer'
 
 import Header           from '../components/Header'
 import Footer           from '../components/Footer'
+import MovieReducer     from '../components/MovieReducer'
 
-import PageHome         from '../pages/PageHome'
-import PageSingle       from '../pages/PageSingle'
-import PageFavourites   from '../pages/PageFavourites'
 import PageAbout        from '../pages/PageAbout'
-import PageSupport      from '../pages/PageSupport'
+import PageFavourites   from '../pages/PageFavourites'
+import PageHome         from '../pages/PageHome'
 import PageLogin        from '../pages/PageLogin'
-import PageRegister     from '../pages/PageRegister'
 import PageNotFound     from '../pages/PageNotFound'
+import PageRegister     from '../pages/PageRegister'
+import PageSingle       from '../pages/PageSingle'
+import PageSupport      from '../pages/PageSupport'
 
 
+// The global state, shared via context
 export const MovieAppContext = createContext({
     setIsHomeBtnEnabled: null,
     isStorageUnlocked: false,
@@ -28,9 +30,17 @@ export const MovieAppContext = createContext({
 
 export const AppRouter = () => {
 
-    const [ isHomeBtnEnabled, setIsHomeBtnEnabled ] = useState(false)
     // State to determine whether the "Home" buttons are disabled
+    const [ isHomeBtnEnabled, setIsHomeBtnEnabled ] = useState(false)
 
+    
+    // A fetch repository, to avoid duplicating requests
+    // to fetch movie posters
+    const posterRepo = []
+
+
+    // The global state manager using reducers and localStorage, and
+    // can be provided via contexts
     const [ isStorageLocked, setIsStorageUnlocked, state, dispatch ]
         = useLocalStorage(
             appName,            // Key value for Storage
@@ -42,7 +52,7 @@ export const AppRouter = () => {
 
                 null            // Original state set to null to ensure we attempt
                                 // initialization from localStorage first
-            )
+            ),
         )
 
         
@@ -56,10 +66,11 @@ export const AppRouter = () => {
                             value={{
                                 isHomeBtnEnabled,
                                 setIsHomeBtnEnabled,
+                                posterRepo,
                                 isStorageLocked,
                                 setIsStorageUnlocked,
                                 state,
-                                dispatch
+                                dispatch,
                             }}
                         >
                             <a href='#mainContent' className='ScreenReaderText'>Skip to Content</a>

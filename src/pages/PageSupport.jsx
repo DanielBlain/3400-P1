@@ -7,9 +7,17 @@ import { imageFolder } from '../config/config'
 
 const PageSupport = () => {
 
-    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const {
+        isHomeBtnEnabled,
+        setIsHomeBtnEnabled,
+        posterRepo,
+        isStorageUnlocked,
+        setIsStorageUnlocked,
+        state,
+        dispatch,
+    } = useContext(MovieAppContext)
 
-
+    
     const isUserLoggedIn = () =>
         state && state.user && state.user.isLoggedIn
 

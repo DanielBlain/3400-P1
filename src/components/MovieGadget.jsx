@@ -1,15 +1,26 @@
 import PropTypes from 'prop-types'
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { MovieAppContext } from '../router/AppRouter'
-import { imageFolder } from '../config/config'
-import { extractDateComponents } from '../utilities/utilities'
-import RatingsIndicators from '../components/RatingsIndicators'
+
+import { MovieAppContext }          from '../router/AppRouter'
+import { imageFolder }              from '../config/config'
+import { extractDateComponents }    from '../utilities/utilities'
+import RatingsIndicators            from '../components/RatingsIndicators'
+import MoviePoster                  from './MoviePoster'
 
 
 const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, setIsVoteNumbersDisplaying }) => {
     
-    const { storageLockState, setInitializationLock, state, dispatch } = useContext(MovieAppContext)
+    const {
+        isHomeBtnEnabled,
+        setIsHomeBtnEnabled,
+        posterRepo,
+        isStorageUnlocked,
+        setIsStorageUnlocked,
+        state,
+        dispatch,
+    } = useContext(MovieAppContext)
+
     const [ releaseDateComponents, setReleaseDateComponents ] = useState(null)
     const [ voteAverage, setVoteAverage ] = useState(0)
     const [ isLikedFlag, setIsLikedFlag ] = useState(false)
@@ -17,7 +28,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
 
 
     const isMovieLiked = () =>
-        !storageLockState
+        !isStorageUnlocked
         && state
         && state.browse
         && state.browse.likedMovies
@@ -44,18 +55,18 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
 
 
     // Update movie details when the movieDetails array is updated
-    useEffect(() => {
+    useEffect(() => {        
         if (movieDetails === null) return
         setReleaseDateComponents( extractDateComponents( movieDetails.release_date ))
-        setVoteAverage(movieDetails.vote_average)
+        setVoteAverage( movieDetails.vote_average )
         setIsLikedFlag(
-            !storageLockState
+            isStorageUnlocked
             && state
             && state.browse
             && state.browse.likedMovies
             && state.browse.likedMovies.includes(movieDetails.id)
         )
-    },[storageLockState, state, movieDetails])
+    }, [isStorageUnlocked, isInfoAvailable, state, movieDetails])
 
 
     return (
@@ -64,14 +75,16 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
             className='movieGadget'
             id={ `movieGadget-${movieDetails.id}` }
         >
-
             <div className='posterPanel'>
-                <img
-                    src={ `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` }
-                    alt={ `Poster of movie: ${movieDetails.title}` }
-                    onClick={ handleInfo }
-                    disabled={ isInfoAvailable }
+
+                {/** The movie's poster */}
+                <MoviePoster
+                    posterRepo={ posterRepo }
+                    movieDetails={ movieDetails }
+                    handleClickFunc={ handleInfo }
                 />
+
+                {/** infoFloat, usually hidden */}
                 { isInfoAvailable && (
                     <div
                         className={ isInfoOpen ? `isInfoOpen` : `` }
@@ -83,16 +96,14 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
                         >
                             <h2>{ movieDetails.title }</h2>
                             <p>{ movieDetails.overview }</p>
-                            <Link
-                                to={`/single/${movieDetails.id}`}
-                                tabIndex={ isInfoOpen ? '100' : '-1'}
-                            >
+                            <Link to={`/single/${movieDetails.id}`} >
                                 Movie Details
                             </Link>
                         </article>
                     </div>
                 )}
             </div>
+
 
             <section className='gadgetPanel'>
 
@@ -141,7 +152,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
                     </button>
                 )
                 : (
-                    // Intentionally empty; on a page where no Info button is required
+                    // Intentionally empty; is on a page where no Info button is required
                     <div></div>
                 )}
 

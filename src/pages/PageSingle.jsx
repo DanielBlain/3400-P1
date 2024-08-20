@@ -8,7 +8,16 @@ import MovieGadget from '../components/MovieGadget'
 
 const PageSingle = () => {
 
-    const { isHomeBtnEnabled, setIsHomeBtnEnabled, isStorageUnlocked, setIsStorageUnlocked, state, dispatch } = useContext(MovieAppContext)
+    const {
+        isHomeBtnEnabled,
+        setIsHomeBtnEnabled,
+        posterRepo,
+        isStorageUnlocked,
+        setIsStorageUnlocked,
+        state,
+        dispatch,
+    } = useContext(MovieAppContext)
+
     const { movieID } = useParams()
     const [ movieDetails, setMovieDetails ] = useState(null)
     const [ isVoteNumbersDisplaying, setIsVoteNumbersDisplaying ] = useState(false)
