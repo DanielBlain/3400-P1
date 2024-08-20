@@ -1,10 +1,19 @@
 @use '../base/vars' as *;
 @use '../mixins/mixins' as *;
 
+
+.supportPage {
+    display: flex;
+    flex-direction: column;
+}
+
+
 .filterPanel a {
     padding: 0.8em;
     border: 1px solid $clr-control-calmIndicate;
     border-radius: 8px;
+    font-size: 1.2em;
+    line-height: 1.2em;
 
     &:hover {
         background-color: $clr-gray;
@@ -12,11 +21,20 @@
     }
 }
 
+@media (min-width: $mqb-max-paragraph) {
+    .filterPanel a {
+        font-size: 1.4em;
+        line-height: 1.4em;
+    }
+}
+
+
 .supportPanel {
-    margin: 0 0.4em 0.4em;
+    margin: 0 1em 1em;
     padding: 0.4em 1em;
     @include spacePanel;
 }
+
 
 .dropdownButton {
     margin: 0 0.4em;
@@ -28,14 +46,20 @@
     }
 }
 
+
 h4.dropdownButton {
     border-top-left-radius: 8px;
     border-top-right-radius: 40px;
     @include spacePanel;
 }
 
+
 h3.dropdownButton {
     margin: 1em 0 0.4em;
+}
+
+#content img {
+    max-width: $mqb-max-paragraph;
 }
 
 #contactUs {
@@ -43,6 +67,7 @@ h3.dropdownButton {
     form {
         margin: 0 0.8em 0.8em;
     }
+
 
     label {
         display: block;
@@ -89,5 +114,35 @@ h3.dropdownButton {
         &:active {
             @include spaceButton;
         }
+    }
+}
+
+
+@media (min-width: $mqb-min-twocol) {
+    .supportPage .supportTabs {
+        background-color: red;
+    }
+
+    .supportTabs {
+        margin: 0 auto;
+        max-width: $mqb-max-paragraph;
+    }
+}
+
+
+@media (min-width: $mqb-min-threecol) {
+
+    .supportPage {
+        flex-direction: row;
+        justify-content: center;
+
+        & > * {
+            margin: 2em;
+            width: 45%;
+        }
+    }
+
+    .supportTabs, #contactUs {
+        max-width: $mqb-min-threecol;
     }
 }
