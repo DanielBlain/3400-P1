@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { appName } from '../config/config'
 import { MovieAppContext } from '../router/AppRouter'
 import { imageFolder } from '../config/config'
@@ -17,11 +17,9 @@ const PageSupport = () => {
         dispatch,
     } = useContext(MovieAppContext)
 
+    const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(false)
+
     
-    const isUserLoggedIn = () =>
-        state && state.user && state.user.isLoggedIn
-
-
     // i) Choose correct HomeBtn state
     // ii) Unlock localStorage
     // Run once on boot
@@ -34,17 +32,19 @@ const PageSupport = () => {
     }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
 
+    // Set the isUserLoggedIn flag, if/when appropriate
+    useEffect(() => {
+        setIsUserLoggedIn(
+            state
+            && state.user
+            && state.user.isUserLoggedIn
+        )
+    }, [ state, setIsUserLoggedIn ])
+
+
     return (
         <section id='mainContent'>
             <h2>Support</h2>
-            <h3>Categories</h3>
-            <ul className='filterPanel'>
-                <li><a href='#website'>Website issues</a></li>
-                <li><a href='#account'>Account issues</a></li>
-                <li><a href='#content'>Content issues</a></li>
-                <li><a href='#contactUs'>Contact us</a></li>
-            </ul>
-
             <div className='supportPage'>
                 <div className='supportTabs'>
                     <section>
@@ -171,8 +171,8 @@ const PageSupport = () => {
                                 type='text'
                                 id='username'
                                 name='username'
-                                defaultValue='state.user.username'
-                                disabled={true}
+                                defaultValue={ isUserLoggedIn ? state.user.username : '' }
+                                disabled={ isUserLoggedIn }
                                 required
                             />
                         </label>
@@ -183,8 +183,9 @@ const PageSupport = () => {
                                 type='email'
                                 id='email'
                                 name='email'
-                                defaultValue='yes'
-                                disabled={true}
+                                defaultValue={ isUserLoggedIn ? state.user.email : '' }
+                                disabled={ isUserLoggedIn }
+                                
                                 required
                             />
                         </label>

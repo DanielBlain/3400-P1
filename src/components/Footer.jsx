@@ -1,19 +1,24 @@
 import SocialMediaPanel         from './SocialMediaPanel'
+import { imageFolder }          from '../config/config'
 import { author }               from '../config/config'
 import { authorQuote }          from '../config/config'
 import { getYear }              from '../utilities/utilities'
 
 const Footer = () => (
     <footer>
-        <SocialMediaPanel />
+        <section>
+            <SocialMediaPanel />
+        </section>
         <section className='copyrightTag'>
             <a
-                className='DanLogoInText'
                 href='https://www.danjblain.dev'
                 target='_blank'
                 rel='noreferrer'
             >
-                {getYear()} &copy; {author}
+
+                <span>
+                    {getYear()} &copy; {author}
+                </span>
             </a>
             <em>
                 {authorQuote}
@@ -23,3 +28,9 @@ const Footer = () => (
 )
 
 export default Footer
+
+                {/* <img
+                    src={imageFolder + '/DanLogo-x256.png'}
+                    alt='Logo for Dan J Blain'
+                    width='20px'
+                /> */}

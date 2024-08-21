@@ -98,5 +98,7 @@ export const socialMedia = [
         ariaLabel:  (string) label for accessibility
         tooltip:    (string) tooltip label
         svgPaths:   (array of strings) the raw svg paths
+            --- can be extracted from a place like https://iconmonstr.com,
+            though not all icons have the same format so this might fail
     },*/
 ]

@@ -87,3 +87,14 @@ nav {
         100%    {border-width: 6px;}
     }
 }
+
+
+@media (min-width: $mqb-min-twocol) {
+
+    nav {
+        display: block;
+        flex-direction: row;
+        flex: 1;
+        position: static;
+    }
+}

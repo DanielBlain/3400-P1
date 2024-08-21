@@ -80,6 +80,15 @@ header {
     }
 }
 
+
+@media (min-width: $mqb-min-twocol) {
+
+    .hamburgerButton {
+        display: none;
+    }
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
 
     .hamburgerButton {

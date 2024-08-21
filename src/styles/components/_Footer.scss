@@ -1,36 +1,55 @@
 @use '../base/vars' as *;
 @use '../mixins/mixins' as *;
 
+
 footer {
+    display: flex;
+    flex-direction: column;
     font-size: 1rem;
+    text-decoration: none;
+    @include spaceButton;
 
     ul {
-        margin: 0;
-        padding: 0;
+        @include flat;
         list-style-type: none;
-        width: 100%;
     }
 
-    & > * {
+    & > section {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: row;
+        justify-content: space-around;
     }
 }
 
-.copyrightTag {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    padding: 1em 0 0.6em;
-    @include spaceButton;
 
-    & > :first-child {
-        margin-left: 0.7em;
+.socialMediaPanel {
+    width: max-content;
+    padding: 0.6em;
+
+    button:not(:last-child) {
+        margin-right: 1em;
     }
+}
 
-    & > :last-child {
-        margin-right: 0.7em;
+
+.copyrightTag {
+    padding: 1.4em 1em;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+
+@media (min-width: $mqb-min-twocol) {
+
+    footer {
+        flex-direction: row-reverse;
+
+        .copyrightTag {
+            width: 100%;
+            flex-direction: column;
+            justify-content: left;
+        }
     }
 }

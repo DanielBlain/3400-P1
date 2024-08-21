@@ -7,7 +7,7 @@ const SocialMediaPanel = () => {
     const ICONSIZE = 30
 
     return (
-        <section className='socialMediaPanel'>
+        <article className='socialMediaPanel'>
             {socialMedia.map((queried, index) => (
                 <SocialMediaButton
                     key         ={ `socialMediaButton-${index}`}
@@ -19,7 +19,7 @@ const SocialMediaPanel = () => {
                     svgPaths    ={ queried.svgPaths }
                 />
             ))}
-        </section>
+        </article>
     )
 }
 
