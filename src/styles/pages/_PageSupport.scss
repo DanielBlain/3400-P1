@@ -21,15 +21,9 @@
     }
 }
 
-@media (min-width: $mqb-min-twocol) {
-    .filterPanel a {
-        font-size: 1.6em;
-    }
-}
-
 
 .supportPanel {
-    margin: 0 1em 1em;
+    margin: 1em;
     padding: 0.4em 1em;
     @include spacePanel;
 }
@@ -58,39 +52,20 @@ h3.dropdownButton {
 }
 
 #content img {
-    max-width: $mqb-max-paragraph;
+    max-width: $metric-max-logo;
 }
 
 #contactUs {
-
-    form {
-        margin: 0 0.8em 0.8em;
-    }
-
 
     label {
         display: block;
         margin: 0.8em 0;
         padding: 0.4em;
         @include spacePanel;
-
+    
         &:last-of-type {
             margin-bottom: 0.8em;
         }
-    }
-
-    input, textarea {
-        width: 100%;
-        margin-top: 0.4em;
-        font-family: $fontfam-body;
-
-        &:disabled {
-            background-color: $clr-gray;
-        }
-    }
-
-    textarea {
-        padding: 0.2em;
     }
 
     button {
@@ -119,9 +94,13 @@ h3.dropdownButton {
 
 @media (min-width: $mqb-min-twocol) {
 
+    .filterPanel a {
+        font-size: 1.6em;
+    }
+
     .supportTabs {
         margin: 0 auto;
-        max-width: $mqb-max-paragraph;
+        max-width: $metric-max-paragraph;
     }
 }
 

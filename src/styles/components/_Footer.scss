@@ -5,6 +5,7 @@
 footer {
     display: flex;
     flex-direction: column;
+    background-color: $clr-gray;
     font-size: 1rem;
     text-decoration: none;
     @include spaceButton;

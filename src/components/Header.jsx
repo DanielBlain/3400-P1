@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { useState, useEffect, useRef } from 'react'
 import HomeButton from '../components/HomeButton'
 import Nav from './Nav'
+import Hamburger from './Hamburger'
 
 
 function Header() {
@@ -40,16 +41,14 @@ function Header() {
             <span>
                 <HomeButton />
             </span>
-            <button className={'hamburgerButton' + (isOpen ? ` isOpen` : ``)} onClick={handleClick}>
-                <span className={'bar top left'}></span>
-                <span className={'bar top right'}></span>
-                <span className={'bar mid left'}></span>
-                <span className={'bar mid right'}></span>
-                <span className={'bar bottom left'}></span>
-                <span className={'bar bottom right'}></span>
-                <div className={'hamburgerGlow'}></div>
-            </button>
-            <Nav isOpen={isOpen} closeNav={closeNav} />
+            <Nav
+                isOpen={ isOpen }
+                closeNav={ closeNav }
+            />
+            <Hamburger
+                isOpen={ isOpen }
+                handleClick={ handleClick }
+            />
         </header>
     )
 }

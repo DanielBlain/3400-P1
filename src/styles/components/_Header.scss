@@ -2,118 +2,22 @@
 @use '../mixins/mixins' as *;
 
 header {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow:
+        inset 0 0 2px 2px rgba(0, 0, 0, 0.3),
+        inset 0 0 4px 4px rgba(0, 0, 0, 0.4);
+    background-color: $clr-gray;
+
     position: relative;
     // To allow special positioning of children
-
-    & > div {
-        @include spaceButton;
-        padding: 6px;
-
-        // To enable z-index, for hiding children
-        position: relative;
-        z-index: 1;
-
-        display: flex;
-        justify-content: space-between;
-        background-color: $clr-white;
-        border: 1px solid $clr-black;
-    }
-}
-
-.hamburgerButton {
-    margin: 5px;
-    padding: 14px;
-    border-radius: 8px;
-    background-color: $clr-white;
-    display: grid;
-    grid-template-columns: 17px 17px;
-    grid-auto-rows: 1fr;
-    grid-gap: 10px 0;
-    position: relative;
-    // To allow special positioning of children
-
-    .bar {
-        display: inline-block;
-        height: 0.1rem;
-        background-color: $clr-black;
-    }
-
-    .bar.top.right, .bar.mid.left {transform-origin: top left;}
-    .bar.mid.right, .bar.bottom.left {transform-origin: bottom right;}
-
-    .hamburgerGlow {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
-
-    &.isOpen {
-        @include spaceButton;
-
-        .bar.top.left {
-            translate: 50% -1px;
-        }
-    
-        .bar.top.right {
-            translate: 50% -1px;
-            rotate: 60deg;
-        }
-    
-        .bar.mid.left {
-            translate: 0 1px;
-            rotate: -60deg;
-        }
-    
-        .bar.mid.right {
-            rotate: -60deg;
-        }
-    
-        .bar.bottom.left {
-            translate: -50% 2px;
-            rotate: 60deg;
-        }
-    
-        .bar.bottom.right {
-            translate: -50% 2px;
-        }
-    }
 }
 
 
 @media (min-width: $mqb-min-twocol) {
 
-    .hamburgerButton {
+    header > .hamburgerButton {
         display: none;
     }
-}
-
-
-@media (prefers-reduced-motion: no-preference) {
-
-    .hamburgerButton {
-        .bar {
-            display: inline-block;
-            height: 0.1rem;
-            background-color: $clr-black;
-            transition: transform 0.4s ease, translate 0.4s ease, rotate 0.4s ease;
-        }
-
-        .hamburgerGlow {
-            clip-path: polygon(38% 25%, 62% 25%, 75% 50%, 62% 75%, 38% 75%, 25% 50%);
-            // To cut the special glow effect into the hexagon
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s 0.4s ease;
-        }
-
-        &.isOpen {
-            .hamburgerGlow {
-                @include plasmaPulse($clr-control-hotGlow, 3s, 0.4s);
-            }
-        }
-    }
-    
 }

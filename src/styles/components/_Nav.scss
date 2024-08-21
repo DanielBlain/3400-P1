@@ -2,22 +2,26 @@
 @use '../mixins/mixins' as *;
 
 nav {
-    width: 80%;
-    margin: 0.4em 0.4em 0;
-    position: absolute;
-    top: -300px;
-    left: 10%;
-    @include spacePanel;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    // width: 80%;
+    // margin: 0.4em 0.4em 0;
+    // position: absolute;
+    // top: -300px;
+    // left: 10%;
+    // @include spacePanel;
 
-    &.isAnim {
-        position: relative;
-        top: 0;
-    }
+    // &.isAnim {
+    //     position: relative;
+    //     top: 0;
+    // }
     
-    &.isOpen {
-        position: absolute;
-        top: 100%;
-    }
+    // &.isOpen {
+    //     position: absolute;
+    //     top: 100%;
+    // }
 
     & div {
         margin: 0.6em 0;
@@ -25,8 +29,7 @@ nav {
 
     & div:hover {
         margin: 0.6em 0;
-        border-left: 0 solid $clr-control-electricGreen;
-        border-right: 0 solid $clr-control-electricGreen;
+        outline: $clr-control-electricGreen solid 0;
     }
 
     a {
@@ -40,6 +43,17 @@ nav {
         color: $clr-white;
     }
 }
+
+
+// @media (min-width: $mqb-min-twocol) {
+
+//     nav {
+//         display: block;
+//         flex-direction: row;
+//         flex: 1;
+//         position: static;
+//     }
+// }
 
 @media (prefers-reduced-motion: no-preference) {
     nav {
@@ -83,18 +97,7 @@ nav {
     
     
     @keyframes cursorBlink {
-        0%      {border-width: 0px;}
-        100%    {border-width: 6px;}
-    }
-}
-
-
-@media (min-width: $mqb-min-twocol) {
-
-    nav {
-        display: block;
-        flex-direction: row;
-        flex: 1;
-        position: static;
+        0%      { outline: 0px; }
+        100%    { outline: 6px; }
     }
 }

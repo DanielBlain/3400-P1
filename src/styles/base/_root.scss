@@ -20,6 +20,24 @@ ul, ol {
     }
 }
 
+form {
+    margin: 0 0.8em 0.8em;
+}
+
+input, textarea {
+    width: 100%;
+    margin-top: 0.4em;
+    font-family: $fontfam-body;
+
+    &:disabled {
+        background-color: $clr-gray;
+    }
+}
+
+textarea {
+    padding: 0.2em;
+}
+
 .gadgetLabel {
     margin: 0.4em 0.2em;
     padding: 0.2em;

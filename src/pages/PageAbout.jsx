@@ -157,12 +157,10 @@ const PageAbout = () => {
                             <b>Favourites</b><br />
                             Click the star (image) to favourite a movie
                         </li>
-                        {/* <li>Playlists: </li> */}
                         <li>
                             <b>User Profiles</b><br />
                             Login to ensure your list of favourited movies are saved for next time
                         </li>
-                        {/* <li>(others?)</li> */}
                     </ul>
                     <p>
                         Discover new releases, timeless classics, and hidden gems. See

@@ -99,41 +99,41 @@ const PageHome = () => {
 
     // Ensure the selected tab matches the homeFilter
     // (Might otherwise differ if E.G. homeFilter is updated by localStorage)
-    useEffect(() => {
-        if (!state || !state.browse) {
-            return
-        }
+    // useEffect(() => {
+    //     if (!state || !state.browse) {
+    //         return
+    //     }
 
-        switch (state.browse.homeFilter) {
-            case NOW_PLAYING:
-                if ( selectedTabNo !== 0 || !movieList_0 ) {
-                    setSelectedTabNo(0)
-                    updateMovieList( NOW_PLAYING )
-                }
-                return
-            case POPULAR:
-                if ( selectedTabNo !== 1 || !movieList_1 ) {
-                    setSelectedTabNo(1)
-                    updateMovieList( POPULAR )
-                }
-                return
-            case TOP_RATED:
-                if ( selectedTabNo !== 2 || !movieList_2 ) {
-                    setSelectedTabNo(2)
-                    updateMovieList( TOP_RATED )
-                }
-                return
-            case UPCOMING:
-                if ( selectedTabNo !==3 || !movieList_3 ) {
-                    setSelectedTabNo(3)
-                    updateMovieList( UPCOMING )
-                }
-                return
-            default:
-                setSelectedTabNo(0)
-                updateMovieList( NOW_PLAYING )
-        }
-    }, [state, selectedTabNo, movieList_0, movieList_1, movieList_2, movieList_3])
+    //     switch (state.browse.homeFilter) {
+    //         case NOW_PLAYING:
+    //             if ( selectedTabNo !== 0 || !movieList_0 ) {
+    //                 setSelectedTabNo(0)
+    //                 updateMovieList( NOW_PLAYING )
+    //             }
+    //             return
+    //         case POPULAR:
+    //             if ( selectedTabNo !== 1 || !movieList_1 ) {
+    //                 setSelectedTabNo(1)
+    //                 updateMovieList( POPULAR )
+    //             }
+    //             return
+    //         case TOP_RATED:
+    //             if ( selectedTabNo !== 2 || !movieList_2 ) {
+    //                 setSelectedTabNo(2)
+    //                 updateMovieList( TOP_RATED )
+    //             }
+    //             return
+    //         case UPCOMING:
+    //             if ( selectedTabNo !==3 || !movieList_3 ) {
+    //                 setSelectedTabNo(3)
+    //                 updateMovieList( UPCOMING )
+    //             }
+    //             return
+    //         default:
+    //             setSelectedTabNo(0)
+    //             updateMovieList( NOW_PLAYING )
+    //     }
+    // }, [state, selectedTabNo, movieList_0, movieList_1, movieList_2, movieList_3])
 
 
     return (

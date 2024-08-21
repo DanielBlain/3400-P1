@@ -169,7 +169,7 @@ const PageSupport = () => {
                         <a href={ baseFolder + '/login'}>
                             logged in
                         </a>
-                        &nbsp;to send a Contact Us request
+                        &nbsp;to request contact
                     </p>
                     <form onSubmit={()=>{alert("form Submitted")}}>
                         <label>
@@ -179,7 +179,7 @@ const PageSupport = () => {
                                 id='username'
                                 name='username'
                                 defaultValue={ isUserLoggedIn ? state.user.username : '' }
-                                disabled={ isUserLoggedIn }
+                                disabled={ true }
                                 required
                             />
                         </label>
@@ -191,7 +191,7 @@ const PageSupport = () => {
                                 id='email'
                                 name='email'
                                 defaultValue={ isUserLoggedIn ? state.user.email : '' }
-                                disabled={ isUserLoggedIn }
+                                disabled={ true }
                                 
                                 required
                             />

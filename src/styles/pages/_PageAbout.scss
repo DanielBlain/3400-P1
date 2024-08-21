@@ -33,12 +33,12 @@
         justify-content: center;
     
         & img {
-            max-width: $mqb-max-paragraph;
+            max-width: $metric-max-logo;
         }
     }
 
     img:first-of-type {
-        max-width: 200px;
+        max-width: $metric-max-logo;
     }
 }
 
@@ -79,7 +79,7 @@
 }
 
 
-@media (min-width: $mqb-max-paragraph) {
+@media (min-width: $metric-max-paragraph) {
     .gratitude {
         display: flex;
         flex: 1;
