@@ -192,7 +192,6 @@ const PageSupport = () => {
                                 name='email'
                                 defaultValue={ isUserLoggedIn ? state.user.email : '' }
                                 disabled={ true }
-                                
                                 required
                             />
                         </label>
@@ -204,14 +203,25 @@ const PageSupport = () => {
                                 name='message'
                                 cols='22'
                                 rows='4'
+                                disabled={ !isUserLoggedIn ? true : false }
                                 required
                             >
                                 {/** Empty by design */}
                             </textarea>
                         </label>
 
-                        <button type='submit'>Submit</button>
-                        <button type='reset'>Reset</button>
+                        <button
+                            type='submit'
+                            disabled={ !isUserLoggedIn ? true : false }
+                        >
+                            Submit
+                        </button>
+                        <button
+                            type='reset'
+                            disabled={ !isUserLoggedIn ? true : false }
+                        >
+                            Reset
+                        </button>
                     </form>
                 </section>
             </div>

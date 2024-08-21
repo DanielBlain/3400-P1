@@ -81,7 +81,7 @@ h3.dropdownButton {
             margin-right: 0.4em;
         }
 
-        &:hover {
+        &:hover:not(:disabled) {
             border-color: $clr-black;
         }
         
