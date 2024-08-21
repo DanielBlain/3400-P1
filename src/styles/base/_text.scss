@@ -10,8 +10,14 @@ h1, h2, h3, h4, h5, h6, button, label, code {
 h1 {
     @include bandedText;
     margin: 2em auto 1em;
-    font-size: 2rem;
+    font-size: 1.2rem;
     letter-spacing: 0.2em;
+}
+
+@media (min-width: $mqb-min-twocol) {
+    h1 {
+        font-size: 2rem;
+    }
 }
 
 h2 {

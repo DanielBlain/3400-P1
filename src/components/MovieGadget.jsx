@@ -100,7 +100,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
                             onClick={ handleInfo }
                             disabled={ isInfoAvailable }
                         >
-                            <h2>{ movieDetails.title }</h2>
+                            <h2 className='isUrl'>{ movieDetails.title }</h2>
                             <p>{ movieDetails.overview }</p>
                             <Link to={`/single/${movieDetails.id}`} >
                                 Movie Details

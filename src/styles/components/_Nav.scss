@@ -1,10 +1,16 @@
 @use '../base/vars' as *;
 @use '../mixins/mixins' as *;
 
+
 nav {
-    @include flat;
+    z-index: 2; // Where:
+                    // normal       = z-index 0
+                    // infoFloat    = z-index 1
+                    // nav          = z-index 2
+                    // header       = z-index 3
     padding: 1em;
     align-items: center;
+    @include flat;
 
     a {
         padding: 0 1em;
@@ -21,7 +27,7 @@ nav {
     a:hover {
         text-decoration: underline;
         animation-duration: 1s;
-        animation-name: cursorBlink;
+        animation-name: coronaPulse;
         animation-direction: alternate;
         animation-iteration-count: infinite;
     }
@@ -33,15 +39,16 @@ nav {
     nav {
         flex-direction: column;
         position: absolute;
-        top: -300px;
+        top: -1000px;
+        right: 0;
+
+        div {
+            padding: 0 1em;
+        }
     }
 
-    a div {
-        padding: 0 1em;
-    }
 
-    // Two step animation - brings it onscreen (translate)
-    // and expands from 0% max-width to 100% max-width
+    
     @media (prefers-reduced-motion: no-preference) {
 
         nav {
@@ -72,19 +79,19 @@ nav {
 }
 
 
-@keyframes cursorBlink {
+@keyframes coronaPulse {
     0%      { text-decoration-color: $clr-control-electricGreen; }
     100%    { text-decoration-color: $clr-white; }
 }
 
 
 @keyframes slottingOpening {
-    0%      { top: -300px; }
-    100%    { top: 0; }
+    0%      { top: -1000px; }
+    100%    { top: 100%; }
 }
 
 
 @keyframes slottingClosing {
-    0%      { top: 0; }
-    100%    { top: -300px; }
+    0%      { top: 100%; }
+    100%    { top: -1000px; }
 }

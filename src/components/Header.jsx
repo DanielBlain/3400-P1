@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
 import { useState, useEffect, useRef } from 'react'
-import HomeButton from '../components/HomeButton'
-import Nav from './Nav'
-import Hamburger from './Hamburger'
+import HomeButton   from '../components/HomeButton'
+import LoginButton  from './LoginButton'
+import Hamburger    from './Hamburger'
+import Nav          from './Nav'
 
 
 function Header() {
@@ -42,10 +43,13 @@ function Header() {
             <span>
                 <HomeButton />
             </span>
-            <Hamburger
-                isOpen={ isOpen }
-                handleClick={ handleClick }
-            />
+            <div>
+                <LoginButton />
+                <Hamburger
+                    isOpen={ isOpen }
+                    handleClick={ handleClick }
+                />
+            </div>
             <Nav
                 isOpen={ isOpen }
                 closeNav={ closeNav }

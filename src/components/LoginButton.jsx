@@ -5,7 +5,7 @@ import { MovieAppContext } from '../router/AppRouter'
 import { imageFolder } from '../config/config'
 
 
-const HomeButton = ({ children }) => {
+const LoginButton = ({ children }) => {
 
     const {
         isHomeBtnEnabled,
@@ -22,7 +22,12 @@ const HomeButton = ({ children }) => {
     
     function handleClick(e) {
         e.preventDefault()
-        navigate('/')
+        if (state && state.user && state.user.timeLoggedIn) {
+            dispatch({ type: 'logOut' })
+        }
+        else {
+            navigate('/login')
+        }
     }
 
 
@@ -30,9 +35,8 @@ const HomeButton = ({ children }) => {
         <div className={ 'homeBtnPanel' }>
             <button
                 onClick={handleClick}
-                disabled={ !isHomeBtnEnabled }
             >
-                <img src={ imageFolder + '/cinescape-e.png' } alt='Icon for Home Button' />
+                <img src={ imageFolder + '/cinescape-login.png' } alt='Icon for Login Button' />
             </button>
             { children }
         </div>
@@ -40,8 +44,8 @@ const HomeButton = ({ children }) => {
 }
 
 
-HomeButton.propTypes = {
+LoginButton.propTypes = {
     children: PropTypes.node,
 }
 
-export default HomeButton
+export default LoginButton

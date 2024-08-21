@@ -55,7 +55,11 @@
 
 .infoFloat {
     display: none;
-    z-index: 1;
+    z-index: 1; // Where:
+                    // normal       = z-index 0
+                    // infoFloat    = z-index 1
+                    // nav          = z-index 2
+                    // header       = z-index 3
     width: 100%;
     min-height: 100%;
     overflow-y: hidden;

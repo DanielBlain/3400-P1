@@ -30,7 +30,7 @@ const Nav = ({ isOpen, closeNav }) => {
         >
             <NavLink
                 // Ensure NavLinks are not tabable while the Nav is closed
-                tabIndex={isOpen ? '1' : '-1'}
+                tabIndex={isOpen ? '0' : '-1'}
                 to='/'
             >
                 <div>
@@ -38,7 +38,7 @@ const Nav = ({ isOpen, closeNav }) => {
                 </div>
             </NavLink>
             <NavLink
-                tabIndex={isOpen ? '2' : '-1'}
+                tabIndex={isOpen ? '0' : '-1'}
                 to='/about'
             >
                 <div>
@@ -46,7 +46,7 @@ const Nav = ({ isOpen, closeNav }) => {
                 </div>
             </NavLink>
             <NavLink
-                tabIndex={isOpen ? '3' : '-1'}
+                tabIndex={isOpen ? '0' : '-1'}
                 to='/favourites'
             >
                 <div>
@@ -54,7 +54,7 @@ const Nav = ({ isOpen, closeNav }) => {
                 </div>
             </NavLink>                
             <NavLink
-                tabIndex={isOpen ? '4' : '-1'}
+                tabIndex={isOpen ? '0' : '-1'}
                 to='/support'
             >
                 <div>

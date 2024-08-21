@@ -1,0 +1,33 @@
+@use '../base/vars' as *;
+@use '../mixins/mixins' as *;
+
+.homeBtnPanel {
+    display: flex;
+    font-family: $fontfam-headers;
+
+    & button {
+        padding: 5px;
+        border-radius: 8px;
+        width: 60px;
+        height: 60px;
+        background-color: $clr-control-primary;
+        @include spaceButton;
+    
+        &:hover {
+            background-color: $clr-control-hover;
+        }
+
+        &:focus {
+            background-color: $clr-control-secondary;
+        }
+    
+        &:disabled {
+            background-color: $clr-gray;
+            pointer-events: none;
+        }
+    }
+
+    & > * {
+        align-self: center;
+    }
+}

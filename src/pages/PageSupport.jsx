@@ -18,6 +18,12 @@ const PageSupport = () => {
     } = useContext(MovieAppContext)
 
     const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(false)
+    const [ isCommented, setIsCommented ] = useState(false)
+
+
+    const handleComment = (event) => {
+        setIsCommented(event.target.value !== '');
+    }
 
 
     // i) Choose correct HomeBtn state
@@ -191,7 +197,7 @@ const PageSupport = () => {
                                 id='email'
                                 name='email'
                                 defaultValue={ isUserLoggedIn ? state.user.email : '' }
-                                disabled={ true }
+                                disabled={ !isUserLoggedIn || state.user.email === '' ? true : false }
                                 required
                             />
                         </label>
@@ -201,9 +207,9 @@ const PageSupport = () => {
                             <textarea
                                 id='message'
                                 name='message'
+                                onChange={ handleComment }
                                 cols='22'
                                 rows='4'
-                                disabled={ !isUserLoggedIn ? true : false }
                                 required
                             >
                                 {/** Empty by design */}
@@ -212,13 +218,13 @@ const PageSupport = () => {
 
                         <button
                             type='submit'
-                            disabled={ !isUserLoggedIn ? true : false }
+                            disabled={ !isCommented ? true : false }
                         >
                             Submit
                         </button>
                         <button
                             type='reset'
-                            disabled={ !isUserLoggedIn ? true : false }
+                            disabled={ !isCommented ? true : false }
                         >
                             Reset
                         </button>
