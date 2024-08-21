@@ -25,7 +25,9 @@ export const appCustomState = {
     user: {
         username: null,             // string
         email: null,                // string
-        isLoggedIn: false,          // bool
+        timeLoggedIn: null,         // timestamp in terms of Javascript's Date.now
+                                    // which is, according to: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
+                                    // the "number of milliseconds elapsed since the epoch, which is defined as the midnight at the beginning of January 1, 1970, UTC"
     },
     browse: {
         homeFilter: null,           // string

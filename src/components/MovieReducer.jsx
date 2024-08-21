@@ -57,8 +57,8 @@ const MovieReducer = (state, action) => {
                 //...state, // Not required for now since all fields are wiped
                 user: {
                     username: action.username,
-                    // email:
-                    // password:
+                    email: action.email,
+                    password: action.password,
                     timeLoggedIn: getTimestamp()
                 },
                 browse: {
@@ -75,6 +75,9 @@ const MovieReducer = (state, action) => {
             return {
                 ...state,
                 user: {
+                    ...state.user,                  // Normally don't do this -- Demo purposes only
+                                                    // Done here so I don't need a backend, and
+                                                    // I can just re-register to fill the user data
                     username: action.username,
                     timeLoggedIn: getTimestamp()
                 }

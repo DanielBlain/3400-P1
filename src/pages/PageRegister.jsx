@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MovieAppContext } from '../router/AppRouter'
-import { appName } from '../config/config'
+import { baseFolder } from '../config/config'
 
 
 const PageRegister = () => {
@@ -44,6 +44,7 @@ const PageRegister = () => {
             dispatch({
                 type: 'register',
                 username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
                 password: document.getElementById('password').value,
             })
             navigate('/login')
@@ -131,6 +132,14 @@ const PageRegister = () => {
                     Register
                 </button>
             </form>
+            
+            <p className='caveat'>
+                * NOTE: If you have already registered, you may&nbsp;
+                <a href={ baseFolder + '/register'}>
+                    login
+                </a>
+                &nbsp;instead
+            </p>            
         </section>        
     )
 }

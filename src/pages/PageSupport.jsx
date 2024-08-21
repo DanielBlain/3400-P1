@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { appName } from '../config/config'
 import { MovieAppContext } from '../router/AppRouter'
-import { imageFolder } from '../config/config'
+import { baseFolder, imageFolder } from '../config/config'
 import ClickDropdown from '../components/ClickDropdown'
 
 
@@ -19,7 +19,7 @@ const PageSupport = () => {
 
     const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(false)
 
-    
+
     // i) Choose correct HomeBtn state
     // ii) Unlock localStorage
     // Run once on boot
@@ -37,7 +37,7 @@ const PageSupport = () => {
         setIsUserLoggedIn(
             state
             && state.user
-            && state.user.isUserLoggedIn
+            && state.user.timeLoggedIn
         )
     }, [ state, setIsUserLoggedIn ])
 
@@ -163,7 +163,14 @@ const PageSupport = () => {
                 </div>
 
                 <section id='contactUs'>
-                    <h2>Contact Us</h2>    
+                    <h2>Contact Us</h2>
+                    <p className='caveat'>
+                        * NOTE: Users must be&nbsp;
+                        <a href={ baseFolder + '/login'}>
+                            logged in
+                        </a>
+                        &nbsp;to send a Contact Us request
+                    </p>
                     <form onSubmit={()=>{alert("form Submitted")}}>
                         <label>
                             Username<br />

@@ -29,13 +29,13 @@
 .loginButton {
     width: 100%;
     padding: 1em;
-    background-color: $clr-control-secondary;
+    background-color: $clr-control-calmIndicate;
     color: $clr-white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-        background-color: $clr-control-hover;
+        background-color: $clr-control-lightIndicate;
     }
 }

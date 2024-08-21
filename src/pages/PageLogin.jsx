@@ -1,5 +1,6 @@
 import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { baseFolder } from '../config/config'
 import { MovieAppContext } from '../router/AppRouter'
 
 
@@ -98,6 +99,14 @@ const PageLogin = () => {
                     Login
                 </button>
             </form>
+            
+            <p className='caveat'>
+                * NOTE: To log in, you must&nbsp;
+                <a href={ baseFolder + '/register'}>
+                    register
+                </a>
+                &nbsp;first
+            </p>
         </section>        
     )
 }

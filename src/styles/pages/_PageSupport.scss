@@ -84,8 +84,8 @@ h3.dropdownButton {
         margin-top: 0.4em;
         font-family: $fontfam-body;
 
-        :disabled {
-            background-color: $clr-control-calmIndicate;
+        &:disabled {
+            background-color: $clr-gray;
         }
     }
 
