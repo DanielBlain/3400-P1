@@ -2,102 +2,89 @@
 @use '../mixins/mixins' as *;
 
 nav {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    // width: 80%;
-    // margin: 0.4em 0.4em 0;
-    // position: absolute;
-    // top: -300px;
-    // left: 10%;
-    // @include spacePanel;
-
-    // &.isAnim {
-    //     position: relative;
-    //     top: 0;
-    // }
-    
-    // &.isOpen {
-    //     position: absolute;
-    //     top: 100%;
-    // }
-
-    & div {
-        margin: 0.6em 0;
-    }
-
-    & div:hover {
-        margin: 0.6em 0;
-        outline: $clr-control-electricGreen solid 0;
-    }
+    @include flat;
+    padding: 1em;
+    align-items: center;
 
     a {
+        padding: 0 1em;
         font-family: $fontfam-headers;
         font-size: 2em;
         color: $clr-control-electricGreen;
         text-decoration: none;
     }
 
+    a:active, a:focus {
+        @include neonText($clr-control-electricGreen, 6px);
+    }
+
     a:hover {
-        color: $clr-white;
+        text-decoration: underline;
+        animation-duration: 1s;
+        animation-name: cursorBlink;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
     }
 }
 
 
-// @media (min-width: $mqb-min-twocol) {
+@media (min-width: $mqb-min-twocol) and (max-width: $mqb-min-threecol) {
 
-//     nav {
-//         display: block;
-//         flex-direction: row;
-//         flex: 1;
-//         position: static;
-//     }
-// }
-
-@media (prefers-reduced-motion: no-preference) {
     nav {
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-        animation-timing-function: ease-in;
-    
-        &.isAnim {
-            animation-name: slottingClosing;
-        }
-        
-        &.isOpen {
-            top: -300px;
-            animation-name: slottingOpening;
-        }
-    
-        & div:hover {
-            animation-duration: 0.05s;
-            animation-name: cursorBlink;
-            animation-direction: alternate;
-            animation-iteration-count: infinite;
-        }
+        flex-direction: column;
+        position: absolute;
+        top: -300px;
+    }
 
-        a:hover {
-            @include neonText($clr-control-electricGreen, 4px);
+    a div {
+        padding: 0 1em;
+    }
+
+    // Two step animation - brings it onscreen (translate)
+    // and expands from 0% max-width to 100% max-width
+    @media (prefers-reduced-motion: no-preference) {
+
+        nav {
+            animation-duration: 0.2s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-in-out;
+
+            &.isAnim {
+                animation-name: slottingClosing;
+            }
+
+            &.isOpen {
+                animation-name: slottingOpening;
+            }
         }
     }
-        
+}
 
-    @keyframes slottingOpening {
-        0%      {top: -300px;   position: relative;}
-        100%    {top: 0;        position: relative;}
+
+@media (min-width: $mqb-min-threecol) {
+
+    nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: max-content;
     }
-    
-    
-    @keyframes slottingClosing {
-        0%      {top: 0;        position: relative;}
-        99%     {top: -300px;   position: relative;}
-        100%    {top: -300px;   position: absolute;}
-    }
-    
-    
-    @keyframes cursorBlink {
-        0%      { outline: 0px; }
-        100%    { outline: 6px; }
-    }
+}
+
+
+@keyframes cursorBlink {
+    0%      { text-decoration-color: $clr-control-electricGreen; }
+    100%    { text-decoration-color: $clr-white; }
+}
+
+
+@keyframes slottingOpening {
+    0%      { top: -300px; }
+    100%    { top: 0; }
+}
+
+
+@keyframes slottingClosing {
+    0%      { top: 0; }
+    100%    { top: -300px; }
 }

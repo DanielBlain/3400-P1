@@ -31,6 +31,7 @@ function Header() {
 
         document.addEventListener('mousedown', handleClickElsewhere)
         return(() => {
+            closeNav()
             document.removeEventListener('mousedown', handleClickElsewhere)
         })
     })
@@ -41,13 +42,13 @@ function Header() {
             <span>
                 <HomeButton />
             </span>
-            <Nav
-                isOpen={ isOpen }
-                closeNav={ closeNav }
-            />
             <Hamburger
                 isOpen={ isOpen }
                 handleClick={ handleClick }
+            />
+            <Nav
+                isOpen={ isOpen }
+                closeNav={ closeNav }
             />
         </header>
     )
