@@ -34,14 +34,24 @@ header {
 
 @media (max-width: $mqb-min-twocol) {
 
-    header nav {
+    nav {
         width: 100%;
     }
 }
 
 @media (min-width: $mqb-min-twocol) and (max-width: $mqb-min-threecol) {
 
+
     .hamburgerButton {
         display: grid;
+        // To make cancel "display: none" and
+        // because block/flex will crush the icon
+    }
+}
+
+@media (min-width: $mqb-min-threecol) {
+
+    header > div {
+        order: 3;
     }
 }

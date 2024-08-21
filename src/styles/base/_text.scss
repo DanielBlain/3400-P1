@@ -14,7 +14,7 @@ h1 {
     letter-spacing: 0.2em;
 }
 
-@media (min-width: $mqb-min-twocol) {
+@media (min-width: $metric-max-paragraph) {
     h1 {
         font-size: 2rem;
     }

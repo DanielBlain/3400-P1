@@ -10,26 +10,22 @@ nav {
                     // header       = z-index 3
     padding: 1em;
     align-items: center;
+    font-family: $fontfam-headers;
+    font-size: 2em;
     @include flat;
-
+    
     a {
         padding: 0 1em;
-        font-family: $fontfam-headers;
-        font-size: 2em;
         color: $clr-control-electricGreen;
         text-decoration: none;
     }
-
+    
     a:active, a:focus {
         @include neonText($clr-control-electricGreen, 6px);
     }
-
+    
     a:hover {
         text-decoration: underline;
-        animation-duration: 1s;
-        animation-name: coronaPulse;
-        animation-direction: alternate;
-        animation-iteration-count: infinite;
     }
 }
 
@@ -46,25 +42,6 @@ nav {
             padding: 0 1em;
         }
     }
-
-
-    
-    @media (prefers-reduced-motion: no-preference) {
-
-        nav {
-            animation-duration: 0.2s;
-            animation-fill-mode: forwards;
-            animation-timing-function: ease-in-out;
-
-            &.isAnim {
-                animation-name: slottingClosing;
-            }
-
-            &.isOpen {
-                animation-name: slottingOpening;
-            }
-        }
-    }
 }
 
 
@@ -75,6 +52,39 @@ nav {
         flex-direction: row;
         justify-content: space-around;
         width: max-content;
+    }
+}
+
+
+@media (min-width: $mqb-min-threecol) and (max-width: $mqb-min-fourcol) {
+
+    nav {
+        font-size: 1.2em;
+    }
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+
+    nav {
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in-out;
+
+        &.isAnim {
+            animation-name: slottingClosing;
+        }
+
+        &.isOpen {
+            animation-name: slottingOpening;
+        }
+    
+        a:hover {
+            animation-duration: 0.1s;
+            animation-name: coronaPulse;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;        
+        }
     }
 }
 
