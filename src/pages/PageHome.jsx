@@ -11,6 +11,7 @@ const NOW_PLAYING   = `/now_playing`
 const POPULAR       = `/popular`
 const TOP_RATED     = `/top_rated`
 const UPCOMING      = `/upcoming`
+const movieFilters = [ NOW_PLAYING, POPULAR, TOP_RATED, UPCOMING ]
 
 
 const PageHome = () => {
@@ -58,31 +59,41 @@ const PageHome = () => {
     const setTabNo = ( tabNo ) => {
         switch (tabNo) {
             case 0:
-                setSelectedTabNo(0)
                 dispatch({ type: 'setFilter', filter: NOW_PLAYING })
-                updateMovieList( NOW_PLAYING )
                 return
             case 1:
-                setSelectedTabNo(1)
                 dispatch({ type: 'setFilter', filter: POPULAR })
-                updateMovieList( POPULAR )
                 return
             case 2:
-                setSelectedTabNo(2)
                 dispatch({ type: 'setFilter', filter: TOP_RATED })
-                updateMovieList( TOP_RATED )
                 return
             case 3:
-                setSelectedTabNo(3)
                 dispatch({ type: 'setFilter', filter: UPCOMING })
-                updateMovieList( UPCOMING )
                 return
             default:
-                setSelectedTabNo(0)
                 dispatch({ type: 'setFilter', filter: NOW_PLAYING })
-                updateMovieList( NOW_PLAYING )
         }
     }
+
+
+    // Ensure the NOW_PLAYING filter is loaded if the existing state
+    // is bad, such as on a first visit. If it's good, ensure the
+    // UI reflects it. CAREFUL OF INFINITE RENDERING
+    useEffect(() => {
+        if (state && state.browse) {
+            const movieFilterIndex = movieFilters.findIndex( queried => queried === state.browse.homeFilter)
+
+            if (movieFilterIndex === -1) {
+                dispatch({ type: 'setFilter', filter: NOW_PLAYING})
+            }
+            else {
+                console.log('GOT HERE')
+                const newFilter = movieFilters[ movieFilterIndex ]
+                setSelectedTabNo( movieFilterIndex )
+                updateMovieList( newFilter )
+            }
+        }
+    }, [state, dispatch])
 
 
     // i) Choose correct HomeBtn state
@@ -94,45 +105,7 @@ const PageHome = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
-
-
-    // Ensure the selected tab matches the homeFilter
-    // (Might otherwise differ if E.G. homeFilter is updated by localStorage)
-    useEffect(() => {
-        if (!state || !state.browse) {
-            return
-        }
-
-        switch (state.browse.homeFilter) {
-            case NOW_PLAYING:
-                if ( selectedTabNo !== 0 || !movieList_0 ) {
-                    setSelectedTabNo(0)
-                    updateMovieList( NOW_PLAYING )
-                }
-                return
-            case POPULAR:
-                if ( selectedTabNo !== 1 || !movieList_1 ) {
-                    setSelectedTabNo(1)
-                    updateMovieList( POPULAR )
-                }
-                return
-            case TOP_RATED:
-                if ( selectedTabNo !== 2 || !movieList_2 ) {
-                    setSelectedTabNo(2)
-                    updateMovieList( TOP_RATED )
-                }
-                return
-            case UPCOMING:
-                if ( selectedTabNo !==3 || !movieList_3 ) {
-                    setSelectedTabNo(3)
-                    updateMovieList( UPCOMING )
-                }
-                return
-            default:
-                setTabNo(0)
-        }
-    }, [state, selectedTabNo, movieList_0, movieList_1, movieList_2, movieList_3])
+    }, [])
 
 
     return (

@@ -27,6 +27,19 @@ const PageSingle = () => {
             genresArray.map( queried => queried.name )
         ).join(' - ')
 
+
+    // i) Choose correct HomeBtn state
+    // ii) Unlock localStorage
+    // Run once on boot
+    useEffect(() => {
+        setIsHomeBtnEnabled(true)
+        setIsStorageUnlocked(true)
+        return (() => {
+            setIsStorageUnlocked(false)
+        })
+    }, [])
+
+    
     // Attempt to fetch movie details
     useEffect(() => {
         async function getMovieDetails(movieID) {
@@ -44,18 +57,6 @@ const PageSingle = () => {
 
         getMovieDetails(movieID)
     }, [movieID])
-
-
-    // i) Choose correct HomeBtn state
-    // ii) Unlock localStorage
-    // Run once on boot
-    useEffect(() => {
-        setIsHomeBtnEnabled(true)
-        setIsStorageUnlocked(true)
-        return (() => {
-            setIsStorageUnlocked(false)
-        })
-    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
 
 
     return (

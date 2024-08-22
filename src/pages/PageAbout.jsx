@@ -27,7 +27,7 @@ const PageAbout = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
+    }, [])
 
     
     return (

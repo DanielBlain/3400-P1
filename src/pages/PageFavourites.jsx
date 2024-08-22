@@ -39,7 +39,7 @@ const PageFavourites = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
+    }, [])
 
 
     // Update numberOfLikedMovies when the likedMovieData changes

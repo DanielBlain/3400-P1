@@ -57,7 +57,7 @@ const PageLogin = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
+    }, [])
 
 
     return (

@@ -35,7 +35,7 @@ const PageSupport = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
+    }, [])
 
 
     // Set the isUserLoggedIn flag, if/when appropriate
@@ -45,7 +45,7 @@ const PageSupport = () => {
             && state.user
             && state.user.timeLoggedIn
         )
-    }, [ state, setIsUserLoggedIn ])
+    }, [state, setIsUserLoggedIn])
 
 
     return (

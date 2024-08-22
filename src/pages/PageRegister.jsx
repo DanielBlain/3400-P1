@@ -64,7 +64,7 @@ const PageRegister = () => {
         return (() => {
             setIsStorageUnlocked(false)
         })
-    }, [setIsHomeBtnEnabled, setIsStorageUnlocked])
+    }, [])
 
 
     return (
