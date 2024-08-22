@@ -1,11 +1,58 @@
+@use '../base//vars' as *;
 @use '../mixins/mixins' as *;
 
-.spacePanel {
-    margin: 0.2em;
-    padding: 1em 2em;
-    @include spacePanel;
+
+.pageSingle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+
+    & > div:first-of-type {
+        max-width: 420px;
+        margin-left: 1em;
+    }
 }
 
 .singleDetailsPanel {
-    margin: 2em 0.2em;
+    padding: 0 0.2em 1em;
+    
+    p {
+        padding: 0 2em;
+    }
+}
+
+
+@media (min-width: $mqb-min-twocol) {
+
+    .pageSingle {
+        flex-direction: row;
+        align-items: start;
+        justify-content: center;
+    }
+
+    .singleDetailsPanel {
+        margin-right: 1em;
+
+        p {
+            max-width: $metric-max-paragraph;
+        }
+    }
+}
+
+
+@media (min-width: $mqb-min-threecol) {
+
+    .pageSingle {
+        flex-direction: row;
+        align-items: start;
+
+        p {
+            margin: 0 1em;
+        }
+
+        & > div:first-of-type {
+            width: $metric-max-paragraph;
+        }
+    }
 }

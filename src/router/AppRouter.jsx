@@ -27,11 +27,6 @@ export const MovieAppContext = createContext({
     dispatch: null,
 })
 
-    
-// A fetch repository, to avoid duplicating requests to fetch movie posters
-// Contains {key, resource}
-const moviePosterRepo = []
-
 
 export const AppRouter = () => {
 
@@ -66,7 +61,6 @@ export const AppRouter = () => {
                             value={{
                                 isHomeBtnEnabled,
                                 setIsHomeBtnEnabled,
-                                moviePosterRepo,
                                 isStorageLocked,
                                 setIsStorageUnlocked,
                                 state,

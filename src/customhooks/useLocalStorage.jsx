@@ -110,7 +110,7 @@ const useLocalStorage = (key, reference, [state, dispatch]) => {
 
     }, [isStorageUnlocked, key, reference, state, dispatch])
 
-    return [isStorageUnlocked, setIsStorageUnlocked, state, dispatch]
+    return [ isStorageUnlocked, setIsStorageUnlocked, state, dispatch ]
 }
 
 export default useLocalStorage

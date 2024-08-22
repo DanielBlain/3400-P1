@@ -11,7 +11,6 @@ const PageSingle = () => {
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,
@@ -21,11 +20,6 @@ const PageSingle = () => {
     const { movieID } = useParams()
     const [ movieDetails, setMovieDetails ] = useState(null)
     const [ isVoteNumbersDisplaying, setIsVoteNumbersDisplaying ] = useState(false)
-
-    const makeGenresString = genresArray =>
-        (
-            genresArray.map( queried => queried.name )
-        ).join(' - ')
 
 
     // i) Choose correct HomeBtn state
@@ -58,6 +52,10 @@ const PageSingle = () => {
         getMovieDetails(movieID)
     }, [movieID])
 
+    const makeGenresString = genresArray =>
+        (
+            genresArray.map( queried => queried.name )
+        ).join(' - ')
 
     return (
         <section id='mainContent'>
@@ -69,20 +67,27 @@ const PageSingle = () => {
                             : 'Movie loading or not found'
                         }
                     </h2>
-                    <section>
-                        <MovieGadget
-                            key={ `movieGadget-${movieDetails.id}` }
-                            movieDetails={ movieDetails }
-                            isInfoAvailable={ false }
-                            isVoteNumbersDisplaying={ isVoteNumbersDisplaying }
-                            setIsVoteNumbersDisplaying={ setIsVoteNumbersDisplaying }
-                        />
+                    <section className='pageSingle'>
+                        <div>
+                            <MovieGadget
+                                key={ `movieGadget-${movieDetails.id}` }
+                                movieDetails={ movieDetails }
+                                isInfoAvailable={ false }
+                                isVoteNumbersDisplaying={ isVoteNumbersDisplaying }
+                                setIsVoteNumbersDisplaying={ setIsVoteNumbersDisplaying }
+                            />
+                        </div>
                         <div className='singleDetailsPanel'>
-                            <b>Genres</b>
-                            <p className='detailLabel'>
+                            <h3>
+                                Genres
+                            </h3>
+                            <p>
                                 { makeGenresString(movieDetails.genres) }
                             </p>
-                            <p className='spacePanel'>
+                            <h3>
+                                Summary
+                            </h3>
+                            <p>
                                 {movieDetails.overview}
                             </p>
                         </div>

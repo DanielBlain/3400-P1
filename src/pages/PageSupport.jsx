@@ -10,7 +10,6 @@ const PageSupport = () => {
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,
@@ -197,7 +196,7 @@ const PageSupport = () => {
                                 id='email'
                                 name='email'
                                 defaultValue={ isUserLoggedIn ? state.user.email : '' }
-                                disabled={ !isUserLoggedIn || state.user.email === '' ? true : false }
+                                disabled={ !isUserLoggedIn || state.user.email !== '' ? true : false }
                                 required
                             />
                         </label>

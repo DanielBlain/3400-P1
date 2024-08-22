@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useMemo } from 'react'
 
 
 /**
@@ -6,9 +6,6 @@ import { useState, useEffect } from 'react'
  * Stores the resource in the browser's cache to avoid refetching
  * (though, currently I'm uncertain whether it's having a
  * performance benefit)
- * 
- * @param {array} moviePosterRepo - An array to be used for saving the
- *      resource in the browser's cache
  * 
  * @param {object} movieDetails - The movie details, which should have
  * been fetched from TMDB
@@ -18,45 +15,25 @@ import { useState, useEffect } from 'react'
  * 
  * @returns render - A function you call to render the movie poster
  */
-const useMoviePoster = ( moviePosterRepo, movieDetails, handleClickFunc ) => {
+const useMoviePoster = ( movieDetails, handleClickFunc ) => {
 
-    const [ isMovieLoaded, setIsMovieLoaded ] = useState(false)
-
-
-    useEffect(() => {
-        if (movieDetails === null) return
-        setIsMovieLoaded(true)
-    }, [movieDetails, setIsMovieLoaded])
-
-
-    function render() {
-        if ( !isMovieLoaded ) {
+    const render = useMemo(() => {
+        if ( !movieDetails ) {
             return undefined
         }
 
-        const posterAcquired = moviePosterRepo.find( queried => queried.key === `${movieDetails.title}` )
+        const newPoster = (
+            <img
+                src={ `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}` }
+                alt={ `Poster of movie titled: ${movieDetails.title}` }
+                onClick={ handleClickFunc }
+            />
+        )
 
-        if (posterAcquired) {
-            return posterAcquired.resource
-        }
-        else {
-            const newResource = (
-                <img
-                    src={ `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}` }
-                    alt={ `Poster of movie titled: ${movieDetails.title}` }
-                    onClick={ handleClickFunc }
-                />
-            )
-            moviePosterRepo.push({
-                key: `${movieDetails.title}`,
-                resource: newResource
-            })
-            return newResource            
-        }
-    }
+        return newPoster
+    }, [ movieDetails, handleClickFunc ])
 
-
-    return [ render ]
+    return { render }
 }
 
 export default useMoviePoster

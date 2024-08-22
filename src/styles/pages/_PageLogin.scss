@@ -1,6 +1,7 @@
 @use '../base/vars' as *;
 
 .loginBox {
+    max-width: $mqb-min-twocol;
     margin: 3em 0.2em;
     padding: 2em;
     border: 1px solid $clr-black;
@@ -37,5 +38,12 @@
 
     &:hover {
         background-color: $clr-control-lightIndicate;
+    }
+}
+
+@media (min-width: $mqb-min-twocol) {
+
+    .loginBox {
+        margin: 0 auto;
     }
 }

@@ -12,7 +12,6 @@ const PageFavourites = () => {
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,

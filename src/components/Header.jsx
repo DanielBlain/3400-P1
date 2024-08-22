@@ -9,37 +9,20 @@ import Nav          from './Nav'
 function Header() {
 
     const [ isOpen, setIsOpen ] = useState(false)
-    const headerRef = useRef(null)
 
 
     function handleClick() {
-        setIsOpen(!isOpen)
+        setIsOpen( prevIsOpen => !prevIsOpen)
     }
 
 
     function closeNav() {
-        setIsOpen(false)
+        setIsOpen( false )
     }
 
 
-    // Close the nav when we click anywhere off the header
-    useEffect(() => {
-        const handleClickElsewhere = e => {
-            if (headerRef.current && !headerRef.current.contains(e.target)) {
-                closeNav()
-            }
-        }
-
-        document.addEventListener('mousedown', handleClickElsewhere)
-        return(() => {
-            closeNav()
-            document.removeEventListener('mousedown', handleClickElsewhere)
-        })
-    })
-
-
     return (
-        <header ref={headerRef}>
+        <header>
             <span>
                 <HomeButton />
             </span>

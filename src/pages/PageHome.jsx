@@ -7,10 +7,10 @@ import MovieDisplayList from '../components/MovieDisplayList'
 
 
 // Home page movie filter constants, double as partial urls for fetching
-const NOW_PLAYING   = `/now_playing`
-const POPULAR       = `/popular`
-const TOP_RATED     = `/top_rated`
-const UPCOMING      = `/upcoming`
+const NOW_PLAYING   = '/now_playing'
+const POPULAR       = '/popular'
+const TOP_RATED     = '/top_rated'
+const UPCOMING      = '/upcoming'
 const movieFilters = [ NOW_PLAYING, POPULAR, TOP_RATED, UPCOMING ]
 
 
@@ -19,7 +19,6 @@ const PageHome = () => {
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,
@@ -87,7 +86,6 @@ const PageHome = () => {
                 dispatch({ type: 'setFilter', filter: NOW_PLAYING})
             }
             else {
-                console.log('GOT HERE')
                 const newFilter = movieFilters[ movieFilterIndex ]
                 setSelectedTabNo( movieFilterIndex )
                 updateMovieList( newFilter )

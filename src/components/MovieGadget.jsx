@@ -14,7 +14,6 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
     const {
         isHomeBtnEnabled,
         setIsHomeBtnEnabled,
-        moviePosterRepo,
         isStorageUnlocked,
         setIsStorageUnlocked,
         state,
@@ -54,7 +53,8 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
     }
 
 
-    const [ renderPoster ] = useMoviePoster( moviePosterRepo, movieDetails, handleInfo )
+    const { render } = useMoviePoster( movieDetails, handleInfo )
+    const renderPoster = render
 
 
     // Update movie details when the movieDetails array is updated
@@ -63,13 +63,12 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
         setReleaseDateComponents( extractDateComponents( movieDetails.release_date ))
         setVoteAverage( movieDetails.vote_average )
         setIsLikedFlag(
-            isStorageUnlocked
-            && state
+            state
             && state.browse
             && state.browse.likedMovies
             && state.browse.likedMovies.includes(movieDetails.id)
         )
-    }, [isStorageUnlocked, isInfoAvailable, state, movieDetails])
+    }, [ state, movieDetails ])
 
 
     return (
@@ -87,7 +86,7 @@ const MovieGadget = ({ movieDetails, isInfoAvailable, isVoteNumbersDisplaying, s
                         src={ imageFolder + '/402107790_STATIC_NOISE_400.gif' }
                         alt={ 'Movie poster pending' }
                     />
-                    : renderPoster()
+                    : renderPoster
                 }
 
                 {/** infoFloat, usually hidden */}
