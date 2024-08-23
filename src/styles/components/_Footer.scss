@@ -15,6 +15,11 @@ footer {
         list-style-type: none;
     }
 
+    em {
+        position: relative;
+        top: 4px;
+    }
+
     & > section {
         display: flex;
         flex-direction: row;
@@ -38,6 +43,10 @@ footer {
 
     a {
         text-decoration: none;
+    }
+    
+    p {
+        @include flat;
     }
     
     img {
