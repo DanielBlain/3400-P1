@@ -15,10 +15,12 @@ const Footer = () => (
                 target='_blank'
                 rel='noreferrer'
             >
-
-                <span>
-                    {getYear()} &copy; {author}
-                </span>
+                <p>
+                    <img
+                        src={imageFolder + '/DanLogo-x256.png'}
+                        alt="Logo for Dan J Blain"
+                        /> &copy; {getYear()} {author}
+                </p>
             </a>
             <em>
                 {authorQuote}

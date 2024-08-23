@@ -28,10 +28,6 @@ export async function fetchSingleton( url ) {
     try {
         const promiseResponse = await fetch(url)
         const fulfilledPromise = await promiseResponse.json()
-
-        console.log('Results of a fetch')
-        console.log(fulfilledPromise.results)
-
         return fulfilledPromise
     }
     catch( failMessage ) {
@@ -48,10 +44,6 @@ export async function fetchList( url ) {
     try {
         const promiseResponse = await fetch( url )
         const fulfilledPromise = await promiseResponse.json()
-
-        console.log('Results of a fetch')
-        console.log(fulfilledPromise.results)
-
         return fulfilledPromise.results
     }
     catch( failMessage ) {
